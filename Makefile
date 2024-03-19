@@ -1,11 +1,11 @@
 NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -Ilmlx -lXext -lX11 
+MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -lXext -lX11 
 DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 
 
-SRC = src/main.c
+SRC = src/main.c src/exit.c src/window.c src/event_handling.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
@@ -35,3 +35,5 @@ fclean: clean
 re: fclean all
 	$(MAKE) re -C ./libs/libft
 	$(MAKE) re -C ./libs/minilibx-linux
+
+.PHONY: all clean fclean re

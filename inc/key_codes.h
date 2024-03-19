@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_codes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/19 13:19:47 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/03/19 13:13:37 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/03/19 13:13:54 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub.h"
+#ifndef KEY_CODES_H
+# define KEY_CODES_H
 
 
-int main()
-{
-	t_cub	cub;
+# define KEY_ESC 0xff1b
 
-	open_window(&cub);
-}
+#endif
