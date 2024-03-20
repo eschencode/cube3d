@@ -15,7 +15,14 @@
 
 int main()
 {
-	t_cub	cub;
-
+	t_cub	*cub;
+	
+	
+	
+	main = malloc(sizeof(t_cub));
+	if(main == NULL)
+		return(-1);
+	initmap(argv[1], cub);
 	open_window(&cub);
+	
 }
