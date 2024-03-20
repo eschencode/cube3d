@@ -12,10 +12,37 @@
 # define NAME	"cub3d"
 
 
+typedef struct s_rgb
+{
+	int r;
+	int g;
+	int b;
+} t_rgb;
+
+typedef struct s_point
+{
+	int x;
+	int y;
+}t_point;
+
+typedef struct s_map
+{
+	char **layout;
+	int x_len;
+	int y_len;
+	int map_valid_flag;
+	t_rgb *F_color;
+	t_rgb *C_color;
+	char *NO;
+	char *SO;
+	char *WE;
+	char *EA;
+}t_map;
 
 
 typedef struct cub
 {
+	t_map *map;
 	void	*mlx;
 	void	*win;
 	int		map_width; /* is calculated in map parsing*/
@@ -38,5 +65,11 @@ int	x_close(t_cub *cub);
 /* exit.c: handles clean exit */
 void	error_exit(t_cub *cub, char *message);
 void	close_window(t_cub *cub);
+
+
+//map parsing
+void initmap(char *path_to_map, t_cub *cube);
+int map_check(t_cub *cube);
+
 
 #endif
