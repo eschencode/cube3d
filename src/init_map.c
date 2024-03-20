@@ -81,22 +81,7 @@ void ft_setcolors(t_cub *cube, char *line, int i)//need to add check if rgb valu
 		free(newline);
 }
 
-int checkcolor(t_cub *cube)
-{
-	if(cube->map->C_color->b > 255 || cube->map->C_color->b < 0	 || cube->map->C_color->r > 255 || cube->map->C_color->r < 0 || cube->map->C_color->g > 255 || cube->map->C_color->g < 0)
-	{
-		cube->map->map_valid_flag = -1;
-		return(-1);
-	}
-	if(cube->map->F_color->b > 255 || cube->map->F_color->b < 0	 || cube->map->F_color->r > 255 || cube->map->F_color->r < 0 || cube->map->F_color->g > 255 || cube->map->F_color->g < 0)
-	{
-		cube->map->map_valid_flag = -1;
-		return(-1);
-	}
-	else 
-		return(0);
-	
-}
+
 
 char	*moded_strdup(const char *s)
 {
@@ -125,20 +110,18 @@ char	*moded_strdup(const char *s)
 void save_texture(t_cub *cube, char *line, int i)
 {
 	char *str;
-	i += 2;
-	while (line[i] == ' ')
-		i++;
-	str = moded_strdup(line + i);
-	printf("\n tex:%s:",str);
+	int j = i + 2;
+	while (line[j] == ' ')
+		j++;
+	str = moded_strdup(line + j);
 	if(line[i] == 'N')
 		cube->map->NO = str;
-	else if(line[i] == 'S')
+	if(line[i] == 'S')
 		cube->map->SO = str;
-	else if(line[i] == 'W')
+	if(line[i] == 'W')
 		cube->map->WE = str;
-	else if(line[i] == 'E')
+	if(line[i] == 'E')
 		cube->map->EA = str;
-	
 }
 
 void initmap(char *path_to_map,t_cub *cube)
@@ -164,23 +147,23 @@ void initmap(char *path_to_map,t_cub *cube)
 			if(line[i] == 'F' )
 			{
 				ft_setcolors(cube, line, i);
-				printf("color :%d: :%d: :%d: \n",cube->map->F_color->r,cube->map->F_color->g,cube->map->F_color->b);
+				//printf("color :%d: :%d: :%d: \n",cube->map->F_color->r,cube->map->F_color->g,cube->map->F_color->b);
 			}
 			if(line[i] == 'C')
 			{
 				ft_setcolors(cube, line, i);
-				printf("color :%d: :%d: :%d: \n",cube->map->C_color->r,cube->map->C_color->g,cube->map->C_color->b);
+				//printf("color :%d: :%d: :%d: \n",cube->map->C_color->r,cube->map->C_color->g,cube->map->C_color->b);
 			}
-			if(line[i] == 'N')
+			if(line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+			{
 				save_texture(cube,line,i);
+			}
 	
 		}
+		i = 0;
 		line = get_next_line(fd);
 	}
-	//printf("txt :%s:\n",cube->map->NO);
-	checkcolor(cube);//check for invalid collors - in rgb
-	if(cube->map->map_valid_flag == -1)
-	{
-		printf("invalid map\n");
-	}
+	
+	map_check(cube);
+	
 }

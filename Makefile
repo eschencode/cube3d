@@ -5,7 +5,7 @@ MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -Ilmlx -lXext -lX11
 DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 
 
-SRC = src/main.c src/init_map.c
+SRC = src/main.c src/init_map.c src/map_check.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a

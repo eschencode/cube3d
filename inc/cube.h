@@ -49,6 +49,6 @@ typedef struct s_cub
 } t_cub;
 
 void initmap(char *path_to_map, t_cub *cube);
-
+int map_check(t_cub *cube);
 
 #endif
