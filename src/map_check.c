@@ -1,4 +1,4 @@
-#include "../inc/cube.h"
+#include "../inc/cub.h"
 
 
 int checkcolor(t_cub *cube)

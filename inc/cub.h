@@ -4,8 +4,13 @@
 # include "../libs/minilibx-linux/mlx.h"
 # include "../libs/libft/libft.h"
 # include "key_codes.h"
-# include <stdio.h>
-# include <math.h>
+#include <stdio.h>
+#include <fcntl.h>      // for open
+#include <unistd.h>     // for close, read, write
+#include <stdlib.h>     // for malloc, free, exit
+#include <string.h>     // for strerror
+#include <errno.h>      // for perror
+#include <math.h>       // for math library functions
 
 # define SCREEN_WIDTH	640
 # define SCREEN_HEIGHT	480

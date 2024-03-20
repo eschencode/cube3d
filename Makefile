@@ -1,11 +1,11 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -lXext -lX11 
 DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 
 
-SRC = src/main.c src/exit.c src/window.c src/event_handling.c
+SRC = src/main.c src/exit.c src/window.c src/event_handling.c src/init_map.c src/map_check.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
@@ -25,7 +25,6 @@ $(NAME): $(OBJ) $(libs) $(LIBFT)
 
 clean:
 	$(MAKE) $@ -C ./libs/libft
-	$(MAKE) $@ -C ./libs/minilibx-linux
 	@rm -rf $(OBJ)
 
 fclean: clean
@@ -34,6 +33,9 @@ fclean: clean
 
 re: fclean all
 	$(MAKE) re -C ./libs/libft
-	$(MAKE) re -C ./libs/minilibx-linux
+	
+
+r: fclean all
+	./$(NAME) "maps/map.cub"
 
 .PHONY: all clean fclean re
