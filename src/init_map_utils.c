@@ -49,9 +49,17 @@ int free_map_data(t_cub *cub)
 			free(cub->map->F_color);
 		if(cub->map->layout != NULL)
 		{
-			while(cub->map->layout[i] != NULL)
-				free(cub->map->layout[i++]);
+			while(cub->map->nlines > i)
+			{
+				if(cub->map->layout[i] != NULL)
+				{
+					free(cub->map->layout[i]);
+					cub->map->layout[i] = NULL;
+				}
+				i++;
+			}
 			free(cub->map->layout);
+			cub->map->layout = NULL;
 		}
 		free(cub->map);
     	cub->map = NULL;

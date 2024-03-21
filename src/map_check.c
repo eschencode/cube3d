@@ -18,10 +18,29 @@ int checkcolor(t_cub *cube)
 	
 }
 
+int check_borders(t_cub *cube)
+{
+	int x = 0;
+	int y = 0;
+	while(cube->map->layout[0][x] == ' ' && x < cube->map->max_line_len)//skip posible spaces on start
+			x++;
+	while (cube->map->layout[0][x] != '\0' && x < cube->map->max_line_len)//check top border
+	{
+		if(cube->map->layout[0][x] != '1')
+		{
+			cube->map->map_valid_flag = -1;
+			return(-1);
+		}
+		x++;
+	}
+	
+	
+}
 
 int map_check(t_cub *cube)
 {
 	checkcolor(cube);
+	//check_borders(cube);
 	//check textures (missing can not open or dubbles)
 	// printf("\ntxtEA :%s:\n",cube->map->EA);
 	// printf("txtNO :%s:\n",cube->map->NO);
@@ -31,5 +50,6 @@ int map_check(t_cub *cube)
 	{
 		printf("map invalid\n");
 	}
+
 	return(0);
 }
