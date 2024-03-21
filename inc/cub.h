@@ -75,6 +75,6 @@ void	close_window(t_cub *cub);
 //map parsing
 void initmap(char *path_to_map, t_cub *cube);
 int map_check(t_cub *cube);
-
+int free_map_data(t_cub *cub);
 
 #endif

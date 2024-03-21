@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/20 15:35:11 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:32:49 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int main(int argc, char **argv)
 		return(-1);
 	initmap(argv[1], cub);
 	//open_window(&cub);
-	
+	free_map_data(cub);
+	free(cub);
 }
