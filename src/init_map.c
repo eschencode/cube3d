@@ -4,143 +4,55 @@
 #include <stdbool.h>
 
 
-int free_map_data(t_cub *cub)
-{
-	 if(cub == NULL) 
-        return(-1);
-	if(cub->map != NULL) 
-	{
-    	if(cub->map->NO != NULL)
-		{
-            free(cub->map->NO);
-            cub->map->NO = NULL;
-        }
-		if(cub->map->EA != NULL)
-		{
-            free(cub->map->EA);
-            cub->map->EA = NULL;
-        }
-		if(cub->map->WE != NULL)
-		{
-            free(cub->map->WE);
-            cub->map->WE = NULL;
-        }
-        if(cub->map->SO != NULL)
-		{
-            free(cub->map->SO);
-            cub->map->SO = NULL;
-        }
-		if(cub->map->C_color != NULL)
-			free(cub->map->C_color);
-		if(cub->map->F_color != NULL)
-			free(cub->map->F_color);
-		free(cub->map);
-    	cub->map = NULL;
-	}
-	return(0);
-}
-int ft_empty(char *line)
-{
-	int i;
-	i = 0;
-	int len = ft_strlen(line);
-	
-	while(i < len)
-	{
-		if(line[i] != ' ' && line[i] != '\n')
-			return(1);
-			i++;
-	}
-	return(-1);
-}
-
-
-void ft_fill_layout(t_cub *cube,char *line)
-{
-	int x_len = ft_strlen(line);
-	printf("\nxlen = %d\n",x_len);
-	//cube->map->layout = malloc(sizeof(char) * x_len + 1);
-	//cube->map->layout[0][0] = ft_strdup(line);
-}
-
 int count_lines(t_cub *cube ,char *path_to_map)
 {
 	int line_counter;
 	char *line;
 	int fd = open(path_to_map,O_RDONLY);
 	line_counter = 0;
+	int max_line_len = 0;
+	int tab = 0;
+	int i = 0;
 	while((line = get_next_line(fd)) != NULL)
 	{
-		if(line[0] == '1')
+		while ((line[i] == ' ' || line[i] == '\t') && line[i] != '\n')
+		{
+			if(line[i] == '\t')
+				tab += 3;
+			i++;
+		}
+		if(line[i] == '1')
+		{
+			while(line[i] != '\n' && line[i] != '\0')
+				i++;
 			line_counter++;
+			if(i + tab > max_line_len)
+				max_line_len = i + tab;
+		}
+		tab = 0;
+		i = 0;
 		free(line);
 	}
 	close(fd);
+	printf("max line len = %d nlines %d\n",max_line_len,line_counter);
+	cube->map->max_line_len = max_line_len;
+	cube->map->nlines = line_counter;
+	//allocate space for layout
+	cube->map->layout = malloc(line_counter * sizeof(char *));
+	if(cube->map->layout == NULL)
+		printf("error");//add error handelibg here later
+	i = 0;
+	while (i < line_counter)
+	{
+		cube->map->layout[i] = malloc((max_line_len +1) * sizeof(char));
+		if(cube->map->layout[i] == NULL)
+			printf("error");//add error handelibg here later
+		i++;
+	}
+	
 	return(line_counter);
 }
 
-void ft_setcolors(t_cub *cube, char *line, int i)//need to add check if rgb value higer 255 or lower 0
-{
-	char *newline;
-	char **ar;
-	if(line[i] == 'F')
-	{
-		cube->map->F_color = (t_rgb*)malloc(sizeof(t_rgb));
-		while(line[i] == 'F' || line[i] == ' ')
-			i++;
-		newline = ft_strdup(line + i);
-		ar = ft_split(newline, ',');
-		cube->map->F_color->r = ft_atoi(ar[0]);
-		cube->map->F_color->g = ft_atoi(ar[1]);
-		cube->map->F_color->b = ft_atoi(ar[2]);
-	}
-	if(line[i] == 'C')
-	{
-		cube->map->C_color = (t_rgb*)malloc(sizeof(t_rgb));
-		while(line[i] == 'C' || line[i] == ' ')
-			i++;
-		newline = ft_strdup(line + i);
-		ar = ft_split(newline, ',');
-		cube->map->C_color->r = ft_atoi(ar[0]);
-		cube->map->C_color->g = ft_atoi(ar[1]);
-		cube->map->C_color->b = ft_atoi(ar[2]);
-		
-	}
-	if(ar != NULL)
-	{
-		free(ar[0]);
-		free(ar[1]);
-		free(ar[2]);
-		free(ar);
-	}
-	if(newline != NULL)
-		free(newline);
-}
-
-
-
-char	*moded_strdup(const char *s)
-{
-	int		i;
-	int		len = 0;
-	char	*nstr;
-
-	i = 0;
-	while(s[len] != '\0' && s[len] != '\n')
-		len++;
-	nstr = malloc ( 1 + len * sizeof(char));
-	if (nstr == NULL)
-	{
-		return (NULL);
-	}
-	while (i < len)
-	{
-		nstr[i] = s[i];
-		i++;
-	}
-	nstr[i] = '\0';
-	return (nstr);
-}
 
 
 void save_texture(t_cub *cube, char *line, int i)
@@ -160,15 +72,45 @@ void save_texture(t_cub *cube, char *line, int i)
 		cube->map->EA = str;
 }
 
+void ft_fill_layout(t_cub *cube,char *line, int current_line)
+{
+	int startposcount = 0;
+	int x = 0;
+	if (cube == NULL || cube->map == NULL || cube->map->layout[current_line] == NULL) {
+        printf("error");
+        return;
+    }
+	while (line[x] != '\n' && line[x] != '\0' && cube->map->max_line_len > x)
+	{
+		if(line[x] == '\t' && x + 3 < cube->map->max_line_len)
+		{
+			cube->map->layout[current_line][x] = ' ';
+			cube->map->layout[current_line][x + 1] = ' ';
+			cube->map->layout[current_line][x+ 2] = ' ';
+			cube->map->layout[current_line][x + 3] = ' ';
+		}
+		if(line[x] == '1' || line[x] == '0')
+		{
+			cube->map->layout[current_line][x] = line[x];
+		}
+		if(line[x] == 'N' || line[x] == 'S' || line[x] == 'E' || line[x] == 'W')
+		{
+			cube->map->layout[current_line][x] = line[x];
+			startposcount++;
+		}
+		x++;
+	}
+}
+
 void initmap(char *path_to_map,t_cub *cube)
 {
 	char **map;
 	char *line;
 	int i = 0;
-	int lines = count_lines(cube,path_to_map);
-	printf("nlines %d\n",lines);
-	cube->map = malloc(sizeof(t_map));
+	int current_line = 0;
 	
+	cube->map = malloc(sizeof(t_map));
+	count_lines(cube,path_to_map);
 	int fd = open(path_to_map,O_RDONLY);
 	printf("path to map %s fd = %d\n",path_to_map,fd);
 	line = get_next_line(fd);
@@ -194,9 +136,20 @@ void initmap(char *path_to_map,t_cub *cube)
 			{
 				save_texture(cube,line,i);
 			}
+			if(line[i] == '1')
+			{
+				
+				printf("current line = %d len of line = %d\n",current_line,ft_strlen(line));
+				ft_fill_layout(cube,line,current_line);
+				printf("lineinlayout :%s:\n",cube->map->layout[current_line]);
+				current_line++;
+				
+				
+			}
 	
 		}
 		i = 0;
+		
 		free(line);
 		line = get_next_line(fd);
 	}

@@ -31,4 +31,5 @@ int map_check(t_cub *cube)
 	{
 		printf("map invalid\n");
 	}
+	return(0);
 }
