@@ -101,7 +101,7 @@ void ft_fill_layout(t_cub *cube,char *line, int current_line)
 		x++;
 	}
 	if(x < cube->map->max_line_len)
-        cube->map->layout[current_line][x] = '\0';
+    {	cube->map->layout[current_line][x] = '\0';}
 }
 
 void initmap(char *path_to_map,t_cub *cube)
@@ -145,14 +145,13 @@ void initmap(char *path_to_map,t_cub *cube)
 				printf("lineinlayout[%d] :%s:\n",current_line ,cube->map->layout[current_line]);
 				current_line++;
 			}
-	
+			printf("currentline %d\n",current_line);
 		}
 		i = 0;
-		
 		free(line);
 		line = get_next_line(fd);
 	}
 	
-	map_check(cube);
+	//map_check(cube);
 	
 }
