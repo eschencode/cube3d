@@ -3,6 +3,42 @@
 
 #include <stdbool.h>
 
+
+int free_map_data(t_cub *cub)
+{
+	 if(cub == NULL) 
+        return(-1);
+	if(cub->map != NULL) 
+	{
+    	if(cub->map->NO != NULL)
+		{
+            free(cub->map->NO);
+            cub->map->NO = NULL;
+        }
+		if(cub->map->EA != NULL)
+		{
+            free(cub->map->EA);
+            cub->map->EA = NULL;
+        }
+		if(cub->map->WE != NULL)
+		{
+            free(cub->map->WE);
+            cub->map->WE = NULL;
+        }
+        if(cub->map->SO != NULL)
+		{
+            free(cub->map->SO);
+            cub->map->SO = NULL;
+        }
+		if(cub->map->C_color != NULL)
+			free(cub->map->C_color);
+		if(cub->map->F_color != NULL)
+			free(cub->map->F_color);
+		free(cub->map);
+    	cub->map = NULL;
+	}
+	return(0);
+}
 int ft_empty(char *line)
 {
 	int i;
@@ -161,6 +197,7 @@ void initmap(char *path_to_map,t_cub *cube)
 	
 		}
 		i = 0;
+		free(line);
 		line = get_next_line(fd);
 	}
 	

@@ -38,4 +38,6 @@ re: fclean all
 r: fclean all
 	./$(NAME) "maps/map.cub"
 
+v: fclean all
+	 valgrind --leak-check=full ./$(NAME) "maps/map.cub" 
 .PHONY: all clean fclean re
