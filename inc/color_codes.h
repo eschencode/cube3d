@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   color_codes.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/20 17:12:38 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/03/21 11:47:08 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/03/21 11:48:17 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub.h"
+#ifndef COLOR_CODES_H
+# define COLOR_CODES_H
 
+# define GREY	0x00808080
 
-void	error_exit(t_cub *cub, char *message)
-{
-	printf("Error: %s\n", message);
-	close_window(cub);
-	exit(1);
-}
+#endif

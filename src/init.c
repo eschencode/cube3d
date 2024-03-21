@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/20 11:12:41 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:34:52 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	init_cub(t_cub *cub)
 {
 	cub->mlx = NULL;
 	cub->win = NULL;
+	cub->img = NULL;
 	cub->dir[0] = -1;
 	cub->dir[1] = 0;
-	cub->cam[0] = 0;
-	cub->cam[1] = 0.66;
+	cub->plane[0] = 0;
+	cub->plane[1] = 0.66;
 }

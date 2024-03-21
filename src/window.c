@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 12:54:13 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/20 10:52:47 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:43:29 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,32 @@ void	open_window(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, NAME);
 	if (!cub->win)
 		error_exit(cub, "new window failed to open");
-	/*here insert image*/
+	init_img(cub);
+	draw_image(cub, cub->img);
 	mlx_key_hook(cub->win, deal_key, cub);
 	mlx_hook(cub->win, 17, 0L, x_close, cub);
 	mlx_loop(cub->mlx);
+}
+
+void	close_window(t_cub *cub)
+{
+	if (!cub)
+		return ;
+	if (cub->img)
+	{
+		mlx_destroy_image(cub->mlx, cub->img->img);
+		free(cub->img);
+	}
+	if (cub->win && cub->mlx)
+	{
+		mlx_clear_window(cub->mlx, cub->win);
+		mlx_destroy_window(cub->mlx, cub->win);
+	}
+	if (cub->mlx)
+	{
+		mlx_loop_end(cub->mlx);
+		mlx_destroy_display(cub->mlx);
+		free(cub->mlx);
+	}
+	exit (0);
 }
