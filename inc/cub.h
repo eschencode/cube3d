@@ -33,8 +33,8 @@ typedef struct s_point
 typedef struct s_map
 {
 	char **layout;
-	int x_len;
-	int y_len;
+	int nlines;
+	int max_line_len;
 	int map_valid_flag;
 	t_rgb *F_color;
 	t_rgb *C_color;
@@ -76,5 +76,9 @@ void	close_window(t_cub *cub);
 void initmap(char *path_to_map, t_cub *cube);
 int map_check(t_cub *cube);
 int free_map_data(t_cub *cub);
-
+//initmap utils
+char	*moded_strdup(const char *s);
+int free_map_data(t_cub *cub);
+int ft_empty(char *line);
+void ft_setcolors(t_cub *cube, char *line, int i);
 #endif
