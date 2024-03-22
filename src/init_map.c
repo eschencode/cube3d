@@ -106,7 +106,6 @@ void ft_fill_layout(t_cub *cube,char *line, int current_line)
 
 void initmap(char *path_to_map,t_cub *cube)
 {
-	char **map;
 	char *line;
 	int i = 0;
 	int current_line = 0;

@@ -7,13 +7,13 @@ int ft_empty(char *line)
 	i = 0;
 	int len = ft_strlen(line);
 	
-	while(i < len)
+	while (i < len)
 	{
-		if(line[i] != ' ' && line[i] != '\n')
+		if (line[i] != ' ' && line[i] != '\n')
 			return(1);
-			i++;
+		i++;
 	}
-	return(-1);
+	return (-1);
 }
 
 int free_map_data(t_cub *cub)

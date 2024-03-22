@@ -21,7 +21,6 @@ int checkcolor(t_cub *cube)
 int check_borders(t_cub *cube)
 {
 	int x = 0;
-	int y = 0;
 	while(cube->map->layout[0][x] == ' ' && x < cube->map->max_line_len)//skip posible spaces on start
 			x++;
 	while (cube->map->layout[0][x] != '\0' && x < cube->map->max_line_len)//check top border
@@ -33,7 +32,7 @@ int check_borders(t_cub *cube)
 		}
 		x++;
 	}
-	
+	return (0);
 	
 }
 
