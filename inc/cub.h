@@ -13,11 +13,11 @@
 #include <errno.h>      // for perror
 #include <math.h>       // for math library functions
 
-# define SCREEN_WIDTH	512 //1024 
-# define SCREEN_HEIGHT	512	//dimension taken from Video by 3D Sage
+# define SCREEN_WIDTH	1500 //1024 
+# define SCREEN_HEIGHT	1000	//dimension taken from Video by 3D Sage
 # define MAP_WIDTH 10 // should later be deleted and ...
 # define MAP_HEIGHT 10 // ... calculated from given map
-# define SQUARE_SIZE 50 //side length of 1 square in the map in pixel
+# define SQUARE_SIZE 25 //side length of 1 square in the map in pixel
 # define NAME	"cub3d"
 
 typedef struct	s_img
@@ -63,7 +63,7 @@ typedef struct s_cub
 	void	*mlx;
 	void	*win;
 	t_img	*img;	/* pointer to image struct, can hold several images*/	
-	int	pos[2];	/* players position (N) found in map: pos[0] = x, pos[1] = y*/
+	int pos[2];	/* players position (N) found in map: pos[0] = x, pos[1] = y*/
 	//player pos should be changed to double for raytracing
 	double	dir[2]; /* direction player faces: dir[0] = x, dir[1] = y*/
 	double	plane[2]; /* camera plane: part you see on the screen */
@@ -82,13 +82,23 @@ void	close_window(t_cub *cub);
 /* image.c: creates the image displayed */
 void	my_pixel_put(t_img *img, int x, int y, unsigned int color);
 void	render_image(t_cub *cub, t_img *img);
+
+/* render_map.c: rendering of 2D map*/
 void	render_square(t_cub *cub, int x, int y, unsigned int color);
-void	render_map(t_cub *cub, t_img *img);
-void	render_player(t_cub *cub);
+void	render_map(t_cub *cub, t_img *img, int start_x, int start_y);
+int		set_right();
+int		set_down();
 
 /* event_handlings.c: management of key and mouse events */
 int	deal_key(int key, t_cub *cub);
 int	x_close(t_cub *cub);
+
+/* move_player.c: calculates and renders movements of player on 2D map*/
+void	move_left(t_cub *cub);
+void	move_right(t_cub *cub);
+void	move_up(t_cub *cub);
+void	move_down(t_cub *cub);
+void	render_player(t_cub *cub, float x, float y);
 
 /* exit.c: handles clean exit */
 void	error_exit(t_cub *cub, char *message);

@@ -4,8 +4,13 @@ CFLAGS = -Wall -Wextra -Werror -g
 MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -lXext -lX11 
 DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 
+DIRSRC = ./src/
 
-SRC = src/main.c src/exit.c src/window.c src/event_handling.c src/init_map.c src/map_check.c src/init_map_utils.c src/image.c src/init.c
+C_FILES = main init exit window event_handling image \
+			init_map init_map_utils map_check \
+			render_map move_player
+
+SRC = ${addprefix ${DIRSRC}, $(addsuffix .c, $(C_FILES))}
 OBJ = $(SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a

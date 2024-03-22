@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/22 10:46:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:48:58 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ int	deal_key(int key, t_cub *cub)
 	{
 	}
 	printf("test_map[%i][%i] = %i\n", cub->pos[0], cub->pos[1], test_map[cub->pos[0]][cub->pos[1]]);
-	if (key == KEY_A && cub->pos[0] > 0 && test_map[cub->pos[0] - 1][cub->pos[1]] == 0)
-		cub->pos[0] -= 1;
-	else if (key == KEY_D && cub->pos[0] < MAP_WIDTH - 1 && test_map[cub->pos[0] + 1][cub->pos[1]] == 0)
-		cub->pos[0] += 1;
-	else if (key == KEY_W && cub->pos[1] > 0 && test_map[cub->pos[0]][cub->pos[1] - 1] == 0)
-		cub->pos[1] -= 1;
-	else if (key == KEY_S && cub->pos[1] < MAP_HEIGHT - 1 && test_map[cub->pos[0]][cub->pos[1] + 1] == 0)
-		cub->pos[1] += 1;
+	if (key == KEY_A)
+		move_left(cub);
+	else if (key == KEY_D)
+		move_right(cub);
+	else if (key == KEY_W)
+		move_up(cub);
+	else if (key == KEY_S)
+		move_down(cub);
 	else
 		printf("key code: %i\n", key);
-	render_player(cub);
+	render_map(cub, cub->img, set_right(), set_down());
 	return (0);
 }
