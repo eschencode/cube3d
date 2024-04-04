@@ -19,6 +19,9 @@
 # define MAP_HEIGHT 10 // ... calculated from given map
 # define SQUARE_SIZE 25 //side length of 1 square in the map in pixel
 # define NAME	"cub3d"
+# define MAP_CHARS "012NSEW"
+# define MAP_INSIDE "02NSEW"
+# define PLAYER "NSEW"
 
 typedef struct	s_img
 {

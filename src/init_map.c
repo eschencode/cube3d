@@ -34,7 +34,7 @@ int count_lines(t_cub *cube ,char *path_to_map)
 		free(line);
 	}
 	close(fd);
-	printf("max line len = %d  + 1 for nullbyte nlines %d\n",max_line_len,line_counter);
+	//printf("max line len = %d  + 1 for nullbyte nlines %d\n",max_line_len,line_counter);
 	cube->map->max_line_len = max_line_len;
 	cube->map->nlines = line_counter;
 	//allocate space for layout
@@ -82,26 +82,11 @@ void ft_fill_layout(t_cub *cube,char *line, int current_line)
     }
 	while (line[x] != '\n' && line[x] != '\0' && cube->map->max_line_len > x)
 	{
-		if(line[x] == '\t' && x + 3 < cube->map->max_line_len)
-		{
-			cube->map->layout[current_line][x] = ' ';
-			cube->map->layout[current_line][x + 1] = ' ';
-			cube->map->layout[current_line][x+ 2] = ' ';
-			cube->map->layout[current_line][x + 3] = ' ';
-		}
-		if(line[x] == '1' || line[x] == '0')
-		{
-			cube->map->layout[current_line][x] = line[x];
-		}
-		if(line[x] == 'N' || line[x] == 'S' || line[x] == 'E' || line[x] == 'W')
-		{
-			cube->map->layout[current_line][x] = line[x];
-			startposcount++;
-		}
+		cube->map->layout[current_line][x] = line[x];
+		
 		x++;
 	}
-	if(x < cube->map->max_line_len)
-    {	cube->map->layout[current_line][x] = '\0';}
+    cube->map->layout[current_line][x] = '\0';
 }
 
 void initmap(char *path_to_map,t_cub *cube)
@@ -118,9 +103,9 @@ void initmap(char *path_to_map,t_cub *cube)
 	{
 		if (ft_empty(line) == 1)//skips empty lines
 		{
-			printf("%s",line);
+			//printf("%s",line);
 			//skip sapces in line 
-			while(line[i] == ' ' || line[i] == '\t')
+			while(line[i] == ' ')
 				i++;
 			if(line[i] == 'F' )
 			{
@@ -144,13 +129,13 @@ void initmap(char *path_to_map,t_cub *cube)
 				printf("lineinlayout[%d] :%s:\n",current_line ,cube->map->layout[current_line]);
 				current_line++;
 			}
-			printf("currentline %d\n",current_line);
+			//printf("currentline %d\n",current_line);
 		}
 		i = 0;
 		free(line);
 		line = get_next_line(fd);
 	}
 	
-	//map_check(cube);
+	map_check(cube);
 	
 }
