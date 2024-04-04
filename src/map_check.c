@@ -119,6 +119,20 @@ int check_first_row(t_cub *cube)
 	return(0);
 }
 
+
+void set_angle(t_cub *cube, char c)
+{
+	if(c == 'N')
+		cube->dir[0] = 0;
+	if(c == 'E')
+		cube->dir[0] = 90;
+	if(c == 'S')
+		cube->dir[0] = 180;
+	if(c == 'W')
+		cube->dir[0] = 270;
+	cube->dir[1] = 90;
+}
+
 int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 {
 	char c;
@@ -144,6 +158,7 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
                 playerCount++;
 				cube->pos[0] = x;
 				cube->pos[1] = y;
+				set_angle(cube, c);
 			}
 			if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
 				return(-1);

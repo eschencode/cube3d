@@ -68,7 +68,7 @@ typedef struct s_cub
 	t_img	*img;	/* pointer to image struct, can hold several images*/	
 	int pos[2];	/* players position (N) found in map: pos[0] = x, pos[1] = y*/
 	//player pos should be changed to double for raytracing
-	double	dir[2]; /* direction player faces: dir[0] = x, dir[1] = y*/
+	int	dir[2]; /* direction player faces: dir[0] = x, dir[1] = y*/
 	double	plane[2]; /* camera plane: part you see on the screen */
 }			t_cub;
 
@@ -101,7 +101,7 @@ void	move_left(t_cub *cub);
 void	move_right(t_cub *cub);
 void	move_up(t_cub *cub);
 void	move_down(t_cub *cub);
-void	render_player(t_cub *cub, float x, float y);
+
 
 /* exit.c: handles clean exit */
 void	error_exit(t_cub *cub, char *message);
