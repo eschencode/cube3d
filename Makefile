@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g #-Wall -Wextra -Werror 
 MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -lXext -lX11 
 DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 
@@ -43,6 +43,8 @@ re: fclean all
 r: fclean all
 	./$(NAME) "maps/map.cub"
 
+gdb: fclean all
+	gdb $(NAME) "maps/map.cub"
 v: fclean all
 	 valgrind --leak-check=full ./$(NAME) "maps/map.cub" 
 .PHONY: all clean fclean re
