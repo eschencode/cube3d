@@ -142,6 +142,8 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 			}
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W') {
                 playerCount++;
+				cube->pos[0] = x;
+				cube->pos[1] = y;
 			}
 			if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
 				return(-1);
