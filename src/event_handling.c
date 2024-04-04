@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   event_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/22 16:48:58 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:31:18 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-int test_map[MAP_WIDTH][MAP_HEIGHT] = {{1,1,1,1,1,1,1,1,1,1}, 
-			{1,0,0,0,0,0,0,0,0,1},
-			{1,0,1,0,0,0,0,0,0,1},
-			{1,0,1,1,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,1,0,0,1},
-			{1,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,1},
-			{1,1,1,1,1,1,1,1,1,1}};
+
 
 /* x_close: This function closes the window with a MLX function. */
 
@@ -50,7 +41,7 @@ int	deal_key(int key, t_cub *cub)
 	if (key == KEY_UP)
 	{
 	}
-	printf("test_map[%i][%i] = %i\n", cub->pos[0], cub->pos[1], test_map[cub->pos[0]][cub->pos[1]]);
+	printf("map[%i][%i] = %c\n", cub->pos[0], cub->pos[1], cub->map->layout[cub->pos[0]][cub->pos[1]]);
 	if (key == KEY_A)
 		move_left(cub);
 	else if (key == KEY_D)
