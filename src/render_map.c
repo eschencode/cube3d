@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:25:49 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/04 16:19:50 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:19:19 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,6 @@ void	render_map(t_cub *cub, t_img *img, int start_x, int start_y)
 		}
 		y++;
 	}
-	printf("\n %d \n ",cub->dir[0]);
-
 	render_player(cub, (cub->pos[0] + start_x), (cub->pos[1] + start_y), YELLOW);
 	//printf("x: %f %f y: %f\n", cub->pos[0], (cub->pos[0] + start_x), (cub->pos[1] + start_y));
 	//render_square(cub, (cub->pos[0] + start_x), (cub->pos[1] + start_y), YELLOW);

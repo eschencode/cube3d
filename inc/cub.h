@@ -62,17 +62,19 @@ typedef struct s_map
 
 typedef struct s_cub
 {
-	t_map *map;
+	t_map 	*map;
 	void	*mlx;
 	void	*win;
 	t_img	*img;	/* pointer to image struct, can hold several images*/	
-	int pos[2];	/* players position (N) found in map: pos[0] = x, pos[1] = y*/
-	//player pos should be changed to double for raytracing
-	int	dir[2]; /* direction player faces: dir[0] = x, dir[1] = y*/
-	double	plane[2]; /* camera plane: part you see on the screen */
+	double 	pos[2];/* position vector of player: pos[0] = pos_x, pos[1] = pos_y*/
+	double	dir[2]; /* direction player faces: dir[0] = dir_x, dir[1] = dir_y*/
+	double	camplane[2]; /* camera plane (part you see on screen)*/
+	double	raydir[2]; /* ray direction */
+	double	deltadist[2]; /* length of ray from one x- or y-side to next x- or y-side*/
+	double	sidedist[2]; /* length of ray from current pos to next x- or y-side*/
 }			t_cub;
 
-extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
+//extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
 
 /* init.c: variables are initialized*/
 void	init_cub(t_cub *cub);

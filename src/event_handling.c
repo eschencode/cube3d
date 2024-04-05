@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/04 14:31:18 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:17:04 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	deal_key(int key, t_cub *cub)
 	if (key == KEY_UP)
 	{
 	}
-	printf("map[%i][%i] = %c\n", cub->pos[0], cub->pos[1], cub->map->layout[cub->pos[0]][cub->pos[1]]);
+	//printf("map[%i][%i] = %c\n", cub->pos[0], cub->pos[1], cub->map->layout[(int)cub->pos[0]][(int)cub->pos[1]]);
 	if (key == KEY_A)
 		move_left(cub);
 	else if (key == KEY_D)

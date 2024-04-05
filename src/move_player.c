@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/04 14:50:36 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:17:46 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 void	move_left(t_cub *cub)
 {
-	if (cub->map->layout[cub->pos[1]][cub->pos[0] - 1] == '0')
+	if (cub->map->layout[(int)cub->pos[1]][(int)cub->pos[0] - 1] == '0')
 		cub->pos[0] -= 1;
 }
 
 void	move_right(t_cub *cub)
 {
-	if (cub->map->layout[cub->pos[1]][cub->pos[0] + 1] == '0')
+	if (cub->map->layout[(int)cub->pos[1]][(int)cub->pos[0] + 1] == '0')
 		cub->pos[0] += 1;
 }
 
@@ -29,13 +29,13 @@ void	move_down(t_cub *cub)
 {
 	//printf("strat %d %d",cub->pos[0],cub->pos[1]);
 	//printf("pos %c\n",cub->map->layout[cub->pos[0]][cub->pos[1] + 1]);
-	if (cub->map->layout[cub->pos[1] + 1][cub->pos[0]] == '0')
+	if (cub->map->layout[(int)cub->pos[1] + 1][(int)cub->pos[0]] == '0')
 		cub->pos[1] += 1;
 }
 
 void	move_up(t_cub *cub)
 {
-	if (cub->map->layout[cub->pos[1] - 1][cub->pos[0]] == '0')//0 = x 1 = y
+	if (cub->map->layout[(int)cub->pos[1] - 1][(int)cub->pos[0]] == '0')//0 = x 1 = y
 		cub->pos[1] -= 1;
 }
 
