@@ -123,14 +123,26 @@ int check_first_row(t_cub *cube)
 void set_angle(t_cub *cube, char c)
 {
 	if(c == 'N')
+	{
 		cube->dir[0] = 0;
+		cube->dir[1] = -1;
+	}
 	if(c == 'E')
-		cube->dir[0] = 90;
+	{
+		cube->dir[0] = 1;
+		cube->dir[1] = 0;
+	}
 	if(c == 'S')
-		cube->dir[0] = 180;
+	{
+		cube->dir[0] = 0;
+		cube->dir[1] = 1;
+	}
 	if(c == 'W')
-		cube->dir[0] = 270;
-	cube->dir[1] = 90;
+	{
+		cube->dir[0] = -1;
+		cube->dir[1] = 0;
+	}
+	printf("\nstrtd 0= %f 1= %f\n\n",cube->dir[0] , cube->dir[1]);
 }
 
 int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
@@ -158,6 +170,7 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
                 playerCount++;
 				cube->pos[0] = x;
 				cube->pos[1] = y;
+				printf("\n YYY = %f",y);
 				set_angle(cube, c);
 			}
 			if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
