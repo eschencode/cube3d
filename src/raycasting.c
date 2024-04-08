@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/05 17:14:12 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:46:43 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,21 @@
 void	calculate_rays(t_cub *cub, int x)
 {
 	double	cam_x; /* x-coordinate of camera plane, current x-coordinate of screen*/
-	
 	int		i;
 
 	i = 0;
 	while (i < 2) // One time for x [0], one time for y [1]
 	{
 		//1.
-		cam_x = 2 * x / SCREEN_WIDTH - 1;
+		cam_x = 2 * x / (double)SCREEN_WIDTH - 1;
+		//cam_x = -cam_x; //Robin fragen
 		cub->raydir[i] = cub->dir[i] + cub->camplane[i] * cam_x;
 		//2.
 		if (cub->raydir[i] != 0)
-			cub->deltadist[i] = abs(1 / cub->raydir[i]);
+			cub->deltadist[i] = fabs(1 / cub->raydir[i]);
 		else
-			cub->deltadist[i] = abs(1 / INFINITY);
+			cub->deltadist[i] = 1e30; //Robin fragen
+			//cub->deltadist[i] = fabs(1 / INFINITY);
 		i++;
 	}
 }
@@ -70,6 +71,7 @@ int	calculate_wall_hit(t_cub *cub)
 		}
 		i++;
 	}
+	hit = 0;
 	while (hit == 0)
 	{
 		if (cub->sidedist[0] < cub->sidedist[1])
@@ -79,10 +81,35 @@ int	calculate_wall_hit(t_cub *cub)
 		cub->sidedist[i] += cub->deltadist[i];
 		map[i] += step[i];
 		side = i;
-		if (cub->map->layout[map[0]][map[1]] > 0)
+		if (cub->map->layout[map[1]][map[0]] != 48)
 			hit = 1;
 	}
 	return (side);
+}
+
+/* draw vertical line on screen */
+void	render_vline(t_cub *cub, int wallheight, int side, int x)
+{
+	int		startwall;
+	int		endwall;
+	int		color;
+	int		y;
+
+	startwall = -wallheight / 2 + SCREEN_HEIGHT / 2;
+	if (startwall < 0)
+		startwall = 0;
+	endwall = wallheight / 2 + SCREEN_HEIGHT / 2;
+	if (endwall >= SCREEN_HEIGHT || endwall < 0)
+		endwall = SCREEN_HEIGHT - 1;
+	color = LAVENDER;
+	if (side == 1)
+		color = color / 2; //gives x and y side different brightness
+	y = startwall;
+	while (y < endwall)
+	{
+		my_pixel_put(cub->img, x, y, color);
+		y++;
+	}
 }
 
 /* raycasting: this function calculates the representation of the 2D in 3D
@@ -109,21 +136,21 @@ int	raycasting(t_cub *cub)
 	double	walldist; /* perpendicular distance from camera plane to wall */
 	int		wallheight; /* height of line drawn on screen, i.e. height of wall*/
 
-	while (1)
+	x = 0;
+	printf("dir: %f, %f\n", cub->dir[0], cub->dir[1]);
+	while (x < SCREEN_WIDTH)
 	{
-		x = 0;
-		while (x < SCREEN_WIDTH)
-		{
-			calculate_rays(cub, x);/* calculate ray position and direction */
-			side = calculate_wall_hit(cub);
-			walldist = (cub->sidedist[side] - cub->deltadist[side]);
-			//calculate height of walls
-			wallheight = (int) (SCREEN_HEIGHT / walldist);
-			// calculate color of pixels
-			// draw
-			// time frame
-			// speed: move speed and rotation speed
-		}
+		calculate_rays(cub, x);/* calculate ray position and direction */
+		side = calculate_wall_hit(cub);
+		if (side != 0 && side != 1)
+			printf("ERROR: side value wrong, see raycasting\n");
+		walldist = (cub->sidedist[side] - cub->deltadist[side]);
+		wallheight = (int) (SCREEN_HEIGHT / walldist); //calculate height of walls
+		render_vline(cub, wallheight, side, x);
+		// time frame
+		// speed: move speed and rotation speed
+		x++;
 	}
+	return (0);
 }
 

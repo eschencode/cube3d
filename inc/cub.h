@@ -53,10 +53,10 @@ typedef struct s_map
 	int map_valid_flag;
 	t_rgb *F_color;
 	t_rgb *C_color;
-	char *NO;
-	char *SO;
-	char *WE;
-	char *EA;
+	char *NO; // dir = -1, 0
+	char *SO; // dir = 1, 0
+	char *WE; // dir = 0, -1
+	char *EA; // dir = 0, 1
 }t_map;
 
 
@@ -79,6 +79,7 @@ typedef struct s_cub
 /* init.c: variables are initialized*/
 void	init_cub(t_cub *cub);
 void	init_img(t_cub *cub);
+void	init_dir(t_cub *cub, char c);
 
 /*	window.c: window management */
 void	open_window(t_cub *cub);
@@ -95,8 +96,14 @@ int		set_right();
 int		set_down();
 
 /* event_handlings.c: management of key and mouse events */
-int	deal_key(int key, t_cub *cub);
-int	x_close(t_cub *cub);
+int		deal_key(int key, t_cub *cub);
+int		x_close(t_cub *cub);
+
+/* raycasting.c */
+void	calculate_rays(t_cub *cub, int x);
+int		calculate_wall_hit(t_cub *cub);
+void	render_vline(t_cub *cub, int wallheight, int side, int x);
+int		raycasting(t_cub *cub);
 
 /* move_player.c: calculates and renders movements of player on 2D map*/
 void	move_left(t_cub *cub);

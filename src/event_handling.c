@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/05 15:17:04 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:24:23 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	deal_key(int key, t_cub *cub)
 		move_down(cub);
 	else
 		printf("key code: %i\n", key);
+	raycasting(cub);
 	render_map(cub, cub->img, set_right(), set_down());
 	return (0);
 }

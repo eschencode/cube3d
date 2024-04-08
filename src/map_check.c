@@ -159,6 +159,7 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 				cube->pos[0] = x;
 				cube->pos[1] = y;
 				set_angle(cube, c);
+				init_dir(cube, c);
 			}
 			if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
 				return(-1);
