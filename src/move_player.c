@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/05 17:06:56 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:52:12 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ void move(t_cub *cub,double distance)
 
 void	move_left(t_cub *cub)//more kinda look left 
 {
-	rotateDirection(cub, 10);
+	rotateDirection(cub, -0.1);
 	printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
 void move_right(t_cub *cub) // more like look right
 {
-    rotateDirection(cub, -10);
+    rotateDirection(cub, 0.1);
     printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
 void	move_down(t_cub *cub)
 {
-	move(cub,-1);
+	move(cub,-0.01);
 	printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 
 void	move_up(t_cub *cub)
 {
-	move(cub,1);
+	move(cub,0.01);
 	printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 
