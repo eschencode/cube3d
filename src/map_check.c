@@ -170,7 +170,7 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
                 playerCount++;
 				cube->pos[0] = x;
 				cube->pos[1] = y;
-				printf("\n YYY = %f",y);
+				//printf("\n YYY = %d",y);
 				set_angle(cube, c);
 			}
 			if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
