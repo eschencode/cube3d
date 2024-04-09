@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/08 15:46:43 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:31:32 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,10 @@ int	raycasting(t_cub *cub)
 	int	side;
 	double	walldist; /* perpendicular distance from camera plane to wall */
 	int		wallheight; /* height of line drawn on screen, i.e. height of wall*/
+	//double	time_start;
+	//double	time_frame;
 
+	//time_start = get_time(0);
 	x = 0;
 	printf("dir: %f, %f\n", cub->dir[0], cub->dir[1]);
 	while (x < SCREEN_WIDTH)

@@ -12,6 +12,7 @@
 #include <string.h>     // for strerror
 #include <errno.h>      // for perror
 #include <math.h>       // for math library functions
+# include <sys/time.h>	// for calculating frames (get_time)
 
 # define SCREEN_WIDTH	1500 //1024 
 # define SCREEN_HEIGHT	1000	//dimension taken from Video by 3D Sage
@@ -72,6 +73,8 @@ typedef struct s_cub
 	double	raydir[2]; /* ray direction */
 	double	deltadist[2]; /* length of ray from one x- or y-side to next x- or y-side*/
 	double	sidedist[2]; /* length of ray from current pos to next x- or y-side*/
+	double	speedmove;	/* speed of movement */
+	double	speedrot;	/* speed of rotation */
 }			t_cub;
 
 //extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
@@ -125,4 +128,8 @@ char	*moded_strdup(const char *s);
 int free_map_data(t_cub *cub);
 int ft_empty(char *line);
 void ft_setcolors(t_cub *cube, char *line, int i);
+
+/* utils.c*/
+double		get_time(double time_zero);
+
 #endif
