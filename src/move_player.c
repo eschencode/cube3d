@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 12:13:01 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:35:58 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,41 @@ void rotateDirection(t_cub *cub, double Dangle)//Dangle = angleindegrees
 	cub->dir[1] = newDirY;
 }
 
-void move(t_cub *cub,double distance)
+void move(t_cub *cub, double distance)
 {
 	// Calculate new position
     double new_x = cub->pos[0] + distance * cub->dir[0];
     double new_y = cub->pos[1] + distance * cub->dir[1];
-	//add checks here 
-	cub->pos[0] = new_x;
-    cub->pos[1] = new_y;
+	if (cub->map->layout[(int)new_y][(int)new_x] != 0)
+	{
+		cub->pos[0] = new_x;
+   		cub->pos[1] = new_y;
+	}
+	else
+		printf("sqaure value: %i\n", cub->map->layout[(int)new_y][(int)new_x]);
 }
 
 void	move_left(t_cub *cub)//more kinda look left 
 {
 	rotateDirection(cub, -0.1);
-	printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
+	//printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
 void move_right(t_cub *cub) // more like look right
 {
     rotateDirection(cub, 0.1);
-    printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
+  //  printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
 void	move_down(t_cub *cub)
 {
 	move(cub,-0.01);
-	printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
+//	printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 
 void	move_up(t_cub *cub)
 {
-	move(cub,0.01);
-	printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
+	move(cub, 0.01);
+	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 

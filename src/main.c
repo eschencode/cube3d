@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 12:06:45 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:42:43 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ int render_frame(void *param)
 	{
 		move_right(cub);
 	}
-	//add render raytracing here later
-	render_map(cub, cub->img, set_right(), set_down());
+	raycasting(cub);
+	render_minimap(cub, cub->img, set_right(), set_down());
+	mlx_clear_window(cub->mlx, cub->win);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img, 0, 0);
 	return(0);
 }
 
 void game_loop(t_cub *cub)
 {
-	printf("ADADA");
 	mlx_hook(cub->win, 2, 1L<<0, key_press, cub); // key press events
     mlx_hook(cub->win, 3, 1L<<1, key_release, cub); // key release events
 	mlx_hook(cub->win, 17, 0L, x_close, cub); //to close window by clicking cross

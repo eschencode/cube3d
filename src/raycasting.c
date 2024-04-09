@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 11:31:32 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:48:28 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,17 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 	color = LAVENDER;
 	if (side == 1)
 		color = color / 2; //gives x and y side different brightness
-	y = startwall;
+	y = -1;
+	while (++y < startwall) 
+		my_pixel_put(cub->img, x, y, BLACK);// this has to be replaced by ceiling/ sky texture
 	while (y < endwall)
 	{
 		my_pixel_put(cub->img, x, y, color);
+		y++;
+	}
+	while (y < SCREEN_HEIGHT) 
+	{
+		my_pixel_put(cub->img, x, y, BLACK); // this has to  be replaced by floor texture
 		y++;
 	}
 }
@@ -131,8 +138,8 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 
 int	raycasting(t_cub *cub)
 {
-	int	x;
-	int	side;
+	int		x;
+	int		side;
 	double	walldist; /* perpendicular distance from camera plane to wall */
 	int		wallheight; /* height of line drawn on screen, i.e. height of wall*/
 	//double	time_start;
@@ -140,7 +147,6 @@ int	raycasting(t_cub *cub)
 
 	//time_start = get_time(0);
 	x = 0;
-	printf("dir: %f, %f\n", cub->dir[0], cub->dir[1]);
 	while (x < SCREEN_WIDTH)
 	{
 		calculate_rays(cub, x);/* calculate ray position and direction */

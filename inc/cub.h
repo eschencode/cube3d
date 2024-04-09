@@ -103,7 +103,7 @@ void	render_image(t_cub *cub, t_img *img);
 
 /* render_map.c: rendering of 2D map*/
 void	render_square(t_cub *cub, int x, int y, unsigned int color);
-void	render_map(t_cub *cub, t_img *img, int start_x, int start_y);
+void	render_minimap(t_cub *cub, t_img *img, int start_x, int start_y);
 int		set_right();
 int		set_down();
 
