@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:25:49 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 12:15:49 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:42:39 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void render_player(t_cub *cub, int start_x ,int start_y)
 	For displaying it at the right side of the screen, call the function set_right() instead of start_x.
 	For displaying it at the bottom of the screen, call the function set_down() instead of start_x.*/
 
-void	render_map(t_cub *cub, t_img *img, int start_x, int start_y)
+void	render_minimap(t_cub *cub, t_img *img, int start_x, int start_y)
 {
 	int	x;
 	int	y;
@@ -131,5 +131,4 @@ void	render_map(t_cub *cub, t_img *img, int start_x, int start_y)
 	}
 	render_player(cub, start_x, start_y);
 	//printf("strtpos x%f y%f\n",cub->pos[0],cub->pos[1]);
-	mlx_put_image_to_window(cub->mlx, cub->win, img->img, 0, 0);
 }

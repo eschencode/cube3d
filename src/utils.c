@@ -6,11 +6,11 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:20:42 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 11:21:33 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:19:04 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../inc/cub.h"
 
 /* get_time: calculates elapsed time since time_zero in milliseconds
 	gettimeofday() gets the system's clock time in elapsed seconds and 
