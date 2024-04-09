@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 14:48:28 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:47:03 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 		color = color / 2; //gives x and y side different brightness
 	y = -1;
 	while (++y < startwall) 
-		my_pixel_put(cub->img, x, y, BLACK);// this has to be replaced by ceiling/ sky texture
+		my_pixel_put(cub->img, x, y, conv_rgb_hex(7, 76, 250));// this has to be replaced by ceiling/ sky texture
 	while (y < endwall)
 	{
 		my_pixel_put(cub->img, x, y, color);

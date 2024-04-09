@@ -141,5 +141,6 @@ void ft_setcolors(t_cub *cube, char *line, int i);
 
 /* utils.c*/
 double		get_time(double time_zero);
+unsigned int		conv_rgb_hex(int r, int g, int b);
 
 #endif

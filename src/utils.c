@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:20:42 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 12:19:04 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:45:10 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,20 @@ double	get_time(double time_zero)
 	gettimeofday(&tv, NULL);
 	time_in_mill = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000;
 	return (time_in_mill - time_zero);
+}
+
+/* convert rgb color to hex color*/
+
+unsigned int	conv_rgb_hex(int r, int g, int b)
+{
+	unsigned int	color;
+
+	color = b;
+	if (g > 16)
+		color += (g / 16) * pow(16, 3);
+	color += (g % 16) * pow(16, 2);
+	if (r > 16)
+		color += (r / 16) * pow(16, 5);
+	color += (r % 16) * pow(16, 4);
+	return (color);
 }
