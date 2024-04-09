@@ -6,28 +6,15 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/08 12:24:23 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:58:04 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-
-
-/* x_close: This function closes the window with a MLX function. */
-
-int	x_close(t_cub *cub)
+int key_press(int key, t_cub *cub)
 {
-	close_window(cub);
-	return (0);
-}
-
-/* deal_key: This function handles key events (when the keyboard is pressed).
-	If ESC (0xff1b) is pressed, the window is closed.
-	 */
-
-int	deal_key(int key, t_cub *cub)
-{
+	printf("Key pressed: %d\n", key);
 	if (key == KEY_ESC)
 	{
 		close_window(cub);
@@ -38,21 +25,36 @@ int	deal_key(int key, t_cub *cub)
 		mlx_clear_window(cub->mlx, cub->win);
 		render_image(cub, cub->img);
 	}
-	if (key == KEY_UP)
-	{
-	}
-	//printf("map[%i][%i] = %c\n", cub->pos[0], cub->pos[1], cub->map->layout[(int)cub->pos[0]][(int)cub->pos[1]]);
-	if (key == KEY_A)
-		move_left(cub);
-	else if (key == KEY_D)
-		move_right(cub);
-	else if (key == KEY_W)
-		move_up(cub);
-	else if (key == KEY_S)
-		move_down(cub);
-	else
-		printf("key code: %i\n", key);
-	raycasting(cub);
-	render_map(cub, cub->img, set_right(), set_down());
+	if(key == KEY_W)
+		cub->m_flag->move_up = 1;
+	else if(key == KEY_S)
+		cub->m_flag->move_down = 1;
+	else if( key == KEY_A)
+		cub->m_flag->move_left = 1;
+	else if(key == KEY_D)
+		cub->m_flag->move_right = 1;
+	return(0);
+}
+
+int key_release(int key, t_cub *cub)
+{
+	if(key == KEY_W)
+		cub->m_flag->move_up = 0;
+	else if(key == KEY_S)
+		cub->m_flag->move_down = 0;
+	else if(key == KEY_A)
+		cub->m_flag->move_left = 0;
+	else if(key == KEY_D)
+		cub->m_flag->move_right = 0;
+	return(0);
+}
+
+/* x_close: This function closes the window with a MLX function. */
+
+int	x_close(t_cub *cub)
+{
+	close_window(cub);
 	return (0);
 }
+
+

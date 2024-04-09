@@ -46,9 +46,17 @@ typedef struct s_point
 	int y;
 }t_point;
 
+typedef struct m_flag
+{
+	int move_up;
+	int move_down;
+	int move_right;
+	int move_left;
+} t_flag;
+
 typedef struct s_map
 {
-	char **layout;
+	char **layout; /*l[0] = y l[1] = x*/
 	int nlines;
 	int max_line_len;
 	int map_valid_flag;
@@ -75,6 +83,7 @@ typedef struct s_cub
 	double	sidedist[2]; /* length of ray from current pos to next x- or y-side*/
 	double	speedmove;	/* speed of movement */
 	double	speedrot;	/* speed of rotation */
+	t_flag *m_flag;
 }			t_cub;
 
 //extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
@@ -114,7 +123,8 @@ void	move_right(t_cub *cub);
 void	move_up(t_cub *cub);
 void	move_down(t_cub *cub);
 
-
+int key_press(int key, t_cub *cub);
+int key_release(int key, t_cub *cub);
 /* exit.c: handles clean exit */
 void	error_exit(t_cub *cub, char *message);
 

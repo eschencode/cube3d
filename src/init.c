@@ -6,21 +6,31 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/08 15:53:33 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:53:14 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
+
+void init_movment(t_cub *cub)
+{
+	cub->m_flag = malloc(sizeof(t_flag));
+	cub->m_flag->move_down = 0;
+	cub->m_flag->move_left = 0;
+	cub->m_flag->move_right = 0;
+	cub->m_flag->move_up = 0;
+}
+
+
 /* init_var: The variables of struct cub are initialized.
 	The initial values of dir and cam are taken from lodev's guide.*/
 void	init_cub(t_cub *cub)
 {
+	init_movment(cub);
 	cub->mlx = NULL;
 	cub->win = NULL;
 	cub->img = NULL;
-	cub->pos[0] = 5.5;
-	cub->pos[1] = 5.5;
 }
 
 void	init_dir(t_cub *cub, char c)
