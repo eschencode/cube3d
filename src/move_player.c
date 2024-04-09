@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 12:35:58 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:11:40 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ void rotateDirection(t_cub *cub, double Dangle)//Dangle = angleindegrees
 	double angleInRadians;
 	double newDirX;
 	double newDirY;
+	double	oldcamplanex;
 	
 	angleInRadians = Dangle * M_PI / 180;// Convert the angle from degrees to radians
 	newDirX = cub->dir[0] * cos(angleInRadians) - cub->dir[1] * sin(angleInRadians);
 	newDirY = cub->dir[0] * sin(angleInRadians) + cub->dir[1] * cos(angleInRadians);
 	cub->dir[0] = newDirX;
 	cub->dir[1] = newDirY;
+	oldcamplanex = cub->camplane[0];
+	cub->camplane[0] = cub->camplane[0] * cos(angleInRadians) - cub->camplane[1] * sin(angleInRadians);
+	cub->camplane[1] = oldcamplanex * sin(angleInRadians) + cub->camplane[1] * cos(angleInRadians);
 }
 
 void move(t_cub *cub, double distance)
