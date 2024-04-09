@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/08 17:01:16 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:06:45 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ int main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	init_cub(&cub);
+	if (argc < 2)
+		return (printf("No map given. Choose one from ./maps/ \n"), 0);
 	if (argc > 1)
 		initmap(argv[1], &cub);
+	init_cub(&cub);
 	open_window(&cub);
-	printf("adada");
 	game_loop(&cub);
 	free_map_data(&cub);
 }

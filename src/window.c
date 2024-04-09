@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 12:54:13 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/08 15:18:37 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:14:12 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	open_window(t_cub *cub)
 	if (!cub->win)
 		error_exit(cub, "new window failed to open");
 	init_img(cub);
+	raycasting(cub);
 	//render_map(cub, cub->img, set_right(), set_down());
 	//render_player(cub);
 	

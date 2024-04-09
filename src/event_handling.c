@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   event_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/08 17:01:47 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:58:04 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
-
 
 int key_press(int key, t_cub *cub)
 {
@@ -36,6 +35,7 @@ int key_press(int key, t_cub *cub)
 		cub->m_flag->move_right = 1;
 	return(0);
 }
+
 int key_release(int key, t_cub *cub)
 {
 	if(key == KEY_W)

@@ -8,7 +8,7 @@ DIRSRC = ./src/
 
 C_FILES = main init exit window event_handling image \
 			init_map init_map_utils map_check \
-			render_map move_player
+			render_map move_player raycasting utils
 
 SRC = ${addprefix ${DIRSRC}, $(addsuffix .c, $(C_FILES))}
 OBJ = $(SRC:.c=.o)

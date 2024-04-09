@@ -12,6 +12,7 @@
 #include <string.h>     // for strerror
 #include <errno.h>      // for perror
 #include <math.h>       // for math library functions
+# include <sys/time.h>	// for calculating frames (get_time)
 
 # define SCREEN_WIDTH	1500 //1024 
 # define SCREEN_HEIGHT	1000	//dimension taken from Video by 3D Sage
@@ -61,30 +62,36 @@ typedef struct s_map
 	int map_valid_flag;
 	t_rgb *F_color;
 	t_rgb *C_color;
-	char *NO;
-	char *SO;
-	char *WE;
-	char *EA;
+	char *NO; // dir = -1, 0
+	char *SO; // dir = 1, 0
+	char *WE; // dir = 0, -1
+	char *EA; // dir = 0, 1
 }t_map;
 
 
 typedef struct s_cub
 {
-	t_map *map;
+	t_map 	*map;
 	void	*mlx;
 	void	*win;
 	t_img	*img;	/* pointer to image struct, can hold several images*/	
-	double pos[2];	/* players position (N) found in map: pos[0] = x, pos[1] = y*/
-	double	dir[2]; /* direction player faces: dir[0] = x, dir[1] = y*/
-	double	plane[2]; /* camera plane: part you see on the screen */
+	double 	pos[2];/* position vector of player: pos[0] = pos_x, pos[1] = pos_y*/
+	double	dir[2]; /* direction player faces: dir[0] = dir_x, dir[1] = dir_y*/
+	double	camplane[2]; /* camera plane (part you see on screen)*/
+	double	raydir[2]; /* ray direction */
+	double	deltadist[2]; /* length of ray from one x- or y-side to next x- or y-side*/
+	double	sidedist[2]; /* length of ray from current pos to next x- or y-side*/
+	double	speedmove;	/* speed of movement */
+	double	speedrot;	/* speed of rotation */
 	t_flag *m_flag;
 }			t_cub;
 
-extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
+//extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
 
 /* init.c: variables are initialized*/
 void	init_cub(t_cub *cub);
 void	init_img(t_cub *cub);
+void	init_dir(t_cub *cub, char c);
 
 /*	window.c: window management */
 void	open_window(t_cub *cub);
@@ -101,8 +108,14 @@ int		set_right();
 int		set_down();
 
 /* event_handlings.c: management of key and mouse events */
-int	deal_key(int key, t_cub *cub);
-int	x_close(t_cub *cub);
+int		deal_key(int key, t_cub *cub);
+int		x_close(t_cub *cub);
+
+/* raycasting.c */
+void	calculate_rays(t_cub *cub, int x);
+int		calculate_wall_hit(t_cub *cub);
+void	render_vline(t_cub *cub, int wallheight, int side, int x);
+int		raycasting(t_cub *cub);
 
 /* move_player.c: calculates and renders movements of player on 2D map*/
 void	move_left(t_cub *cub);
@@ -125,4 +138,8 @@ char	*moded_strdup(const char *s);
 int free_map_data(t_cub *cub);
 int ft_empty(char *line);
 void ft_setcolors(t_cub *cube, char *line, int i);
+
+/* utils.c*/
+double		get_time(double time_zero);
+
 #endif

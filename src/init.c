@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/08 13:21:34 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:53:14 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,48 @@ void	init_cub(t_cub *cub)
 	cub->mlx = NULL;
 	cub->win = NULL;
 	cub->img = NULL;
-	cub->pos[0] = 5.0;
-	cub->pos[1] = 5.0;
-	cub->dir[0] = -1;
-	cub->dir[1] = 0;
-	cub->plane[0] = 0;
-	cub->plane[1] = 0.66;
-	
+}
+
+void	init_dir(t_cub *cub, char c)
+{	
+	printf("direction facing: %c\n", c);
+	/*this is the right code, but I had to change it, as in map->layout x and y are swapped
+	if(c == 'N' || c == 'S')
+	{
+		cub->dir[0] = 1;
+		if (c == 'N')
+			cub->dir[0] = -1;
+		cub->dir[1] = 0;
+		cub->camplane[0] = 0;
+		cub->camplane[1] = 0.66 * cub->dir[0];
+	}
+	if(c == 'E' || c == 'W')
+	{
+		cub->dir[0] = 0;
+		cub->dir[1] = 1;
+		if (c == 'W')
+			cub->dir[1] = -1;
+		cub->camplane[0] = -0.66 * cub->dir[1];
+		cub->camplane[1] = 0;
+	}*/
+		if(c == 'N' || c == 'S')
+	{
+		cub->dir[1] = 1;
+		if (c == 'N')
+			cub->dir[1] = -1;
+		cub->dir[0] = 0;
+		cub->camplane[1] = 0;
+		cub->camplane[0] = -0.66 * cub->dir[1];
+	}
+	if(c == 'E' || c == 'W')
+	{
+		cub->dir[1] = 0;
+		cub->dir[0] = 1;
+		if (c == 'W')
+			cub->dir[0] = -1;
+		cub->camplane[1] = -0.66 * cub->dir[0];
+		cub->camplane[0] = 0;
+	}
 }
 
 
