@@ -83,7 +83,6 @@ void ft_fill_layout(t_cub *cube,char *line, int current_line)
 	while (line[x] != '\n' && line[x] != '\0' && cube->map->max_line_len > x)
 	{
 		cube->map->layout[current_line][x] = line[x];
-		
 		x++;
 	}
     cube->map->layout[current_line][x] = '\0';

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 14:42:43 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:35:03 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int render_frame(void *param)
 		move_right(cub);
 	}
 	raycasting(cub);
-	render_minimap(cub, cub->img, set_right(), set_down());
+	render_minimap(cub, cub->img, set_right(cub), set_down(cub));
 	mlx_clear_window(cub->mlx, cub->win);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img, 0, 0);
 	return(0);

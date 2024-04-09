@@ -58,7 +58,7 @@ typedef struct s_map
 {
 	char **layout; /*l[0] = y l[1] = x*/
 	int nlines;
-	int max_line_len;
+	int max_line_len; /*WWWWWWWWW*/
 	int map_valid_flag;
 	t_rgb *F_color;
 	t_rgb *C_color;
