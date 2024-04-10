@@ -143,7 +143,6 @@ void set_angle(t_cub *cube, char c)
 		cube->dir[0] = -1;
 		cube->dir[1] = 0;
 	}
-	printf("\nstrtd 0= %f 1= %f\n\n",cube->dir[0] , cube->dir[1]);
 }
 
 int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
@@ -171,7 +170,6 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
                 playerCount++;
 				cube->pos[0] = x + 0.5; // + 12,5 so he starts in middle of the grid thingi
 				cube->pos[1] = y + 0.5;
-				//printf("\n YYY = %d",y);
 				set_angle(cube, c);
 				init_dir(cube, c);
 				cube->map->layout[y][x] = '0';
@@ -197,16 +195,29 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 		printf("4");
 		return(-1);
 	}
-	//printf("passed all row check\n");
 	return(0);
 }
 
+int check_textures(char *str)//can open and xmp at the end 
+{
+	int i;
+	i = 0;
+	while(str[i+4] != '\0')
+		i++;
+	if(str[i] != '.' || str[i+1] != 'x' || str[i+2] != 'p' || str[i+3] != 'm')
+		return(-1);
+	
+	if(open(str,O_RDONLY) == -1)
+		return(-1);
+	return(0);
+}
 
 int map_check(t_cub *cube)
 {
 	checkcolor(cube);
+	if (check_textures(cube->map->NO) == -1 || check_textures(cube->map->SO) == -1 || check_textures(cube->map->WE) == -1 || check_textures(cube->map->EA) == -1)
+		cube->map->map_valid_flag = -1;
 	//check_borders(cube);
-	//printf("valid flag %d\n",cube->map->map_valid_flag);
 	printf("\n\nmap y %d x %d\n",cube->map->max_line_len , cube->map->nlines);
 	if(check_all_rows(cube) == -1)
 	{

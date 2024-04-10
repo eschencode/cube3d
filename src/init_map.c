@@ -111,13 +111,6 @@ int check_valid_file(t_cub *cube, char *pf)
 }
 
 
-
-
-
-
-
-
-
 int initmap(char *path_to_map,t_cub *cube)
 {
 	char *line;
