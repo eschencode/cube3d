@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:25:49 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 14:42:39 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:50:24 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 /* only works properly if SCREEN_WIDTH is a multiple of MAP_WIDTH * SQUARE_SIZE*/
 
-int	set_right()
+int	set_right(t_cub *cube)
 {
-	return (SCREEN_WIDTH / SQUARE_SIZE - MAP_WIDTH);
+	return (SCREEN_WIDTH / SQUARE_SIZE - cube->map->max_line_len);
 }
 
-int	set_down()
+int	set_down(t_cub *cube)
 {
-	return (SCREEN_HEIGHT / SQUARE_SIZE - MAP_HEIGHT);
+	return (SCREEN_HEIGHT / SQUARE_SIZE - cube->map->nlines);
 }
 
 void	render_square(t_cub *cub, int x, int y, unsigned int color)
@@ -90,8 +90,8 @@ void ft_draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
 void render_player(t_cub *cub, int start_x ,int start_y)
 {
 	int i = 0;
-	int x_pixel = (start_x * 25) + (25 * cub->pos[0]) + 12.5;//layout pos to pixel pos 
-	int y_pixel = (start_y * 25) + (25 * cub->pos[1]) + 12.5;
+	int x_pixel = (start_x * 25) + (25 * cub->pos[0]) ;//layout pos to pixel pos 
+	int y_pixel = (start_y * 25) + (25 * cub->pos[1]) ;
 	//printf("ppixle %d y %d\n",x_pixel, y_pixel);
 	int end_x_pixel = x_pixel + (cub->dir[0] * 10);
 	int end_y_pixel = y_pixel + (cub->dir[1] * 10);

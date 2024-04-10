@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 11:53:14 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:30:52 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void init_movment(t_cub *cub)
 {
 	cub->m_flag = malloc(sizeof(t_flag));
 	cub->m_flag->move_down = 0;
-	cub->m_flag->move_left = 0;
-	cub->m_flag->move_right = 0;
+	cub->m_flag->look_left = 0;
+	cub->m_flag->look_right = 0;
 	cub->m_flag->move_up = 0;
+	cub->m_flag->look_left = 0;
+	cub->m_flag->look_right = 0;
 }
 
 

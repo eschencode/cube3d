@@ -3,6 +3,7 @@
 
 int checkcolor(t_cub *cube)
 {
+
 	if(cube->map->C_color->b > 255 || cube->map->C_color->b < 0	 || cube->map->C_color->r > 255 || cube->map->C_color->r < 0 || cube->map->C_color->g > 255 || cube->map->C_color->g < 0)
 	{
 		cube->map->map_valid_flag = -1;
@@ -168,11 +169,12 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 			}
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W') {
                 playerCount++;
-				cube->pos[0] = x;
-				cube->pos[1] = y;
+				cube->pos[0] = x + 0.5; // + 12,5 so he starts in middle of the grid thingi
+				cube->pos[1] = y + 0.5;
 				//printf("\n YYY = %d",y);
 				set_angle(cube, c);
 				init_dir(cube, c);
+				cube->map->layout[y][x] = '0';
 			}
 			if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
 				return(-1);
@@ -205,6 +207,7 @@ int map_check(t_cub *cube)
 	checkcolor(cube);
 	//check_borders(cube);
 	//printf("valid flag %d\n",cube->map->map_valid_flag);
+	printf("\n\nmap y %d x %d\n",cube->map->max_line_len , cube->map->nlines);
 	if(check_all_rows(cube) == -1)
 	{
 		cube->map->map_valid_flag = -1;

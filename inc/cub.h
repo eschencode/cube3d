@@ -50,15 +50,17 @@ typedef struct m_flag
 {
 	int move_up;
 	int move_down;
-	int move_right;
 	int move_left;
+	int move_right;
+	int look_right;
+	int look_left;
 } t_flag;
 
 typedef struct s_map
 {
 	char **layout; /*l[0] = y l[1] = x*/
 	int nlines;
-	int max_line_len;
+	int max_line_len; /*WWWWWWWWW*/
 	int map_valid_flag;
 	t_rgb *F_color;
 	t_rgb *C_color;
@@ -118,10 +120,12 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x);
 int		raycasting(t_cub *cub);
 
 /* move_player.c: calculates and renders movements of player on 2D map*/
-void	move_left(t_cub *cub);
-void	move_right(t_cub *cub);
+void	look_left(t_cub *cub);
+void	look_right(t_cub *cub);
 void	move_up(t_cub *cub);
 void	move_down(t_cub *cub);
+void move_left(t_cub *cub);
+void move_right(t_cub *cub);
 
 int key_press(int key, t_cub *cub);
 int key_release(int key, t_cub *cub);
@@ -130,7 +134,7 @@ void	error_exit(t_cub *cub, char *message);
 
 
 //map parsing
-void initmap(char *path_to_map, t_cub *cube);
+int initmap(char *path_to_map, t_cub *cube);
 int map_check(t_cub *cube);
 int free_map_data(t_cub *cub);
 //initmap utils

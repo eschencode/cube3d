@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 14:42:43 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:47:03 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,19 @@ int render_frame(void *param)
 {
 	t_cub *cub = (t_cub *)param;
 	if(cub->m_flag->move_up == 1)
-	{
 		move_up(cub);
-	}
 	if(cub->m_flag->move_down == 1)
-	{
 		move_down(cub);
-	}
 	if(cub->m_flag->move_left == 1)
-	{
 		move_left(cub);
-	}
 	if(cub->m_flag->move_right == 1)
-	{
 		move_right(cub);
-	}
+	if(cub->m_flag->look_left == 1)
+		look_left(cub);
+	if(cub->m_flag->look_right == 1)
+		look_right(cub);
 	raycasting(cub);
-	render_minimap(cub, cub->img, set_right(), set_down());
+	render_minimap(cub, cub->img, set_right(cub), set_down(cub));
 	mlx_clear_window(cub->mlx, cub->win);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img, 0, 0);
 	return(0);
@@ -56,8 +52,11 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 		return (printf("No map given. Choose one from ./maps/ \n"), 0);
-	if (argc > 1)
-		initmap(argv[1], &cub);
+	
+	if(initmap(argv[1], &cub) == -1)
+	{
+		return(0);
+	}
 	init_cub(&cub);
 	open_window(&cub);
 	game_loop(&cub);

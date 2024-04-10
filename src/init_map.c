@@ -83,13 +83,45 @@ void ft_fill_layout(t_cub *cube,char *line, int current_line)
 	while (line[x] != '\n' && line[x] != '\0' && cube->map->max_line_len > x)
 	{
 		cube->map->layout[current_line][x] = line[x];
-		
 		x++;
 	}
     cube->map->layout[current_line][x] = '\0';
 }
 
-void initmap(char *path_to_map,t_cub *cube)
+
+
+
+
+int check_valid_file(t_cub *cube, char *pf)
+{
+	int i;
+	i = 0;
+	//check .cub at end 
+	while(pf[i + 4] != '\0')
+		i++;
+	if(pf[i] != '.' || pf[i + 1] != 'c' || pf[i + 2] != 'u' || pf[i +3] != 'b')
+	{
+		printf("worng file format only .cub files valid\n");
+		return(-1);
+	}
+	int fd = open(pf,O_RDONLY);
+	if(fd == -1)
+	{
+		printf("can not open file\n");
+		return(-1);
+	}
+	return(0);
+}
+
+
+
+
+
+
+
+
+
+int initmap(char *path_to_map,t_cub *cube)
 {
 	char *line;
 	int i = 0;
@@ -98,6 +130,7 @@ void initmap(char *path_to_map,t_cub *cube)
 	cube->map = malloc(sizeof(t_map));
 	count_lines(cube,path_to_map);
 	int fd = open(path_to_map,O_RDONLY);
+	check_valid_file(cube, path_to_map);
 	line = get_next_line(fd);
 	while(line != NULL)
 	{
@@ -137,5 +170,5 @@ void initmap(char *path_to_map,t_cub *cube)
 	}
 	
 	map_check(cube);
-	
+	return(0);
 }
