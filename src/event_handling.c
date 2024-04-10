@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 13:38:56 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:47:56 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 int key_press(int key, t_cub *cub)
 {
 	if (key == KEY_ESC)
-	{
 		close_window(cub);
-		return (0);
-	}
-	if (key == KEY_W)
+	else if (key == KEY_W)
 		cub->m_flag->move_up = 1;
 	else if(key == KEY_S)
 		cub->m_flag->move_down = 1;
