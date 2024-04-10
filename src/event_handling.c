@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 12:30:35 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:38:56 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int key_press(int key, t_cub *cub)
 		cub->m_flag->look_left = 1;
 	else if(key == KEY_RIGHT)
 		cub->m_flag->look_right = 1;
+	else if (key == KEY_M)
+		cub->m_flag->map_flag ^= 1; 
 	return(0);
 }
 

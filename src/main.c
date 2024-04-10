@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 12:47:03 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:39:50 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int render_frame(void *param)
 	if(cub->m_flag->look_right == 1)
 		look_right(cub);
 	raycasting(cub);
-	render_minimap(cub, cub->img, set_right(cub), set_down(cub));
+	if(cub->m_flag->map_flag == 1) 
+		render_minimap(cub, cub->img, set_right(cub), set_down(cub));
 	mlx_clear_window(cub->mlx, cub->win);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img, 0, 0);
 	return(0);

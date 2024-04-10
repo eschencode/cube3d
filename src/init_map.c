@@ -89,9 +89,6 @@ void ft_fill_layout(t_cub *cube,char *line, int current_line)
 }
 
 
-
-
-
 int check_valid_file(t_cub *cube, char *pf)
 {
 	int i;
@@ -130,7 +127,8 @@ int initmap(char *path_to_map,t_cub *cube)
 	cube->map = malloc(sizeof(t_map));
 	count_lines(cube,path_to_map);
 	int fd = open(path_to_map,O_RDONLY);
-	check_valid_file(cube, path_to_map);
+	if(check_valid_file(cube, path_to_map) == -1)
+		return(-1);
 	line = get_next_line(fd);
 	while(line != NULL)
 	{
@@ -168,7 +166,6 @@ int initmap(char *path_to_map,t_cub *cube)
 		free(line);
 		line = get_next_line(fd);
 	}
-	
 	map_check(cube);
 	return(0);
 }
