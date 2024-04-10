@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 12:30:52 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:39:09 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void init_movment(t_cub *cub)
 	cub->m_flag->move_up = 0;
 	cub->m_flag->look_left = 0;
 	cub->m_flag->look_right = 0;
+	cub->m_flag->map_flag = 1;
 }
 
 

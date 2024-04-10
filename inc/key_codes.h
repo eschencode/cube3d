@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_codes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:13:37 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/21 17:19:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:05:30 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@
 # define KEY_UP 65362
 # define KEY_DOWN 65364
 # define KEY_ENTER 65293
-
+# define KEY_M 109
 #endif

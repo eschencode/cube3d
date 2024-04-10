@@ -54,6 +54,7 @@ typedef struct m_flag
 	int move_right;
 	int look_right;
 	int look_left;
+	int map_flag;
 } t_flag;
 
 typedef struct s_map
