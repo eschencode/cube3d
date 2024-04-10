@@ -169,8 +169,8 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 			}
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W') {
                 playerCount++;
-				cube->pos[0] = x;
-				cube->pos[1] = y;
+				cube->pos[0] = x + 0.5; // + 12,5 so he starts in middle of the grid thingi
+				cube->pos[1] = y + 0.5;
 				//printf("\n YYY = %d",y);
 				set_angle(cube, c);
 				init_dir(cube, c);

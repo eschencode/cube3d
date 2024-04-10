@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 12:38:42 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:30:35 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int key_press(int key, t_cub *cub)
 		cub->m_flag->move_left = 1;
 	else if(key == KEY_D)
 		cub->m_flag->move_right = 1;
+	else if(key == KEY_LEFT)
+		cub->m_flag->look_left = 1;
+	else if(key == KEY_RIGHT)
+		cub->m_flag->look_right = 1;
 	return(0);
 }
 
@@ -40,6 +44,10 @@ int key_release(int key, t_cub *cub)
 		cub->m_flag->move_left = 0;
 	else if(key == KEY_D)
 		cub->m_flag->move_right = 0;
+	else if(key == KEY_LEFT)
+		cub->m_flag->look_left = 0;
+	else if(key == KEY_RIGHT)
+		cub->m_flag->look_right = 0;
 	return(0);
 }
 
