@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 13:39:09 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:32:34 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_cub(t_cub *cub)
 
 void	init_dir(t_cub *cub, char c)
 {	
-	printf("direction facing: %c\n", c);
+	//printf("direction facing: %c\n", c);
 	/*this is the right code, but I had to change it, as in map->layout x and y are swapped
 	if(c == 'N' || c == 'S')
 	{
