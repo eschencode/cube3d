@@ -155,11 +155,11 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 	int playerCount = 0;
 
 	if (cube == NULL || cube->map == NULL || cube->map->layout == NULL || cube->map->nlines < 3) {
-        
+		printf("222\n");
         return -1;
     }
 	if(check_first_row(cube) == -1)
-		return(-1);
+		printf("11111\n");//return(-1);
 	y++;
 	//printf("n lines %d",cube->map->nlines);
 	while (y < cube->map->nlines - 1 )
@@ -169,8 +169,9 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 			//printf("c = %c x %d y %d\n",c,x,y);
 			c = cube->map->layout[y][x];
 			 // Check if the character is valid
-            if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W') 
+            if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != ' ') 
             {
+				printf("12\n");
 				return (-1);
 			}
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W') {
@@ -181,15 +182,14 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 				init_dir(cube, c);
 				cube->map->layout[y][x] = '0';
 			}
-			if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
-				return(-1);
-			}
+			//if((x == 0 || cube->map->layout[y][x + 1] == '\0') && c != '1'){
+			//	return(-1);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	while (cube->map->layout[y][x] != '\0')
+	/*while (cube->map->layout[y][x] != '\0')
 	{
 		if(cube->map->layout[y][x] != '1')
 		{
@@ -197,9 +197,9 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 			return(-1);
 		}
 		x++;
-	}
+	*/
 	if(playerCount != 1){
-		printf("4");
+		printf("TO MANY PLAYERS ON MAP");
 		return(-1);
 	}
 	return(0);
@@ -229,7 +229,7 @@ int flood_fill_check(char **layout,int x,int y, int xmax,int ymax)
         // If not, return -1
         return -1;
     }
-	printf("layout[%d][%d]:%c:\n", y, x, layout[y][x]);
+	//printf("layout[%d][%d]:%c:\n", y, x, layout[y][x]);
 	if(layout[y][x] == 'x' ||layout[y][x] == '1')
 		return(0);
 	layout[y][x] = 'x';
@@ -273,8 +273,13 @@ int map_check(t_cub *cube)
 {
 	
 	checkcolor(cube);
+	if(cube->map->map_valid_flag == -1)
+		printf("COLOR ERROR\n");
 	if (check_textures(cube->map->NO) == -1 || check_textures(cube->map->SO) == -1 || check_textures(cube->map->WE) == -1 || check_textures(cube->map->EA) == -1)
+	{
+		printf("TEXTURE ERROR\n");
 		cube->map->map_valid_flag = -1;
+	}	
 	//check_borders(cube);
 	
 	if(check_all_rows(cube) == -1)
@@ -282,7 +287,10 @@ int map_check(t_cub *cube)
 		cube->map->map_valid_flag = -1;
 	}
 	if(ft_flood_fill(cube) == -1)
+	{
 		cube->map->map_valid_flag = -1;
+	}
+		
 	
 	if(cube->map->map_valid_flag == -1)
 	{
