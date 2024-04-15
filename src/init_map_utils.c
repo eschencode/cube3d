@@ -102,9 +102,13 @@ void ft_setcolors(t_cub *cube, char *line, int i)//need to add check if rgb valu
 			i++;
 		newline = ft_strdup(line + i);
 		ar = ft_split(newline, ',');
-		cube->map->F_color->r = ft_atoi(ar[0]);
-		cube->map->F_color->g = ft_atoi(ar[1]);
-		cube->map->F_color->b = ft_atoi(ar[2]);
+		if(ar[0] && ar[1] && ar[2])
+		{
+			cube->map->F_color->r = ft_atoi(ar[0]);
+			cube->map->F_color->g = ft_atoi(ar[1]);
+			cube->map->F_color->b = ft_atoi(ar[2]);
+		}
+		
 	}
 	if(line[i] == 'C')
 	{
@@ -113,10 +117,12 @@ void ft_setcolors(t_cub *cube, char *line, int i)//need to add check if rgb valu
 			i++;
 		newline = ft_strdup(line + i);
 		ar = ft_split(newline, ',');
-		cube->map->C_color->r = ft_atoi(ar[0]);
-		cube->map->C_color->g = ft_atoi(ar[1]);
-		cube->map->C_color->b = ft_atoi(ar[2]);
-		
+		if(ar[0] && ar[1] && ar[2])
+		{
+			cube->map->C_color->r = ft_atoi(ar[0]);
+			cube->map->C_color->g = ft_atoi(ar[1]);
+			cube->map->C_color->b = ft_atoi(ar[2]);
+		}
 	}
 	if(ar != NULL)
 	{

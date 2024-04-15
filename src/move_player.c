@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 13:07:53 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:33:35 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void move(t_cub *cub, double distance)
 
 void	look_left(t_cub *cub)//more kinda look left 
 {
-	rotateDirection(cub, -0.5);
+	rotateDirection(cub, 0.5);
 	//printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
 void look_right(t_cub *cub) // more like look right
 {
-    rotateDirection(cub, 0.5);
+    rotateDirection(cub, -0.5);
   //  printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
@@ -64,7 +64,7 @@ void	move_down(t_cub *cub)
 	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 
-void move_right(t_cub *cub)
+void move_left(t_cub *cub)
 {
 	double perp_dir[2] = {-cub->dir[1], cub->dir[0]};
 	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
@@ -77,7 +77,7 @@ void move_right(t_cub *cub)
 	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 
-void move_left(t_cub *cub)
+void move_right(t_cub *cub)
 {
 	double perp_dir[2] = {cub->dir[1], -cub->dir[0]};
 	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
