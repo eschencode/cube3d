@@ -118,6 +118,7 @@ int initmap(char *path_to_map,t_cub *cube)
 	int current_line = 0;
 	
 	cube->map = malloc(sizeof(t_map));
+	cube->map->map_valid_flag = 0;
 	count_lines(cube,path_to_map);
 	int fd = open(path_to_map,O_RDONLY);
 	if(check_valid_file(cube, path_to_map) == -1)
@@ -159,6 +160,7 @@ int initmap(char *path_to_map,t_cub *cube)
 		free(line);
 		line = get_next_line(fd);
 	}
-	map_check(cube);
+	if(map_check(cube) == -1)
+		return(-1);
 	return(0);
 }

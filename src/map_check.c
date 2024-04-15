@@ -3,7 +3,8 @@
 
 int checkcolor(t_cub *cube)
 {
-
+	if(cube->map->C_color == NULL || cube->map->F_color == NULL)
+		return(-1);
 	if(cube->map->C_color->b > 255 || cube->map->C_color->b < 0	 || cube->map->C_color->r > 255 || cube->map->C_color->r < 0 || cube->map->C_color->g > 255 || cube->map->C_color->g < 0)
 	{
 		cube->map->map_valid_flag = -1;
@@ -145,19 +146,25 @@ void set_angle(t_cub *cube, char c)
 	}
 }
 
+
 int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 {
 	char c;
 	int x = 0;
 	int y = 0;
 	int playerCount = 0;
+
+	if (cube == NULL || cube->map == NULL || cube->map->layout == NULL || cube->map->nlines < 3) {
+        
+        return -1;
+    }
 	if(check_first_row(cube) == -1)
 		return(-1);
 	y++;
 	//printf("n lines %d",cube->map->nlines);
 	while (y < cube->map->nlines - 1 )
 	{
-		while(cube->map->layout[y][x] != '\0')
+		while(cube->map->layout[y][x] != '\0' )
 		{
 			//printf("c = %c x %d y %d\n",c,x,y);
 			c = cube->map->layout[y][x];
@@ -202,6 +209,8 @@ int check_textures(char *str)//can open and xmp at the end
 {
 	int i;
 	i = 0;
+	if(!str)
+		return(-1);
 	while(str[i+4] != '\0')
 		i++;
 	if(str[i] != '.' || str[i+1] != 'x' || str[i+2] != 'p' || str[i+3] != 'm')
@@ -212,20 +221,73 @@ int check_textures(char *str)//can open and xmp at the end
 	return(0);
 }
 
+int flood_fill_check(char **layout,int x,int y, int xmax,int ymax)
+{
+	// Check if x and y are within the map's boundaries
+    if (x < 0 || y < 0 || x >= xmax || y >= ymax) 
+	{
+        // If not, return -1
+        return -1;
+    }
+	printf("layout[%d][%d]:%c:\n", y, x, layout[y][x]);
+	if(layout[y][x] == 'x' ||layout[y][x] == '1')
+		return(0);
+	layout[y][x] = 'x';
+	 // Recursively check the neighboring cells
+    // If any of them return -1, return -1
+    if (flood_fill_check(layout, x + 1, y,xmax,ymax) == -1 ||
+        flood_fill_check(layout, x - 1, y,xmax,ymax) == -1 ||
+        flood_fill_check(layout, x, y + 1,xmax,ymax) == -1 ||
+        flood_fill_check(layout, x, y - 1,xmax,ymax) == -1) {
+        return (-1);
+    }
+	return(0);
+}
+
+int ft_flood_fill(t_cub *cube)
+{
+	char **layout_copy;
+	int i = 0;
+	int rounded_x  = round(cube->pos[0]) -1;
+	int rounded_y = round(cube->pos[1]) -1;
+	layout_copy = malloc(sizeof(char*)*cube->map->nlines);
+	while (i < cube->map->nlines)
+	{
+		layout_copy[i] = malloc(sizeof(char)*(cube->map->max_line_len + 1));
+		ft_strcpy(layout_copy[i],cube->map->layout[i]);
+		i++;
+	}
+	if(flood_fill_check(layout_copy,rounded_x,rounded_y,cube->map->max_line_len,cube->map->nlines) == -1)
+		cube->map->map_valid_flag = -1;
+	i = 0;
+	while(i < cube->map->nlines)
+	{
+		free(layout_copy[i]);
+		i++;
+	}	
+	free(layout_copy);
+	return(0);
+}
+
 int map_check(t_cub *cube)
 {
+	
 	checkcolor(cube);
 	if (check_textures(cube->map->NO) == -1 || check_textures(cube->map->SO) == -1 || check_textures(cube->map->WE) == -1 || check_textures(cube->map->EA) == -1)
 		cube->map->map_valid_flag = -1;
 	//check_borders(cube);
-	printf("\n\nmap y %d x %d\n",cube->map->max_line_len , cube->map->nlines);
+	
 	if(check_all_rows(cube) == -1)
 	{
 		cube->map->map_valid_flag = -1;
 	}
+	if(ft_flood_fill(cube) == -1)
+		cube->map->map_valid_flag = -1;
+	
 	if(cube->map->map_valid_flag == -1)
 	{
 		printf("map invalid\n");
+		return(-1);
 	}
 	else{
 		printf("MAP VALIDDDD\n");
