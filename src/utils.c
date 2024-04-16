@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:20:42 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 17:45:10 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:27:21 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,20 @@ double	get_time(double time_zero)
 	return (time_in_mill - time_zero);
 }
 
-/* convert rgb color to hex color*/
+/* conv_rgb_hex: converts rgb color to the unsigned int equivalent 
+	of the color in hexadecimal */
 
-unsigned int	conv_rgb_hex(int r, int g, int b)
+unsigned int	conv_rgb_hex(t_rgb *rgb)
 {
-	unsigned int	color;
+	return (rgb->r << 16 | rgb->g << 8 | rgb->b);
+	/*unsigned int	color;
 
-	color = b;
-	if (g > 16)
-		color += (g / 16) * pow(16, 3);
-	color += (g % 16) * pow(16, 2);
-	if (r > 16)
-		color += (r / 16) * pow(16, 5);
-	color += (r % 16) * pow(16, 4);
-	return (color);
+	color = rgb->b;
+	color += (rgb->g % 16) * pow(16, 2);
+	if (rgb->g > 16)
+		color += (rgb->g / 16) * pow(16, 3);
+	color += (rgb->r % 16) * pow(16, 4);
+	if (rgb->r > 16)
+		color += (rgb->r / 16) * pow(16, 5);
+	return (color);*/
 }

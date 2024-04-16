@@ -6,14 +6,14 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 11:53:14 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:31:10 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
 
-void init_movment(t_cub *cub)
+void init_movement(t_cub *cub)
 {
 	cub->m_flag = malloc(sizeof(t_flag));
 	cub->m_flag->move_down = 0;
@@ -27,7 +27,7 @@ void init_movment(t_cub *cub)
 	The initial values of dir and cam are taken from lodev's guide.*/
 void	init_cub(t_cub *cub)
 {
-	init_movment(cub);
+	init_movement(cub);
 	cub->mlx = NULL;
 	cub->win = NULL;
 	cub->img = NULL;
@@ -76,7 +76,7 @@ void	init_dir(t_cub *cub, char c)
 }
 
 
-void	init_img(t_cub *cub)
+void	init_img(t_cub *cub, int width, int height)
 {
 	t_img	*img;
 	
@@ -84,11 +84,40 @@ void	init_img(t_cub *cub)
 	if (!cub->img)
 		error_exit(cub, "malloc image failed");
 	img = cub->img;
-	img->img = mlx_new_image(cub->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	img->img = mlx_new_image(cub->mlx, width, height);
 	if (!img->img)
 		error_exit(cub, "image could not be initialized");
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian);
 	if (!img->addr)
 		error_exit(cub, "image information could not be retrieved");
-	//draw_image(cub, cub->img);
 }
+
+void	init_img_xpm(t_cub *cub, int *img_width, int *img_height)
+{
+	int			*addr;
+	
+	cub->img_tex.img = mlx_xpm_file_to_image(cub->mlx, cub->map->NO, img_width, img_height);
+	if (!cub->img_tex.img)
+		error_exit(cub, "image could not be initialized");
+	addr = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
+	cub->img_tex.addr = addr;
+	if (!cub->img_tex.addr)
+		error_exit(cub, "image information could not be retrieved");
+
+	/*void	*temp;
+	int		*address;
+	
+	temp = mlx_xpm_file_to_image(cub->mlx, cub->map->NO, img_width, img_height);
+	cub->img_tex.img = temp;
+	//error handling
+	address = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
+	cub->img_tex.addr = address;*/
+	//error handling
+}
+
+/*temp = mlx_xpm_file_to_image(cub->mlx, map->NO, &img_width, &img_height);
+	cub->img_tex.img = temp;
+	//error handling
+	address = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
+	cub->img_tex.addr = address;*/
+	//error handling

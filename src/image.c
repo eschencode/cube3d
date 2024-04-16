@@ -6,18 +6,22 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:16:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/22 16:58:10 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:07:44 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
+/*
+	line_length = amount of bytes taken by one row of image
+			= image_width * (bpp / 8)*/
+
 void	my_pixel_put(t_img *img, int x, int y, unsigned int color)
 {
-	char	*dst;
+	char	*pixel;
 
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
+	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	*(unsigned int *)pixel = color;
 }
 
 

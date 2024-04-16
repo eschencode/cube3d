@@ -23,6 +23,13 @@
 # define MAP_CHARS "012NSEW"
 # define MAP_INSIDE "02NSEW"
 # define PLAYER "NSEW"
+# define TEX_NUM 4 // number of textures
+# define TEX_N 0	//texture for NO side
+# define TEX_S 1	//texture for SO side
+# define TEX_W 2	//texture for WE side
+# define TEX_E 3	//texture for EA side
+# define TEX_WIDTH 64 // size of pixels for texture (x)
+# define TEX_HEIGHT 64 // size of pixels for texture (y)
 
 typedef struct	s_img
 {
@@ -32,6 +39,15 @@ typedef struct	s_img
 	int		line_length;	/*needed by mlx to create image*/
 	int		endian;			/*needed by mlx to create image*/
 }		t_img;
+
+typedef struct	s_img_tex
+{
+	void	*img;
+	int		*addr;			/*needed by mlx to create image*/
+	int		bpp;			/*bits_per_pixel:needed by mlx to create image*/
+	int		line_length;	/*needed by mlx to create image*/
+	int		endian;			/*needed by mlx to create image*/
+}		t_img_tex;
 
 typedef struct s_rgb
 {
@@ -56,16 +72,17 @@ typedef struct m_flag
 
 typedef struct s_map
 {
-	char **layout; /*l[0] = y l[1] = x*/
-	int nlines;
-	int max_line_len;
-	int map_valid_flag;
-	t_rgb *F_color;
-	t_rgb *C_color;
-	char *NO; // dir = -1, 0
-	char *SO; // dir = 1, 0
-	char *WE; // dir = 0, -1
-	char *EA; // dir = 0, 1
+	char 	**layout; /*l[0] = y l[1] = x*/
+	int		nlines;
+	int		max_line_len;
+	int		map_valid_flag;
+	t_rgb	*F_color;
+	t_rgb	*C_color;
+	char	*NO; // dir = -1, 0
+	char	*SO; // dir = 1, 0
+	char	*WE; // dir = 0, -1
+	char	*EA; // dir = 0, 1
+	int		*texture_buf[TEX_NUM]; // stores the colour of each pixel of the 4 textures
 }t_map;
 
 
@@ -75,6 +92,7 @@ typedef struct s_cub
 	void	*mlx;
 	void	*win;
 	t_img	*img;	/* pointer to image struct, can hold several images*/	
+	t_img_tex	img_tex;
 	double 	pos[2];/* position vector of player: pos[0] = pos_x, pos[1] = pos_y*/
 	double	dir[2]; /* direction player faces: dir[0] = dir_x, dir[1] = dir_y*/
 	double	camplane[2]; /* camera plane (part you see on screen)*/
@@ -90,8 +108,12 @@ typedef struct s_cub
 
 /* init.c: variables are initialized*/
 void	init_cub(t_cub *cub);
-void	init_img(t_cub *cub);
+void	init_img(t_cub *cub, int width, int height);
+void	init_img_xpm(t_cub *cub, int *img_width, int *img_height);
 void	init_dir(t_cub *cub, char c);
+
+/* textures.c: init textures (save them so that they are usable)*/
+void	read_in_textures(t_cub *cub, t_map *map);
 
 /*	window.c: window management */
 void	open_window(t_cub *cub);
@@ -140,7 +162,7 @@ int ft_empty(char *line);
 void ft_setcolors(t_cub *cube, char *line, int i);
 
 /* utils.c*/
-double		get_time(double time_zero);
-unsigned int		conv_rgb_hex(int r, int g, int b);
+double			get_time(double time_zero);
+unsigned int	conv_rgb_hex(t_rgb *rgb);
 
 #endif
