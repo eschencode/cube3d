@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/16 16:30:52 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:27:54 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 	}
 }
 
-void	render_wall(t_cub *cub, int side, int walldist, int x)
+void	render_wall(t_cub *cub, int side, double walldist, int x)
 {
 	double	wall; // where wall was hit
 	int		tex_x; //x coordinate on texture
@@ -200,6 +200,7 @@ int	raycasting(t_cub *cub)
 			printf("ERROR: side value wrong, see raycasting\n");
 		walldist = (cub->sidedist[side] - cub->deltadist[side]);
 		wallheight = (int) (SCREEN_HEIGHT / walldist); //calculate height of walls
+		printf("walldist: %f\n", walldist);
 		render_vline(cub, wallheight, side, x);
 		render_wall(cub, side, walldist, x);
 		// time frame
