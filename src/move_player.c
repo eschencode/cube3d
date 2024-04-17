@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/15 16:26:16 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:29:32 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,19 @@ void move(t_cub *cub, double distance)
 
 void	look_right(t_cub *cub)//more kinda look left 
 {
-	rotateDirection(cub, -0.5);
+	if(cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
+		rotateDirection(cub, 0.5);
+	else
+		rotateDirection(cub, -0.5);
 	//printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
 void look_left(t_cub *cub) // more like look right
 {
-    rotateDirection(cub, 0.5);
+	if(cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
+    	rotateDirection(cub, -0.5);
+	else
+		rotateDirection(cub, 0.5);
   //  printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
@@ -66,6 +72,7 @@ void	move_down(t_cub *cub)
 
 void move_left(t_cub *cub)
 {
+	if(cub->map->initial_dir == 'W' || cub->map->initial_dir == 'E'){
 	double perp_dir[2] = {-cub->dir[1], cub->dir[0]};
 	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
 	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
@@ -74,12 +81,9 @@ void move_left(t_cub *cub)
         cub->pos[0] = new_x;
         cub->pos[1] = new_y;
     }
-	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
-}
-
-void move_right(t_cub *cub)
-{
-	double perp_dir[2] = {cub->dir[1], -cub->dir[0]};
+	}
+	else{
+		double perp_dir[2] = {cub->dir[1], -cub->dir[0]};
 	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
 	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
 	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
@@ -87,11 +91,37 @@ void move_right(t_cub *cub)
         cub->pos[0] = new_x;
         cub->pos[1] = new_y;
     }
+	}
+		
+	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
+}
+
+void move_right(t_cub *cub)
+{
+	if(cub->map->initial_dir == 'W' || cub->map->initial_dir == 'E'){
+		double perp_dir[2] = {cub->dir[1], -cub->dir[0]};
+	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
+	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
+	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
+    {
+        cub->pos[0] = new_x;
+        cub->pos[1] = new_y;
+    }
+	}
+	else{
+		double perp_dir[2] = {-cub->dir[1], cub->dir[0]};
+	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
+	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
+	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
+    {
+        cub->pos[0] = new_x;
+        cub->pos[1] = new_y;
+    }
+	}
 	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 void	move_up(t_cub *cub)
 {
 	move(cub, 0.01);
-	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
 

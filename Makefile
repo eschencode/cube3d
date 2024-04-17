@@ -47,4 +47,6 @@ gdb: fclean all
 	gdb $(NAME) "maps/map.cub"
 v: fclean all
 	 valgrind --leak-check=full ./$(NAME) "maps/map.cub" 
+vv:fclean all
+	valgrind --leak-check=full ./$(NAME) "maps/bad/wall_none.cub"
 .PHONY: all clean fclean re
