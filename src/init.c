@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/17 11:48:23 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:35:06 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,32 +95,29 @@ void	init_img(t_cub *cub, int width, int height)
 		error_exit(cub, "image information could not be retrieved");
 }
 
-void	init_img_xpm(t_cub *cub, int *img_width, int *img_height)
+void	init_img_xpm(t_cub *cub, t_map *map, int tex)
 {
 	int			*addr;
-	
-	cub->img_tex.img = mlx_xpm_file_to_image(cub->mlx, cub->map->NO, img_width, img_height);
+	char		*texture_path;
+
+	if (tex == TEX_N)
+		texture_path = map->NO;
+	else if (tex == TEX_S)
+		texture_path = map->SO;
+	else if (tex == TEX_W)
+		texture_path = map->WE;
+	else
+		texture_path = map->EA;
+	printf("tex: %i tex_path: %s", tex, texture_path);
+	cub->img_tex.img = mlx_xpm_file_to_image(cub->mlx, texture_path, &map->tex_width[tex], &map->tex_height[tex]);
 	if (!cub->img_tex.img)
 		error_exit(cub, "image could not be initialized");
+	if (map->tex_width[tex] < 1 || map->tex_width[tex] > 1000)
+		error_exit(cub, "at least 1 texture image is too big or small");
+	if (map->tex_height[tex] < 1 || map->tex_height[tex] > 1000)
+		error_exit(cub, "at least 1 texture image is too big or small");	
 	addr = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
 	cub->img_tex.addr = addr;
 	if (!cub->img_tex.addr)
 		error_exit(cub, "image information could not be retrieved");
-
-	/*void	*temp;
-	int		*address;
-	
-	temp = mlx_xpm_file_to_image(cub->mlx, cub->map->NO, img_width, img_height);
-	cub->img_tex.img = temp;
-	//error handling
-	address = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
-	cub->img_tex.addr = address;*/
-	//error handling
 }
-
-/*temp = mlx_xpm_file_to_image(cub->mlx, map->NO, &img_width, &img_height);
-	cub->img_tex.img = temp;
-	//error handling
-	address = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
-	cub->img_tex.addr = address;*/
-	//error handling

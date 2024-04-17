@@ -50,3 +50,50 @@ So, we have
 			rightest point of vision: pos + dir + plane
 
 The Field of Vision (FOV) is calculated through the lenght of dir and of the camera plane. For a first person game, an FOV of 66 degrees is good. This means that the direction vector is slightly longer than the camera plane. 
+
+
+## TO DO
+
+### Valgrind
+
+1. If texture image too big or small: conditional jump
+
+	c1b3c1% valgrind --track-origins=yes ./cub3d maps/map.cub
+	==36495== Memcheck, a memory error detector
+	==36495== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+	==36495== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+	==36495== Command: ./cub3d maps/map.cub
+	==36495== 
+	MAP VALIDDDD
+	tex: 0 tex_path: textures/Solid_white.xpmError: at least 1 texture image is too big or small
+	==36495== Conditional jump or move depends on uninitialised value(s)
+	==36495==    at 0x402DB3: free_textures (exit.c:22)
+	==36495==    by 0x402DFF: free_map (exit.c:31)
+	==36495==    by 0x402E80: error_exit (exit.c:45)
+	==36495==    by 0x402CD1: init_img_xpm (init.c:132)
+	==36495==    by 0x405188: read_in_textures (textures.c:38)
+	==36495==    by 0x402EEF: open_window (window.c:20)
+	==36495==    by 0x40283C: main (main.c:62)
+	==36495==  Uninitialised value was created by a heap allocation
+	==36495==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+	==36495==    by 0x403915: allocate_map_data (init_map.c:117)
+	==36495==    by 0x403A06: initmap (init_map.c:140)
+	==36495==    by 0x40280F: main (main.c:57)
+	==36495== 
+	==36495== 
+	==36495== HEAP SUMMARY:
+	==36495==     in use at exit: 631 bytes in 18 blocks
+	==36495==   total heap usage: 379 allocs, 361 frees, 114,276 bytes allocated
+	==36495== 
+	==36495== LEAK SUMMARY:
+	==36495==    definitely lost: 144 bytes in 4 blocks
+	==36495==    indirectly lost: 210 bytes in 10 blocks
+	==36495==      possibly lost: 0 bytes in 0 blocks
+	==36495==    still reachable: 277 bytes in 4 blocks
+	==36495==         suppressed: 0 bytes in 0 blocks
+	==36495== Rerun with --leak-check=full to see details of leaked memory
+	==36495== 
+	==36495== For lists of detected and suppressed errors, rerun with: -s
+	==36495== ERROR SUMMARY: 4 errors from 1 contexts (suppressed: 0 from 0)
+
+

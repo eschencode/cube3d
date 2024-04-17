@@ -1,17 +1,17 @@
 #ifndef CUBE_H
-#define CUBE_H
+# define CUBE_H
 
 # include "../libs/minilibx-linux/mlx.h"
 # include "../libs/libft/libft.h"
 # include "key_codes.h"
 # include "color_codes.h"
-#include <stdio.h>
-#include <fcntl.h>      // for open
-#include <unistd.h>     // for close, read, write
-#include <stdlib.h>     // for malloc, free, exit
-#include <string.h>     // for strerror
-#include <errno.h>      // for perror
-#include <math.h>       // for math library functions
+# include <stdio.h>
+# include <fcntl.h>      // for open
+# include <unistd.h>     // for close, read, write
+# include <stdlib.h>     // for malloc, free, exit
+# include <string.h>     // for strerror
+# include <errno.h>      // for perror
+# include <math.h>       // for math library functions
 # include <sys/time.h>	// for calculating frames (get_time)
 
 # define SCREEN_WIDTH	1500 //1024 
@@ -51,12 +51,6 @@ typedef struct	s_img_tex
 	int		endian;			/*needed by mlx to create image*/
 }		t_img_tex;
 
-typedef struct	s_tex
-{
-	int	tex_width;
-	int	tex_height;
-}		t_tex;
-
 typedef struct s_rgb
 {
 	int r;
@@ -94,7 +88,9 @@ typedef struct s_map
 	char	*WE; // dir = 0, -1
 	char	*EA; // dir = 0, 1
 	char 	initial_dir;
-	int		*texture_buf[TEX_NUM]; // stores the colour of each pixel of the 4 textures
+	int		*texture[TEX_NUM]; // stores the colour of each pixel of the 4 textures
+	int		tex_width[TEX_NUM]; //width of all loaded textures
+	int		tex_height[TEX_NUM]; //height of all loaded textures
 }t_map;
 
 
@@ -123,10 +119,13 @@ typedef struct s_cub
 /* init.c: variables are initialized*/
 void	init_cub(t_cub *cub);
 void	init_img(t_cub *cub, int width, int height);
-void	init_img_xpm(t_cub *cub, int *img_width, int *img_height);
+void	init_img_xpm(t_cub *cub, t_map *map, int tex);
+void 	init_movement(t_cub *cub);
 void	init_dir(t_cub *cub, char c);
+void	init_map(t_map *map);
 
 /* textures.c: init textures (save them so that they are usable)*/
+void	malloc_textures(t_cub *cub, t_map *map, int tex);
 void	read_in_textures(t_cub *cub, t_map *map);
 int		choose_texture(t_cub *cub);
 
@@ -172,6 +171,9 @@ void	error_exit(t_cub *cub, char *message);
 int initmap(char *path_to_map, t_cub *cube);
 int map_check(t_cub *cube);
 int free_map_data(t_cub *cub);
+
+/* init_map.c */
+int allocate_map_data(t_cub *cub);
 //initmap utils
 char	*moded_strdup(const char *s);
 int free_map_data(t_cub *cub);

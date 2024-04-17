@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/17 14:14:39 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:07:35 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,13 +142,13 @@ void	render_wall(t_cub *cub, double walldist, int x, int tex)
 	else
 		wall = cub->pos[0] + walldist * cub->raydir[0];
 	wall -= floor(wall); // floor is a function in math.h: returns largest integral value that is not greater than wallx
-	tex_x = (int)(wall * (double)TEX_WIDTH);
+	tex_x = (int)(wall * (double)cub->map->tex_width[tex]);
 	if (cub->side == 0 && cub->raydir[0] > 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
+		tex_x = cub->map->tex_width[tex] - tex_x - 1;
 	if (cub->side == 1 && cub->raydir[1] < 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
+		tex_x = cub->map->tex_width[tex] - tex_x - 1;
 	wallheight = (int) (SCREEN_HEIGHT / walldist); //calculate height of walls
-	step = 1.0 * TEX_HEIGHT / wallheight;
+	step = 1.0 * cub->map->tex_height[tex] / wallheight;
 	startwall = -wallheight / 2 + SCREEN_HEIGHT / 2;
 	if (startwall < 0)
 		startwall = 0;
@@ -159,13 +159,9 @@ void	render_wall(t_cub *cub, double walldist, int x, int tex)
 	y = startwall;
 	while (y < endwall)
 	{
-		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
+		tex_y = (int)tex_pos & (cub->map->tex_height[tex] - 1);
 		tex_pos += step;
-		color = cub->map->texture_buf[tex][TEX_HEIGHT * tex_y + tex_x];
-		if (cub->side == 1 && cub->step[cub->side] == -1) //NO
-			color = 0xFFFFFFFF;
-		if (cub->side == 1 && cub->step[cub->side] == 1) //SO
-			color = 0x00000000;
+		color = cub->map->texture[tex][cub->map->tex_height[tex] * tex_y + tex_x];
 		my_pixel_put(cub->img, x, y, color);
 		y++;
 	}
@@ -204,7 +200,7 @@ int	raycasting(t_cub *cub)
 		calculate_rays(cub, x);/* calculate ray position and direction */
 		calculate_wall_hit(cub);
 		tex = choose_texture(cub);
-		tex = 0; //for testing purposes
+		//tex = 0; //for testing purposes
 		if (cub->side != 0 && cub->side != 1)
 			printf("ERROR: side value wrong, see raycasting\n");
 		walldist = (cub->sidedist[cub->side] - cub->deltadist[cub->side]);
