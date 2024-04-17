@@ -28,6 +28,8 @@
 # define TEX_S 1	//texture for SO side
 # define TEX_W 2	//texture for WE side
 # define TEX_E 3	//texture for EA side
+// To DO: either delete defined tex width & height and retrieve from xpm file
+// or include check in map parsing that xpm not bigger or smaller than 64x64
 # define TEX_WIDTH 64 // size of pixels for texture (x)
 # define TEX_HEIGHT 64 // size of pixels for texture (y)
 
@@ -48,6 +50,12 @@ typedef struct	s_img_tex
 	int		line_length;	/*needed by mlx to create image*/
 	int		endian;			/*needed by mlx to create image*/
 }		t_img_tex;
+
+typedef struct	s_tex
+{
+	int	tex_width;
+	int	tex_height;
+}		t_tex;
 
 typedef struct s_rgb
 {
@@ -103,6 +111,8 @@ typedef struct s_cub
 	double	raydir[2]; /* ray direction */
 	double	deltadist[2]; /* length of ray from one x- or y-side to next x- or y-side*/
 	double	sidedist[2]; /* length of ray from current pos to next x- or y-side*/
+	int		side;		/* which wall was hit? x (NS) or y (EW)*/
+	int		step[2]; /* into what direction to step: either -1 or 1, maybe if SW or NE*/
 	double	speedmove;	/* speed of movement */
 	double	speedrot;	/* speed of rotation */
 	t_flag *m_flag;
@@ -118,6 +128,7 @@ void	init_dir(t_cub *cub, char c);
 
 /* textures.c: init textures (save them so that they are usable)*/
 void	read_in_textures(t_cub *cub, t_map *map);
+int		choose_texture(t_cub *cub);
 
 /*	window.c: window management */
 void	open_window(t_cub *cub);
@@ -139,8 +150,8 @@ int		x_close(t_cub *cub);
 
 /* raycasting.c */
 void	calculate_rays(t_cub *cub, int x);
-int		calculate_wall_hit(t_cub *cub);
-void	render_vline(t_cub *cub, int wallheight, int side, int x);
+void	calculate_wall_hit(t_cub *cub);
+void	render_vline(t_cub *cub, int wallheight, int x);
 int		raycasting(t_cub *cub);
 
 /* move_player.c: calculates and renders movements of player on 2D map*/

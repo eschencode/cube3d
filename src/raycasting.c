@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/17 11:27:54 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:14:39 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	calculate_rays(t_cub *cub, int x)
 	{
 		//1.
 		cam_x = 2 * x / (double)SCREEN_WIDTH - 1;
-		//cam_x = -cam_x; //Robin fragen
 		cub->raydir[i] = cub->dir[i] + cub->camplane[i] * cam_x;
 		//2.
 		if (cub->raydir[i] != 0)
@@ -41,36 +40,43 @@ void	calculate_rays(t_cub *cub, int x)
 	}
 }
 
-/* calculates where ray hits wall */	
-int	calculate_wall_hit(t_cub *cub)
-{	
-	int	step[2]; /* into what direction to step: either -1 or 1 */
-	int	hit;	/* hit = 0; if a wall was hit, hit = 1 */
-	int	side;	/* which wall was hit? x (NS) or y (EW)*/
-	int	map[2]; // in which square on the map the ray is currently in
-
-	map[0] = (int)cub->pos[0]; // it starts at the players position
-	map[1] = (int)cub->pos[1];
-	
-	/* calculate step and initial sidedist*/
+/* calculate step and initial sidedist*/
 	/* if raydir is negative, step is -1 (left for x (i = 0) or up for y (i = 1))
 		otherwise step is 1 (right for x, down for y)*/
+
+void	calculate_step_sidedist(t_cub *cub, int map[2])
+{
 	int	i;
+
 	i = 0;
 	while (i < 2)
 	{
 		if (cub->raydir[i] < 0)
 		{
-			step[i] = -1;
+			cub->step[i] = -1;
 			cub->sidedist[i] = (cub->pos[i] - map[i]) * cub->deltadist[i];
 		}
 		else
 		{
-			step[i] = 1;
+			cub->step[i] = 1;
 			cub->sidedist[i] = (map[i] + 1.0 - cub->pos[i]) * cub->deltadist[i];
 		}
 		i++;
 	}
+}
+
+/* calculates where ray hits wall */	
+void	calculate_wall_hit(t_cub *cub)
+{	
+	int	hit;	/* hit = 0; if a wall was hit, hit = 1 */
+	int	map[2]; // in which square on the map the ray is currently in
+	int	i;
+
+	map[0] = (int)cub->pos[0]; // it starts at the players position
+	map[1] = (int)cub->pos[1];
+	
+	i = 0;
+	calculate_step_sidedist(cub, map);
 	hit = 0;
 	while (hit == 0)
 	{
@@ -79,16 +85,15 @@ int	calculate_wall_hit(t_cub *cub)
 		else
 			i = 1;
 		cub->sidedist[i] += cub->deltadist[i];
-		map[i] += step[i];
-		side = i;
+		map[i] += cub->step[i];
+		cub->side = i;
 		if (cub->map->layout[map[1]][map[0]] != 48)
 			hit = 1;
 	}
-	return (side);
 }
 
 /* draw vertical line on screen */
-void	render_vline(t_cub *cub, int wallheight, int side, int x)
+void	render_vline(t_cub *cub, int wallheight, int x)
 {
 	int		startwall;
 	int		endwall;
@@ -102,7 +107,7 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 	if (endwall >= SCREEN_HEIGHT || endwall < 0)
 		endwall = SCREEN_HEIGHT - 1;
 	color = LAVENDER;
-	if (side == 1)
+	if (cub->side == 1)
 		color = color / 2; //gives x and y side different brightness
 	y = -1;
 	while (++y < startwall) 
@@ -119,7 +124,7 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 	}
 }
 
-void	render_wall(t_cub *cub, int side, double walldist, int x)
+void	render_wall(t_cub *cub, double walldist, int x, int tex)
 {
 	double	wall; // where wall was hit
 	int		tex_x; //x coordinate on texture
@@ -132,15 +137,15 @@ void	render_wall(t_cub *cub, int side, double walldist, int x)
 	int		y;
 	unsigned int	color;
 
-	if (side == 0)
+	if (cub->side == 0)
 		wall = cub->pos[1] + walldist * cub->raydir[1];
 	else
 		wall = cub->pos[0] + walldist * cub->raydir[0];
 	wall -= floor(wall); // floor is a function in math.h: returns largest integral value that is not greater than wallx
 	tex_x = (int)(wall * (double)TEX_WIDTH);
-	if (side == 0 && cub->raydir[0] > 0)
+	if (cub->side == 0 && cub->raydir[0] > 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
-	if (side == 1 && cub->raydir[1] < 0)
+	if (cub->side == 1 && cub->raydir[1] < 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
 	wallheight = (int) (SCREEN_HEIGHT / walldist); //calculate height of walls
 	step = 1.0 * TEX_HEIGHT / wallheight;
@@ -156,9 +161,11 @@ void	render_wall(t_cub *cub, int side, double walldist, int x)
 	{
 		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
-		color = cub->map->texture_buf[TEX_N][TEX_HEIGHT * tex_y + tex_x];
-		//if (side == 1)
-		//	color = (color >> 1) & 8355711;
+		color = cub->map->texture_buf[tex][TEX_HEIGHT * tex_y + tex_x];
+		if (cub->side == 1 && cub->step[cub->side] == -1) //NO
+			color = 0xFFFFFFFF;
+		if (cub->side == 1 && cub->step[cub->side] == 1) //SO
+			color = 0x00000000;
 		my_pixel_put(cub->img, x, y, color);
 		y++;
 	}
@@ -184,9 +191,9 @@ void	render_wall(t_cub *cub, int side, double walldist, int x)
 int	raycasting(t_cub *cub)
 {
 	int		x;
-	int		side;
 	double	walldist; /* perpendicular distance from camera plane to wall */
 	int		wallheight; /* height of line drawn on screen, i.e. height of wall*/
+	int		tex;
 	//double	time_start;
 	//double	time_frame;
 
@@ -195,14 +202,15 @@ int	raycasting(t_cub *cub)
 	while (x < SCREEN_WIDTH)
 	{
 		calculate_rays(cub, x);/* calculate ray position and direction */
-		side = calculate_wall_hit(cub);
-		if (side != 0 && side != 1)
+		calculate_wall_hit(cub);
+		tex = choose_texture(cub);
+		tex = 0; //for testing purposes
+		if (cub->side != 0 && cub->side != 1)
 			printf("ERROR: side value wrong, see raycasting\n");
-		walldist = (cub->sidedist[side] - cub->deltadist[side]);
+		walldist = (cub->sidedist[cub->side] - cub->deltadist[cub->side]);
 		wallheight = (int) (SCREEN_HEIGHT / walldist); //calculate height of walls
-		printf("walldist: %f\n", walldist);
-		render_vline(cub, wallheight, side, x);
-		render_wall(cub, side, walldist, x);
+		render_vline(cub, wallheight, x);
+		render_wall(cub, walldist, x, tex);
 		// time frame
 		// speed: move speed and rotation speed
 		x++;
