@@ -69,6 +69,7 @@ typedef struct s_map
 	char *SO; // dir = 1, 0
 	char *WE; // dir = 0, -1
 	char *EA; // dir = 0, 1
+	char initial_dir;
 }t_map;
 
 

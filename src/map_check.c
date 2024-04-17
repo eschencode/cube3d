@@ -124,6 +124,7 @@ int check_first_row(t_cub *cube)
 
 void set_angle(t_cub *cube, char c)
 {
+	cube->map->initial_dir = c;
 	if(c == 'N')
 	{
 		cube->dir[0] = 0;
@@ -295,6 +296,7 @@ int map_check(t_cub *cube)
 	if(cube->map->map_valid_flag == -1)
 	{
 		printf("map invalid\n");
+		
 		return(-1);
 	}
 	else{

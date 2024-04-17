@@ -19,7 +19,7 @@ int ft_empty(char *line)
 int free_map_data(t_cub *cub)
 {
 	int i = 0;
-	 if(cub == NULL) 
+	if(cub == NULL) 
         return(-1);
 	if(cub->map != NULL) 
 	{
@@ -97,7 +97,6 @@ void ft_setcolors(t_cub *cube, char *line, int i)//need to add check if rgb valu
 	char **ar;
 	if(line[i] == 'F')
 	{
-		cube->map->F_color = (t_rgb*)malloc(sizeof(t_rgb));
 		while(line[i] == 'F' || line[i] == ' ')
 			i++;
 		newline = ft_strdup(line + i);
@@ -112,7 +111,6 @@ void ft_setcolors(t_cub *cube, char *line, int i)//need to add check if rgb valu
 	}
 	if(line[i] == 'C')
 	{
-		cube->map->C_color = (t_rgb*)malloc(sizeof(t_rgb));
 		while(line[i] == 'C' || line[i] == ' ')
 			i++;
 		newline = ft_strdup(line + i);

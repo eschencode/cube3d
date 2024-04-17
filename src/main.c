@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 13:39:50 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:06:45 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int main(int argc, char **argv)
 	
 	if(initmap(argv[1], &cub) == -1)
 	{
+		free_map_data(&cub);
 		return(0);
 	}
 	init_cub(&cub);
