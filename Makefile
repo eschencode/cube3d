@@ -7,7 +7,7 @@ DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 DIRSRC = ./src/
 
 C_FILES = main init exit window event_handling image \
-			init_map init_map_utils map_check \
+			init_map init_map_utils map_check textures \
 			render_map move_player raycasting utils
 
 SRC = ${addprefix ${DIRSRC}, $(addsuffix .c, $(C_FILES))}

@@ -1,6 +1,6 @@
 #include "../inc/cub.h"
 
-
+/* Wenn man sich bei der map eingabe vertippt, segfaulted die Funktion*/
 int checkcolor(t_cub *cube)
 {
 	if(cube->map->C_color == NULL || cube->map->F_color == NULL)
@@ -15,7 +15,7 @@ int checkcolor(t_cub *cube)
 		cube->map->map_valid_flag = -1;
 		return(-1);
 	}
-	else 
+	else
 		return(0);
 	
 }

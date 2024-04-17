@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/09 14:48:28 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:27:54 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 		color = color / 2; //gives x and y side different brightness
 	y = -1;
 	while (++y < startwall) 
-		my_pixel_put(cub->img, x, y, BLACK);// this has to be replaced by ceiling/ sky texture
+		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->C_color));// fills in ceiling color given in map
 	while (y < endwall)
 	{
 		my_pixel_put(cub->img, x, y, color);
@@ -114,7 +114,52 @@ void	render_vline(t_cub *cub, int wallheight, int side, int x)
 	}
 	while (y < SCREEN_HEIGHT) 
 	{
-		my_pixel_put(cub->img, x, y, BLACK); // this has to  be replaced by floor texture
+		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->F_color)); // fills in floor color given in map
+		y++;
+	}
+}
+
+void	render_wall(t_cub *cub, int side, double walldist, int x)
+{
+	double	wall; // where wall was hit
+	int		tex_x; //x coordinate on texture
+	int		tex_y; //y coordinate on texture
+	double	step;
+	double	tex_pos;
+	int		wallheight;
+	int		startwall;
+	int		endwall;
+	int		y;
+	unsigned int	color;
+
+	if (side == 0)
+		wall = cub->pos[1] + walldist * cub->raydir[1];
+	else
+		wall = cub->pos[0] + walldist * cub->raydir[0];
+	wall -= floor(wall); // floor is a function in math.h: returns largest integral value that is not greater than wallx
+	tex_x = (int)(wall * (double)TEX_WIDTH);
+	if (side == 0 && cub->raydir[0] > 0)
+		tex_x = TEX_WIDTH - tex_x - 1;
+	if (side == 1 && cub->raydir[1] < 0)
+		tex_x = TEX_WIDTH - tex_x - 1;
+	wallheight = (int) (SCREEN_HEIGHT / walldist); //calculate height of walls
+	step = 1.0 * TEX_HEIGHT / wallheight;
+	startwall = -wallheight / 2 + SCREEN_HEIGHT / 2;
+	if (startwall < 0)
+		startwall = 0;
+	endwall = wallheight / 2 + SCREEN_HEIGHT / 2;
+	if (endwall >= SCREEN_HEIGHT || endwall < 0)
+		endwall = SCREEN_HEIGHT - 1;
+	tex_pos = (startwall - SCREEN_HEIGHT / 2 + wallheight / 2) * step;
+	y = startwall;
+	while (y < endwall)
+	{
+		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
+		tex_pos += step;
+		color = cub->map->texture_buf[TEX_N][TEX_HEIGHT * tex_y + tex_x];
+		//if (side == 1)
+		//	color = (color >> 1) & 8355711;
+		my_pixel_put(cub->img, x, y, color);
 		y++;
 	}
 }
@@ -155,7 +200,9 @@ int	raycasting(t_cub *cub)
 			printf("ERROR: side value wrong, see raycasting\n");
 		walldist = (cub->sidedist[side] - cub->deltadist[side]);
 		wallheight = (int) (SCREEN_HEIGHT / walldist); //calculate height of walls
+		printf("walldist: %f\n", walldist);
 		render_vline(cub, wallheight, side, x);
+		render_wall(cub, side, walldist, x);
 		// time frame
 		// speed: move speed and rotation speed
 		x++;
