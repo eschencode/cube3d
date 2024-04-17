@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/16 17:27:41 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:10:18 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	read_in_textures(t_cub *cub, t_map *map)
 		x = -1;
 		while (++x < img_width)
 		{
-			map->texture_buf[TEX_N][img_height * y + x] = cub->img->addr[img_height * y + x];
+			map->texture_buf[TEX_N][img_height * y + x] = cub->img_tex.addr[img_height * y + x];
 		}
 	}
 	mlx_destroy_image(cub->mlx, cub->img_tex.img);
