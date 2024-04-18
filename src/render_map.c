@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:25:49 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 12:50:24 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:07:44 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,9 @@ void	render_minimap(t_cub *cub, t_img *img, int start_x, int start_y)
 		{
 			if (cub->map->layout[y - start_y][x - start_x] == '1')
 				render_square(cub, x, y, WHITE);
-			else if (cub->map->layout[y - start_y][x - start_x] != '1')
+			if (cub->map->layout[y - start_y][x - start_x] == '2')
+				render_square(cub, x, y, GREEN);
+			else if (cub->map->layout[y - start_y][x - start_x] != '1' && cub->map->layout[y - start_y][x - start_x] != '2')
 				render_square(cub, x, y, BLACK);
 			x++;
 		}

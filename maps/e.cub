@@ -1,7 +1,7 @@
-F  7,76,61
-C 99,99,99
+C 1,0,0
+F 0,0,99
 
-NO  textures/purplestone.xpm
+NO  textures/blue2.xpm
 SO textures/wall_1.xpm
 WE textures/wall_3.xpm
 EA textures/wall_2.xpm
@@ -13,8 +13,6 @@ EA textures/wall_2.xpm
 1001000001
 1001000001
 1001000001
-11011111101
-10011  1001
-10111  11111
-11111  11111
-
+1101111111
+10011  
+11111

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/17 11:47:49 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:30:03 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ void move(t_cub *cub, double distance)
 	// Calculate new position
     double new_x = cub->pos[0] + distance * cub->dir[0];
     double new_y = cub->pos[1] + distance * cub->dir[1];
+	if(cub->map->layout[(int)new_y][(int)new_x] == '2')
+	{
+		printf("YOU FOUND THE EXIT\n");
+		cub->exit_flag = 1;
+	}
 	if (cub->map->layout[(int)new_y][(int)new_x] != '0')
 	{
 		return;
@@ -95,6 +100,7 @@ void move_left(t_cub *cub)
 		
 	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
+
 
 void move_right(t_cub *cub)
 {

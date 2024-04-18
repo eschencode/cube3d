@@ -102,6 +102,8 @@ typedef struct s_cub
 	t_img	*img;	/* pointer to image struct, can hold several images*/	
 	t_img_tex	img_tex;
 	double 	pos[2];/* position vector of player: pos[0] = pos_x, pos[1] = pos_y*/
+	int		exit_pos[2];/*0 =x 1=y pos of exit */
+	int		exit_flag;
 	double	dir[2]; /* direction player faces: dir[0] = dir_x, dir[1] = dir_y*/
 	double	camplane[2]; /* camera plane (part you see on screen)*/
 	double	raydir[2]; /* ray direction */
@@ -160,6 +162,7 @@ void	move_up(t_cub *cub);
 void	move_down(t_cub *cub);
 void move_left(t_cub *cub);
 void move_right(t_cub *cub);
+void check_next_pos(t_cub *cub,int new_x,int new_y);
 
 int key_press(int key, t_cub *cub);
 int key_release(int key, t_cub *cub);
