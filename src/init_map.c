@@ -21,7 +21,7 @@ int count_lines(t_cub *cube ,char *path_to_map)
 				tab += 3;
 			i++;
 		}
-		if(line[i] == '1')
+		if(line[i] == '1' || line[i] == '2')
 		{
 			while(line[i] != '\n' && line[i] != '\0')
 				i++;
@@ -168,12 +168,12 @@ int initmap(char *path_to_map,t_cub *cube)
 			{
 				save_texture(cube,line,i);
 			}
-			if(line[i] == '1' && current_line < cube->map->nlines)
+			if((line[i] == '1' || line[i] == '2')&& current_line < cube->map->nlines)
 			{
 				
 				//printf("current line = %d len of line = %d\n",current_line,ft_strlen(line));
 				ft_fill_layout(cube,line,current_line);
-				//printf("lineinlayout[%d] :%s:\n",current_line ,cube->map->layout[current_line]);
+				printf("lineinlayout[%d] :%s:\n",current_line ,cube->map->layout[current_line]);
 				current_line++;
 			}
 			//printf("currentline %d\n",current_line);

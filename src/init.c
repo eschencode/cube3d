@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 15:06:25 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:07:17 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void init_movement(t_cub *cub)
 void	init_cub(t_cub *cub)
 {
 	init_movement(cub);
+	cub->exit_flag = 0;
 	cub->mlx = NULL;
 	cub->win = NULL;
 	cub->img = NULL;
