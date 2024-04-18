@@ -3,11 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2024/04/18 16:07:44 by leschenb         ###   ########.fr       */
+/*   Created: 2024/04/18 16:07:44 by leschenb          #+#    #+#             */
+/*   Updated: 2024/04/18 16:40:12 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../inc/cub.h"
 
@@ -95,7 +98,7 @@ void render_player(t_cub *cub, int start_x ,int start_y)
 	int end_x_pixel = x_pixel + (cub->dir[0] * 10);
 	int end_y_pixel = y_pixel + (cub->dir[1] * 10);
 	my_pixel_put(cub->img, x_pixel + i, y_pixel + i, YELLOW);
-//	ft_draw_line(cub->img,x_pixel,y_pixel,end_x_pixel,end_y_pixel,YELLOW);
+	ft_draw_line(cub->img,x_pixel,y_pixel,end_x_pixel,end_y_pixel,YELLOW);
 		
 }
 
