@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 15:52:15 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:43:19 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int key_press(int key, t_cub *cub)
 {
 	if (key == KEY_ESC)
-		close_window(cub);
+		x_close(cub);
 	else if (key == KEY_W)
 		cub->m_flag.move_up = 1;
 	else if(key == KEY_S)
@@ -54,6 +54,7 @@ int key_release(int key, t_cub *cub)
 
 int	x_close(t_cub *cub)
 {
+	free_map_data(cub->map);
 	close_window(cub);
 	return (0);
 }

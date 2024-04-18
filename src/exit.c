@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 16:22:13 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:42:16 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	free_textures(t_map *map)
 			free(map->texture[i]);
 	}
 }
+
+/*void	free_layout(t_map *map)
+{
+	
+}*/
 
 void free_map_data(t_map *map)
 {
@@ -54,7 +59,7 @@ void free_map_data(t_map *map)
 			free(map->C_color);
 		if(map->F_color != NULL)
 			free(map->F_color);
-		if(map->layout != NULL)
+		if(map->layout)
 		{
 			while(map->nlines > i)
 			{

@@ -3,8 +3,30 @@
 
 #include <stdbool.h>
 
+/*allocate space for layout
+	in case malloc fails, all allocated pointers are set to NULL*/
 
-int count_lines(t_cub *cube ,char *path_to_map)
+void	allocate_layout(t_cub *cube)
+{
+	int	i;
+
+	cube->map->layout = malloc(cube->map->nlines * sizeof(char *));
+	i = -1;
+	while (++i < cube->map->nlines)
+		cube->map->layout[i] = NULL;
+	if (!cube->map->layout)
+		error_exit(cube, "malloc failed");
+	i = 0;
+	while (i < cube->map->nlines)
+	{
+		cube->map->layout[i] = malloc((cube->map->max_line_len +1) * sizeof(char));
+		if(!cube->map->layout[i])
+			error_exit(cube, "malloc failed");
+		i++;
+	}
+}
+
+void	count_lines(t_cub *cube ,char *path_to_map)
 {
 	int line_counter;
 	char *line;
@@ -37,20 +59,6 @@ int count_lines(t_cub *cube ,char *path_to_map)
 	//printf("max line len = %d  + 1 for nullbyte nlines %d\n",max_line_len,line_counter);
 	cube->map->max_line_len = max_line_len;
 	cube->map->nlines = line_counter;
-	//allocate space for layout
-	cube->map->layout = malloc(line_counter * sizeof(char *));
-	if(cube->map->layout == NULL)
-		printf("error");//add error handelibg here later
-	i = 0;
-	while (i < line_counter)
-	{
-		cube->map->layout[i] = malloc((max_line_len +1) * sizeof(char));
-		if(cube->map->layout[i] == NULL)
-			printf("error");//add error handelibg here later
-		i++;
-	}
-	
-	return(line_counter);
 }
 
 
@@ -112,6 +120,8 @@ int check_valid_file(t_cub *cube, char *pf)
 
 void	set_map_data_to_null(t_map *map)
 {
+	int	i;
+
 	map->layout = NULL;
 	map->C_color = NULL;
 	map->F_color = NULL;
@@ -119,6 +129,9 @@ void	set_map_data_to_null(t_map *map)
 	map->SO = NULL;
 	map->WE = NULL;
 	map->EA = NULL;
+	i = -1;
+	while (++i < TEX_NUM)
+		map->texture[i] = NULL;
 }
 
 /*allocate */
@@ -127,14 +140,15 @@ void	allocate_map_data(t_cub *cub)
 	t_map	*map;
 
     cub->map = malloc(sizeof(t_map));
-    if (cub->map == NULL)
+	set_map_data_to_null(cub->map);
+    if (!cub->map)
        error_exit(cub, "malloc failed");
 	map = cub->map;
 	map->F_color = (t_rgb*)malloc(sizeof(t_rgb));
-    if (map->F_color == NULL)
+    if (!map->F_color)
 		error_exit(cub, "malloc failed");
     map->C_color = (t_rgb*)malloc(sizeof(t_rgb));
-    if (map->C_color == NULL)
+    if (!map->C_color)
 		error_exit(cub, "malloc failed");
 }
 
@@ -148,6 +162,7 @@ int initmap(char *path_to_map,t_cub *cube)
 	allocate_map_data(cube);	
 	cube->map->map_valid_flag = 0;
 	count_lines(cube,path_to_map);
+	allocate_layout(cube);
 	int fd = open(path_to_map,O_RDONLY);
 	if(check_valid_file(cube, path_to_map) == -1)
 		return(-1);

@@ -299,9 +299,5 @@ int map_check(t_cub *cube)
 		
 		return(-1);
 	}
-	else{
-		printf("MAP VALIDDDD\n");
-	}
-
 	return(0);
 }
