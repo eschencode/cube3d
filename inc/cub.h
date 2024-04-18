@@ -117,7 +117,7 @@ typedef struct s_cub
 	int		endwall;
 	double	speedmove;	/* speed of movement */
 	double	speedrot;	/* speed of rotation */
-	t_flag *m_flag;
+	t_flag	m_flag;
 }			t_cub;
 
 //extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
@@ -179,20 +179,19 @@ int key_press(int key, t_cub *cub);
 int key_release(int key, t_cub *cub);
 
 /* exit.c: handles clean exit */
+void 		free_map_data(t_map *map);
 void		error_exit(t_cub *cub, char *message);
 
 
 /*map parsing*/
 int			initmap(char *path_to_map, t_cub *cube);
 int 		map_check(t_cub *cube);
-int 		free_map_data(t_cub *cub);
 
 /* init_map.c */
-int 		allocate_map_data(t_cub *cub);
+void		allocate_map_data(t_cub *cub);
 
 /*initmap utils*/
 char		*moded_strdup(const char *s);
-int 		free_map_data(t_cub *cub);
 int 		ft_empty(char *line);
 void 		ft_setcolors(t_cub *cube, char *line, int i);
 

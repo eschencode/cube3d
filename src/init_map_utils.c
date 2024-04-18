@@ -16,58 +16,6 @@ int ft_empty(char *line)
 	return (-1);
 }
 
-int free_map_data(t_cub *cub)
-{
-	int i = 0;
-	if(cub == NULL) 
-        return(-1);
-	if(cub->map != NULL) 
-	{
-    	if(cub->map->NO != NULL)
-		{
-            free(cub->map->NO);
-            cub->map->NO = NULL;
-        }
-		if(cub->map->EA != NULL)
-		{
-            free(cub->map->EA);
-            cub->map->EA = NULL;
-        }
-		if(cub->map->WE != NULL)
-		{
-            free(cub->map->WE);
-            cub->map->WE = NULL;
-        }
-        if(cub->map->SO != NULL)
-		{
-            free(cub->map->SO);
-            cub->map->SO = NULL;
-        }
-		if(cub->map->C_color != NULL)
-			free(cub->map->C_color);
-		if(cub->map->F_color != NULL)
-			free(cub->map->F_color);
-		if(cub->map->layout != NULL)
-		{
-			while(cub->map->nlines > i)
-			{
-				if(cub->map->layout[i] != NULL)
-				{
-					free(cub->map->layout[i]);
-					cub->map->layout[i] = NULL;
-				}
-				i++;
-			}
-			free(cub->map->layout);
-			cub->map->layout = NULL;
-		}
-		free(cub->map);
-    	cub->map = NULL;
-		
-	}
-	return(0);
-}
-
 char	*moded_strdup(const char *s)
 {
 	int		i;
