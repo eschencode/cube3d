@@ -110,26 +110,32 @@ int check_valid_file(t_cub *cube, char *pf)
 	return(0);
 }
 
-/*allocate */
-int allocate_map_data(t_cub *cube)
+void	set_map_data_to_null(t_map *map)
 {
+	map->layout = NULL;
+	map->C_color = NULL;
+	map->F_color = NULL;
+	map->NO = NULL;
+	map->SO = NULL;
+	map->WE = NULL;
+	map->EA = NULL;
+}
 
-    cube->map = malloc(sizeof(t_map));
-    if (cube->map == NULL) {
-        return -1;  // Indicate that memory allocation failed
-    }
-    cube->map->F_color = (t_rgb*)malloc(sizeof(t_rgb));
-    if (cube->map->F_color == NULL) {
-        free(cube->map);  // Free previously allocated memory
-        return -1;  // Indicate that memory allocation failed
-    }
-    cube->map->C_color = (t_rgb*)malloc(sizeof(t_rgb));
-    if (cube->map->C_color == NULL) {
-        free(cube->map->F_color);  // Free previously allocated memory
-        free(cube->map);  // Free previously allocated memory
-        return -1;  // Indicate that memory allocation failed
-    }
-    return 0;  // Indicate that memory allocation was successful
+/*allocate */
+void	allocate_map_data(t_cub *cub)
+{
+	t_map	*map;
+
+    cub->map = malloc(sizeof(t_map));
+    if (cub->map == NULL)
+       error_exit(cub, "malloc failed");
+	map = cub->map;
+	map->F_color = (t_rgb*)malloc(sizeof(t_rgb));
+    if (map->F_color == NULL)
+		error_exit(cub, "malloc failed");
+    map->C_color = (t_rgb*)malloc(sizeof(t_rgb));
+    if (map->C_color == NULL)
+		error_exit(cub, "malloc failed");
 }
 
 int initmap(char *path_to_map,t_cub *cube)
@@ -137,9 +143,9 @@ int initmap(char *path_to_map,t_cub *cube)
 	char *line;
 	int i = 0;
 	int current_line = 0;
-	if (allocate_map_data(cube) == -1)
-		return(-1);
+
 	
+	allocate_map_data(cube);	
 	cube->map->map_valid_flag = 0;
 	count_lines(cube,path_to_map);
 	int fd = open(path_to_map,O_RDONLY);
