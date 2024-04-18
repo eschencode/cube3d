@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:25:49 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 12:50:24 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:32:52 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void render_player(t_cub *cub, int start_x ,int start_y)
 	int end_x_pixel = x_pixel + (cub->dir[0] * 10);
 	int end_y_pixel = y_pixel + (cub->dir[1] * 10);
 	my_pixel_put(cub->img, x_pixel + i, y_pixel + i, YELLOW);
-	ft_draw_line(cub->img,x_pixel,y_pixel,end_x_pixel,end_y_pixel,YELLOW);
+//	ft_draw_line(cub->img,x_pixel,y_pixel,end_x_pixel,end_y_pixel,YELLOW);
 		
 }
 
@@ -113,7 +113,6 @@ void	render_minimap(t_cub *cub, t_img *img, int start_x, int start_y)
 {
 	int	x;
 	int	y;
-	//printf("sy %dsx %d\n",start_y,start_x);
 	
 	y = start_y;
 	while (y < (start_y + cub->map->nlines))
@@ -130,5 +129,4 @@ void	render_minimap(t_cub *cub, t_img *img, int start_x, int start_y)
 		y++;
 	}
 	render_player(cub, start_x, start_y);
-	//printf("strtpos x%f y%f\n",cub->pos[0],cub->pos[1]);
 }

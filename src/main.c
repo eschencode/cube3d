@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/17 16:29:57 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:23:37 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int render_frame(void *param)
 		look_left(cub);
 	if(cub->m_flag->look_right == 1)
 		look_right(cub);
-	raycasting(cub);
+	render_3d_view(cub);
 	if(cub->m_flag->map_flag == 1) 
 		render_minimap(cub, cub->img, set_right(cub), set_down(cub));
 	mlx_clear_window(cub->mlx, cub->win);

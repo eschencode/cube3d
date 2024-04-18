@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/17 16:35:06 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:06:25 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ void	init_cub(t_cub *cub)
 	cub->win = NULL;
 	cub->img = NULL;
 }
+
+/* Variables shortly explained:
+	1. dir[2]; direction player is facing: dir[0] = dir_x, dir[1] = dir_y
+		We get pos and dir from map (N, E, W, S).
+	2. camplane[2]; camera plane of player, needs to be perpendicular to dir
+		The FOV (Field of View) is determined by ratio between length of 
+			direction and camera plane; camplane is set to [0, 0.66] 
+			which creates perfect FOV of 66°*/
 
 void	init_dir(t_cub *cub, char c)
 {	
@@ -112,9 +120,9 @@ void	init_img_xpm(t_cub *cub, t_map *map, int tex)
 	cub->img_tex.img = mlx_xpm_file_to_image(cub->mlx, texture_path, &map->tex_width[tex], &map->tex_height[tex]);
 	if (!cub->img_tex.img)
 		error_exit(cub, "image could not be initialized");
-	if (map->tex_width[tex] < 1 || map->tex_width[tex] > 1000)
+	if (map->tex_width[tex] < 1 || map->tex_width[tex] > 6000)
 		error_exit(cub, "at least 1 texture image is too big or small");
-	if (map->tex_height[tex] < 1 || map->tex_height[tex] > 1000)
+	if (map->tex_height[tex] < 1 || map->tex_height[tex] > 6000)
 		error_exit(cub, "at least 1 texture image is too big or small");	
 	addr = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
 	cub->img_tex.addr = addr;
