@@ -54,6 +54,10 @@ The Field of Vision (FOV) is calculated through the lenght of dir and of the cam
 
 ## TO DO
 
+## Directions
+
+Something seems to be wrong with the directions, either keys or initial values
+
 ### Valgrind
 
 1. If texture image too big or small: conditional jump

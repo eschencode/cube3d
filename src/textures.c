@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/17 16:29:19 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:33:06 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ void	read_in_textures(t_cub *cub, t_map *map)
 	}
 }
 
+/* choose_texture: returns the texture for wall which was hit
+	side = 0 -> South or North side
+	side = 1 -> East or West side
+	step = -1 -> North or West
+	step = 1 -> South or East
+	(imagine a coordinate system)
+	if no texture matches (which should not be the case)
+		it returns 0 which corresponds to the north texture */
+
 int	choose_texture(t_cub *cub)
 {
 	int	tex;
@@ -60,9 +69,9 @@ int	choose_texture(t_cub *cub)
 		tex = TEX_N;
 	if (cub->side == 1 && cub->step[cub->side] == 1)
 		tex = TEX_S;
-	if (cub->side == 0 && cub->step[cub->side] == -1)
-		tex = TEX_E;
 	if (cub->side == 0 && cub->step[cub->side] == 1)
+		tex = TEX_E;
+	if (cub->side == 0 && cub->step[cub->side] == -1)
 		tex = TEX_W;
 	return (tex);
 }

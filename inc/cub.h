@@ -111,6 +111,10 @@ typedef struct s_cub
 	double	sidedist[2]; /* length of ray from current pos to next x- or y-side*/
 	int		side;		/* which wall was hit? x (NS) or y (EW)*/
 	int		step[2]; /* into what direction to step: either -1 or 1, maybe if SW or NE*/
+	double	walldist;
+	int		wallheight;
+	int		startwall;
+	int		endwall;
 	double	speedmove;	/* speed of movement */
 	double	speedrot;	/* speed of rotation */
 	t_flag *m_flag;
@@ -119,43 +123,50 @@ typedef struct s_cub
 //extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
 
 /* init.c: variables are initialized*/
-void	init_cub(t_cub *cub);
-void	init_img(t_cub *cub, int width, int height);
-void	init_img_xpm(t_cub *cub, t_map *map, int tex);
-void 	init_movement(t_cub *cub);
-void	init_dir(t_cub *cub, char c);
-void	init_map(t_map *map);
+void		init_cub(t_cub *cub);
+void		init_img(t_cub *cub, int width, int height);
+void		init_img_xpm(t_cub *cub, t_map *map, int tex);
+void 		init_movement(t_cub *cub);
+void		init_dir(t_cub *cub, char c);
+void		init_map(t_map *map);
 
 /* textures.c: init textures (save them so that they are usable)*/
-void	malloc_textures(t_cub *cub, t_map *map, int tex);
-void	read_in_textures(t_cub *cub, t_map *map);
-int		choose_texture(t_cub *cub);
+void		malloc_textures(t_cub *cub, t_map *map, int tex);
+void		read_in_textures(t_cub *cub, t_map *map);
+int			choose_texture(t_cub *cub);
 
 /*	window.c: window management */
-void	open_window(t_cub *cub);
-void	close_window(t_cub *cub);
+void		open_window(t_cub *cub);
+void		close_window(t_cub *cub);
 
 /* image.c: creates the image displayed */
-void	my_pixel_put(t_img *img, int x, int y, unsigned int color);
-void	render_image(t_cub *cub, t_img *img);
+void		my_pixel_put(t_img *img, int x, int y, unsigned int color);
+void		render_image(t_cub *cub, t_img *img);
 
 /* render_map.c: rendering of 2D map*/
-void	render_square(t_cub *cub, int x, int y, unsigned int color);
-void	render_minimap(t_cub *cub, t_img *img, int start_x, int start_y);
-int		set_right();
-int		set_down();
+void		render_square(t_cub *cub, int x, int y, unsigned int color);
+void		render_minimap(t_cub *cub, t_img *img, int start_x, int start_y);
+int			set_right();
+int			set_down();
 
 /* event_handlings.c: management of key and mouse events */
-int		deal_key(int key, t_cub *cub);
-int		x_close(t_cub *cub);
+int			deal_key(int key, t_cub *cub);
+int			x_close(t_cub *cub);
+
+/* raycasting_calc.c */
+void		calculate_ray(t_cub *cub, int x);
+void		calculate_step_sidedist(t_cub *cub, int map[2]);
+void		calculate_wall_hit(t_cub *cub);
+void		calculate_wall_dimensions(t_cub *cub);
+int			calculate_tex_x(t_cub *cub, double walldist, int tex);
 
 /* raycasting.c */
-void	calculate_rays(t_cub *cub, int x);
-void	calculate_wall_hit(t_cub *cub);
-void	render_vline(t_cub *cub, int wallheight, int x);
-int		raycasting(t_cub *cub);
+void		render_wall_texture(t_cub *cub, int x, int tex);
+int			render_3d_view(t_cub *cub);
+
 
 /* move_player.c: calculates and renders movements of player on 2D map*/
+
 void	look_left(t_cub *cub);
 void	look_right(t_cub *cub);
 void	move_up(t_cub *cub);
@@ -166,22 +177,24 @@ void check_next_pos(t_cub *cub,int new_x,int new_y);
 
 int key_press(int key, t_cub *cub);
 int key_release(int key, t_cub *cub);
+
 /* exit.c: handles clean exit */
-void	error_exit(t_cub *cub, char *message);
+void		error_exit(t_cub *cub, char *message);
 
 
-//map parsing
-int initmap(char *path_to_map, t_cub *cube);
-int map_check(t_cub *cube);
-int free_map_data(t_cub *cub);
+/*map parsing*/
+int			initmap(char *path_to_map, t_cub *cube);
+int 		map_check(t_cub *cube);
+int 		free_map_data(t_cub *cub);
 
 /* init_map.c */
-int allocate_map_data(t_cub *cub);
-//initmap utils
-char	*moded_strdup(const char *s);
-int free_map_data(t_cub *cub);
-int ft_empty(char *line);
-void ft_setcolors(t_cub *cube, char *line, int i);
+int 		allocate_map_data(t_cub *cub);
+
+/*initmap utils*/
+char		*moded_strdup(const char *s);
+int 		free_map_data(t_cub *cub);
+int 		ft_empty(char *line);
+void 		ft_setcolors(t_cub *cube, char *line, int i);
 
 /* utils.c*/
 double			get_time(double time_zero);

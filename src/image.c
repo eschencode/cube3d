@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:16:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/16 17:07:44 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:28:25 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 void	my_pixel_put(t_img *img, int x, int y, unsigned int color)
 {
 	char	*pixel;
-
+	
+	if (x < 0 && y < 0 && x > SCREEN_WIDTH && y > SCREEN_HEIGHT)
+		return ;
 	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)pixel = color;
 }
