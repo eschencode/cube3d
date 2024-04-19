@@ -190,7 +190,7 @@ int initmap(char *path_to_map,t_cub *cube)
 				
 				//printf("current line = %d len of line = %d\n",current_line,ft_strlen(line));
 				ft_fill_layout(cube,line,current_line);
-				printf("lineinlayout[%d] :%s:\n",current_line ,cube->map->layout[current_line]);
+			//	printf("lineinlayout[%d] :%s:\n",current_line ,cube->map->layout[current_line]);
 				current_line++;
 			}
 			//printf("currentline %d\n",current_line);

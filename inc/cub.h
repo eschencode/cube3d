@@ -29,6 +29,7 @@
 # define TEX_W 2	//texture for WE side
 # define TEX_E 3	//texture for EA side
 # define TEX_EXIT 4 //texture for exit
+# define TEX_EXIT_PATH "./textures/exit_blue.xpm"
 // To DO: either delete defined tex width & height and retrieve from xpm file
 // or include check in map parsing that xpm not bigger or smaller than 64x64
 # define TEX_WIDTH 64 // size of pixels for texture (x)

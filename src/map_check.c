@@ -184,7 +184,7 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 			}
 			if(c == '2')
 			{
-				printf("F2");
+				//printf("F2");
 				cube->exit_flag = 1;
 				cube->exit_pos[0] = x;
 				cube->exit_pos[1] = y;
@@ -251,7 +251,7 @@ int flood_fill_check(char **layout,int x,int y, int xmax,int ymax)
 
 int ft_flood_fill(t_cub *cube)
 {
-	printf("dadad");
+	//printf("dadad");
 	char **layout_copy;
 	int i = 0;
 	int rounded_x  = cube->pos[0] -0.5;
@@ -289,12 +289,12 @@ int map_check(t_cub *cube)
 	
 	if(check_all_rows(cube) == -1)
 	{
-		printf("DAASDA");
+		//printf("DAASDA");
 		cube->map->map_valid_flag = -1;
 	}
 	if(ft_flood_fill(cube) == -1)
 	{
-		printf("ADADADA");
+		//printf("ADADADA");
 		cube->map->map_valid_flag = -1;
 	}
 	if(cube->map->map_valid_flag == -1)

@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 15:43:32 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:02:08 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,35 @@ void	malloc_textures(t_cub *cub, t_map *map, int tex)
 	if (!map->texture[tex])
 		error_exit(cub, "malloc texture failed", NULL);
 //	map->texture[tex] = NULL;
+}
+
+
+void	init_img_xpm(t_cub *cub, t_map *map, int tex)
+{
+	int			*addr;
+	char		*texture_path;
+
+	if (tex == (TEX_NUM - 1))
+		texture_path = TEX_EXIT_PATH;
+	else if (tex == TEX_N)
+		texture_path = map->NO;
+	else if (tex == TEX_S)
+		texture_path = map->SO;
+	else if (tex == TEX_W)
+		texture_path = map->WE;
+	else
+		texture_path = map->EA;
+	cub->img_tex.img = mlx_xpm_file_to_image(cub->mlx, texture_path, &map->tex_width[tex], &map->tex_height[tex]);
+	if (!cub->img_tex.img)
+		error_exit(cub, "image could not be initialized", texture_path);
+	if (map->tex_width[tex] < 1 || map->tex_width[tex] > 6000)
+		error_exit(cub, "at least 1 texture image is too big or small", texture_path);
+	if (map->tex_height[tex] < 1 || map->tex_height[tex] > 6000)
+		error_exit(cub, "at least 1 texture image is too big or small", texture_path);	
+	addr = (int *) mlx_get_data_addr(cub->img_tex.img, &cub->img_tex.bpp, &cub->img_tex.line_length, &cub->img_tex.endian);
+	cub->img_tex.addr = addr;
+	if (!cub->img_tex.addr)
+		error_exit(cub, "image information could not be retrieved", texture_path);
 }
 
 /* the number of textures varies depending on whether there is an 
