@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 12:33:06 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:54:17 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ void	malloc_textures(t_cub *cub, t_map *map, int tex)
 //	map->texture[tex] = NULL;
 }
 
+/* the number of textures varies depending on whether there is an 
+	exit door in the map ('2') or not. TEX_NUM is the max nb of 
+	textures available. It is 5 (4 wall textures + 1 exit texture).
+	All texture pointers are set to NULL (see init.c).
+	We start at the end of the textures array with the copying.
+	If there is a exit texture, we start at position 4
+	(5 - 1 + 1 & -1 at the start of the loop), 
+	if not at position 3 (5 - 1 + 0 & -1)*/
+
 void	read_in_textures(t_cub *cub, t_map *map)
 {
 	int	x;
@@ -32,8 +41,8 @@ void	read_in_textures(t_cub *cub, t_map *map)
 	int		*address;
 	int		tex;
 
-	tex = -1;
-	while (++tex < TEX_NUM)
+	tex = TEX_NUM -1 + cub->exit_flag;
+	while (--tex >= 0)
 	{
 		init_img_xpm(cub, map, tex);
 		malloc_textures(cub, map, tex);
@@ -47,7 +56,6 @@ void	read_in_textures(t_cub *cub, t_map *map)
 			}
 		}
 		mlx_destroy_image(cub->mlx, cub->img_tex.img);
-		printf("texture %i read in\n", tex);
 	}
 }
 
@@ -60,18 +68,20 @@ void	read_in_textures(t_cub *cub, t_map *map)
 	if no texture matches (which should not be the case)
 		it returns 0 which corresponds to the north texture */
 
-int	choose_texture(t_cub *cub)
+int	choose_texture(t_cub *cub, int wall_type)
 {
 	int	tex;
 
 	tex = 0;
-	if (cub->side == 1 && cub->step[cub->side] == -1)
+	if (wall_type == '2')
+		tex = TEX_EXIT;
+	else if (cub->side == 1 && cub->step[cub->side] == -1)
 		tex = TEX_N;
-	if (cub->side == 1 && cub->step[cub->side] == 1)
+	else if (cub->side == 1 && cub->step[cub->side] == 1)
 		tex = TEX_S;
-	if (cub->side == 0 && cub->step[cub->side] == 1)
+	else if (cub->side == 0 && cub->step[cub->side] == 1)
 		tex = TEX_E;
-	if (cub->side == 0 && cub->step[cub->side] == -1)
+	else if (cub->side == 0 && cub->step[cub->side] == -1)
 		tex = TEX_W;
 	return (tex);
 }

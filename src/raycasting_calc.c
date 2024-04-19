@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:40:46 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 15:09:35 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:52:16 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	calculate_step_sidedist(t_cub *cub, int map[2])
 			to next x- or y-side of a square on the map
 */	
 
-void	calculate_wall_hit(t_cub *cub)
+int	calculate_wall_hit(t_cub *cub)
 {
 	int	hit;
 	int	map[2];
@@ -100,6 +100,7 @@ void	calculate_wall_hit(t_cub *cub)
 		if (cub->map->layout[map[1]][map[0]] != 48)
 			hit = 1;
 	}
+	return (cub->map->layout[map[1]][map[0]]);
 }
 
 /* calculates the dimensions of the wall that was hit

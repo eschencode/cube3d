@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 15:08:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:55:49 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	render_3d_view(t_cub *cub)
 {
 	int		x;
 	int		tex;
+	int		wall_type;
 	//double	time_start;
 	//double	time_frame;
 
@@ -82,8 +83,8 @@ int	render_3d_view(t_cub *cub)
 	while (x < SCREEN_WIDTH)
 	{
 		calculate_ray(cub, x);
-		calculate_wall_hit(cub);
-		tex = choose_texture(cub);
+		wall_type = calculate_wall_hit(cub);
+		tex = choose_texture(cub, wall_type);
 		if (cub->side != 0 && cub->side != 1)
 			printf("ERROR: side value wrong, see raycasting\n");
 		calculate_wall_dimensions(cub);

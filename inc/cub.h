@@ -23,11 +23,12 @@
 # define MAP_CHARS "012NSEW"
 # define MAP_INSIDE "02NSEW"
 # define PLAYER "NSEW"
-# define TEX_NUM 4 // number of textures
+# define TEX_NUM 5 // number of textures
 # define TEX_N 0	//texture for NO side
 # define TEX_S 1	//texture for SO side
 # define TEX_W 2	//texture for WE side
 # define TEX_E 3	//texture for EA side
+# define TEX_EXIT 4 //texture for exit
 // To DO: either delete defined tex width & height and retrieve from xpm file
 // or include check in map parsing that xpm not bigger or smaller than 64x64
 # define TEX_WIDTH 64 // size of pixels for texture (x)
@@ -103,7 +104,8 @@ typedef struct s_cub
 	t_img_tex	img_tex;
 	double 	pos[2];/* position vector of player: pos[0] = pos_x, pos[1] = pos_y*/
 	int		exit_pos[2];/*0 =x 1=y pos of exit */
-	int		exit_flag;
+	int		found_exit; /* 1 if player touched exit, otherwise 0*/
+	int		exit_flag;	/* 1 if map has an exit door (a "2" on the map), 0 if it doesn't */
 	double	dir[2]; /* direction player faces: dir[0] = dir_x, dir[1] = dir_y*/
 	double	camplane[2]; /* camera plane (part you see on screen)*/
 	double	raydir[2]; /* ray direction */
@@ -133,7 +135,7 @@ void		init_map(t_map *map);
 /* textures.c: init textures (save them so that they are usable)*/
 void		malloc_textures(t_cub *cub, t_map *map, int tex);
 void		read_in_textures(t_cub *cub, t_map *map);
-int			choose_texture(t_cub *cub);
+int			choose_texture(t_cub *cub, int wall_type);
 
 /*	window.c: window management */
 void		open_window(t_cub *cub);
@@ -156,7 +158,7 @@ int			x_close(t_cub *cub);
 /* raycasting_calc.c */
 void		calculate_ray(t_cub *cub, int x);
 void		calculate_step_sidedist(t_cub *cub, int map[2]);
-void		calculate_wall_hit(t_cub *cub);
+int			calculate_wall_hit(t_cub *cub);
 void		calculate_wall_dimensions(t_cub *cub);
 int			calculate_tex_x(t_cub *cub, double walldist, int tex);
 
@@ -179,7 +181,7 @@ int key_press(int key, t_cub *cub);
 int key_release(int key, t_cub *cub);
 
 /* exit.c: handles clean exit */
-void 		free_map_data(t_map *map);
+void 		free_map_data(t_map *map, t_cub *cub);
 void		error_exit(t_cub *cub, char *message);
 
 
