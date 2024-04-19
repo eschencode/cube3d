@@ -13,6 +13,7 @@
 # include <errno.h>      // for perror
 # include <math.h>       // for math library functions
 # include <sys/time.h>	// for calculating frames (get_time)
+# include <time.h>
 
 # define SCREEN_WIDTH	1500 //1024 
 # define SCREEN_HEIGHT	1000	//dimension taken from Video by 3D Sage
@@ -120,6 +121,7 @@ typedef struct s_cub
 	double	speedmove;	/* speed of movement */
 	double	speedrot;	/* speed of rotation */
 	t_flag	m_flag;
+	time_t timer;
 }			t_cub;
 
 //extern int	test_map[MAP_WIDTH][MAP_HEIGHT];
@@ -166,7 +168,9 @@ int			calculate_tex_x(t_cub *cub, double walldist, int tex);
 void		render_wall_texture(t_cub *cub, int x, int tex);
 int			render_3d_view(t_cub *cub);
 
-
+//timer
+void start_timer(t_cub *cube);
+long ft_get_time(t_cub *cube);
 /* move_player.c: calculates and renders movements of player on 2D map*/
 
 void	look_left(t_cub *cub);

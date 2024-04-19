@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 14:30:03 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:00:02 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void move(t_cub *cub, double distance)
 	if(cub->map->layout[(int)new_y][(int)new_x] == '2')
 	{
 		printf("YOU FOUND THE EXIT\n");
-		cub->exit_flag = 1;
+		cub->exit_flag = -1;
 	}
 	if (cub->map->layout[(int)new_y][(int)new_x] != '0')
 	{
