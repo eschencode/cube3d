@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/18 17:40:28 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:41:39 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 		return (printf("No map given. Choose one from ./maps/ \n"), 0);
 	init_cub(&cub);
 	if (initmap(argv[1], &cub) == -1)
-		error_exit(&cub, "could not initialize map");
+		error_exit(&cub, "could not initialize map", NULL);
 	open_window(&cub);
 	game_loop(&cub);
 }

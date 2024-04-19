@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 13:54:17 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:43:32 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	malloc_textures(t_cub *cub, t_map *map, int tex)
 {
 	map->texture[tex] = malloc(sizeof(int) * map->tex_width[tex] * map->tex_height[tex]);
 	if (!map->texture[tex])
-		error_exit(cub, "malloc texture failed");
+		error_exit(cub, "malloc texture failed", NULL);
 //	map->texture[tex] = NULL;
 }
 
