@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 15:35:50 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:31:53 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,27 @@ void	error_exit(t_cub *cub, char *message, char *file)
 	free_map_data(cub->map, cub);
 	close_window(cub);
 	exit(1);
+}
+
+void	exit_screen(t_cub *cub)
+{
+	int	width;
+	int	height;
+
+	width = 0;
+	height = 0;
+
+	
+	mlx_destroy_image(cub->mlx, cub->img->img);
+	free(cub->img);
+	mlx_clear_window(cub->mlx, cub->win);
+	mlx_loop_end(cub->mlx);
+	cub->img->img = mlx_xpm_file_to_image(cub->mlx, EXIT_IMAGE, &width, &height);
+	if (!cub->img->img)
+	{
+		//free(ptr);
+		error_exit(cub, "image could not be put to window", EXIT_IMAGE);
+	}
+	cub->exit_found = 2;
+	mlx_loop(cub->mlx);
 }

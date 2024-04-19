@@ -29,11 +29,12 @@
 # define TEX_W 2	//texture for WE side
 # define TEX_E 3	//texture for EA side
 # define TEX_EXIT 4 //texture for exit
-# define TEX_EXIT_PATH "./textures/exit_blue.xpm"
 // To DO: either delete defined tex width & height and retrieve from xpm file
 // or include check in map parsing that xpm not bigger or smaller than 64x64
 # define TEX_WIDTH 64 // size of pixels for texture (x)
 # define TEX_HEIGHT 64 // size of pixels for texture (y)
+# define TEX_EXIT_PATH "./textures/exit_blue.xpm"
+# define EXIT_IMAGE "./textures/exit_blue.xpm"
 
 typedef struct	s_img
 {
@@ -105,7 +106,7 @@ typedef struct s_cub
 	t_img_tex	img_tex;
 	double 	pos[2];/* position vector of player: pos[0] = pos_x, pos[1] = pos_y*/
 	int		exit_pos[2];/*0 =x 1=y pos of exit */
-	int		found_exit; /* 1 if player touched exit, otherwise 0*/
+	int		exit_found; /* 1 if player touched exit, otherwise 0*/
 	int		exit_flag;	/* 1 if map has an exit door (a "2" on the map), 0 if it doesn't */
 	double	dir[2]; /* direction player faces: dir[0] = dir_x, dir[1] = dir_y*/
 	double	camplane[2]; /* camera plane (part you see on screen)*/
@@ -184,6 +185,7 @@ int key_release(int key, t_cub *cub);
 /* exit.c: handles clean exit */
 void 		free_map_data(t_map *map, t_cub *cub);
 void		error_exit(t_cub *cub, char *message, char *file);
+void		exit_screen(t_cub *cub);
 
 
 /*map parsing*/

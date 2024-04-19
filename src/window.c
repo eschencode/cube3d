@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 12:54:13 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 15:43:20 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:50:52 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	close_window(t_cub *cub)
 {
 	if (!cub)
 		return ;
-	if (cub->img)
+	if (cub->img->img)
 	{
 		mlx_destroy_image(cub->mlx, cub->img->img);
 		free(cub->img);
