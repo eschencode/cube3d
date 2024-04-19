@@ -182,7 +182,7 @@ int key_release(int key, t_cub *cub);
 
 /* exit.c: handles clean exit */
 void 		free_map_data(t_map *map, t_cub *cub);
-void		error_exit(t_cub *cub, char *message);
+void		error_exit(t_cub *cub, char *message, char *file);
 
 
 /*map parsing*/

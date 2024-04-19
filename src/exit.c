@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 13:32:45 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:35:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,12 @@ void free_map_data(t_map *map, t_cub *cub)
 	}
 }
 
-void	error_exit(t_cub *cub, char *message)
+void	error_exit(t_cub *cub, char *message, char *file)
 {
-	printf("Error: %s\n", message);
+	if (!file)
+		printf("Error: %s\n", message);
+	else
+		printf("Error: %s: %s\n", message, file);
 	free_map_data(cub->map, cub);
 	close_window(cub);
 	exit(1);

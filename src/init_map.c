@@ -15,13 +15,13 @@ void	allocate_layout(t_cub *cube)
 	while (++i < cube->map->nlines)
 		cube->map->layout[i] = NULL;
 	if (!cube->map->layout)
-		error_exit(cube, "malloc failed");
+		error_exit(cube, "malloc failed", NULL);
 	i = 0;
 	while (i < cube->map->nlines)
 	{
 		cube->map->layout[i] = malloc((cube->map->max_line_len +1) * sizeof(char));
 		if(!cube->map->layout[i])
-			error_exit(cube, "malloc failed");
+			error_exit(cube, "malloc failed", NULL);
 		i++;
 	}
 }
@@ -100,21 +100,17 @@ void ft_fill_layout(t_cub *cube,char *line, int current_line)
 int check_valid_file(t_cub *cube, char *pf)
 {
 	int i;
+	int	fd;
+
 	i = 0;
 	//check .cub at end 
-	while(pf[i + 4] != '\0')
+	while (pf[i + 4] != '\0')
 		i++;
-	if(pf[i] != '.' || pf[i + 1] != 'c' || pf[i + 2] != 'u' || pf[i +3] != 'b')
-	{
-		printf("worng file format only .cub files valid\n");
-		return(-1);
-	}
-	int fd = open(pf,O_RDONLY);
-	if(fd == -1)
-	{
-		printf("can not open file\n");
-		return(-1);
-	}
+	if (pf[i] != '.' || pf[i + 1] != 'c' || pf[i + 2] != 'u' || pf[i +3] != 'b')
+		error_exit(cube, "wrong file format. Only '.cub' extension valid", pf);
+	fd = open(pf, O_RDONLY);
+	if (fd == -1)
+		error_exit(cube, "could not open file", pf);
 	return(0);
 }
 
@@ -142,14 +138,14 @@ void	allocate_map_data(t_cub *cub)
     cub->map = malloc(sizeof(t_map));
 	set_map_data_to_null(cub->map);
     if (!cub->map)
-       error_exit(cub, "malloc failed");
+       error_exit(cub, "malloc failed", NULL);
 	map = cub->map;
 	map->F_color = (t_rgb*)malloc(sizeof(t_rgb));
     if (!map->F_color)
-		error_exit(cub, "malloc failed");
+		error_exit(cub, "malloc failed", NULL);
     map->C_color = (t_rgb*)malloc(sizeof(t_rgb));
     if (!map->C_color)
-		error_exit(cub, "malloc failed");
+		error_exit(cub, "malloc failed", NULL);
 }
 
 int initmap(char *path_to_map,t_cub *cube)
