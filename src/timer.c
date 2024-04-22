@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   timer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/22 13:44:54 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/04/22 13:49:23 by tstahlhu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 
 #include "../inc/cub.h"
@@ -17,6 +28,23 @@ long ft_get_time(t_cub *cube)
 		elapsed_time = current_time - cube->timer;
 	}
 	return(elapsed_time);
+}
+
+void	print_timer(t_cub *cub)
+{
+	long	min;
+	long	sec;
+
+	min = ft_get_time(cub) / 60;
+	sec = ft_get_time(cub) % 60;
+	if (min < 10)
+		printf("0%li:", min);
+	else
+		printf("%li:", min);
+	if (sec < 10)
+		printf("0%li\n", sec);
+	else
+		printf("%li\n", sec);
 }
 
 

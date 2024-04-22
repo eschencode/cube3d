@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"mlx.h": "c",
-		"color_codes.h": "c"
+		"color_codes.h": "c",
+		"limits": "c"
 	}
 }

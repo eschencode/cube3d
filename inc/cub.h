@@ -175,6 +175,7 @@ int			render_3d_view(t_cub *cub);
 //timer
 void start_timer(t_cub *cube);
 long ft_get_time(t_cub *cube);
+void	print_timer(t_cub *cub);
 
 /* move_player.c: calculates and renders movements of player on 2D map*/
 
