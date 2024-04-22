@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 16:16:06 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:20:31 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_cub(t_cub *cub)
 	cub->mlx = NULL;
 	cub->win = NULL;
 	cub->img = NULL;
+	cub->img_exit.img = NULL;
 }
 
 /* Variables shortly explained:
