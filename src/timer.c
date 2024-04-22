@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:44:54 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/22 13:49:23 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:12:36 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long ft_get_time(t_cub *cube)
 {
 	static long elapsed_time;
 	
-	if(cube->exit_flag != -1)
+	if (cube->exit_flag)
 	{
 		time_t current_time = time(NULL);
 		elapsed_time = current_time - cube->timer;
@@ -35,8 +35,12 @@ void	print_timer(t_cub *cub)
 	long	min;
 	long	sec;
 
+	if (!cub->exit_flag)
+		return ;
 	min = ft_get_time(cub) / 60;
 	sec = ft_get_time(cub) % 60;
+	if (cub->exit_found)
+		printf("IN ");
 	if (min < 10)
 		printf("0%li:", min);
 	else

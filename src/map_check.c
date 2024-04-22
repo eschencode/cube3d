@@ -184,7 +184,6 @@ int check_all_rows(t_cub *cube)//probelm dosent check the dimesnion right :()
 			}
 			if(c == '2')
 			{
-				//printf("F2");
 				cube->exit_flag = 1;
 				cube->exit_pos[0] = x;
 				cube->exit_pos[1] = y;
