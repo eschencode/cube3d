@@ -6,28 +6,28 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:44:54 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/22 14:12:36 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:17:46 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/cub.h"
 
-void start_timer(t_cub *cube)
+void	start_timer(t_cub *cube)
 {
 	cube->timer = time(NULL);
 }
 
-long ft_get_time(t_cub *cube)
+long	ft_get_time(t_cub *cube)
 {
-	static long elapsed_time;
-	
+	static long	elapsed_time;
+	time_t		current_time;
+
 	if (cube->exit_flag)
 	{
-		time_t current_time = time(NULL);
+		current_time = time(NULL);
 		elapsed_time = current_time - cube->timer;
 	}
-	return(elapsed_time);
+	return (elapsed_time);
 }
 
 void	print_timer(t_cub *cub)
@@ -50,5 +50,3 @@ void	print_timer(t_cub *cub)
 	else
 		printf("%li\n", sec);
 }
-
-
