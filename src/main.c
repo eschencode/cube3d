@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 17:24:12 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:08:15 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 int render_frame(void *param)
 {
 	t_cub *cub = (t_cub *)param;
-	if (cub->exit_found == 1)
+	if (cub->exit_found > 0)
+	{
 		exit_screen(cub);
-	else if (cub->exit_found == 2)
 		return (0);
+	}
 	if(cub->m_flag.move_up == 1)
 		move_up(cub);
 	if(cub->m_flag.move_down == 1)

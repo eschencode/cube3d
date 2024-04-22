@@ -34,7 +34,7 @@
 # define TEX_WIDTH 64 // size of pixels for texture (x)
 # define TEX_HEIGHT 64 // size of pixels for texture (y)
 # define TEX_EXIT_PATH "./textures/exit_blue.xpm"
-# define EXIT_IMAGE "./textures/exit_blue.xpm"
+# define EXIT_IMAGE "./textures/win.xpm"
 
 typedef struct	s_img
 {
@@ -104,6 +104,7 @@ typedef struct s_cub
 	void	*win;
 	t_img	*img;	/* pointer to image struct, can hold several images*/	
 	t_img_tex	img_tex;
+	t_img	img_exit;
 	double 	pos[2];/* position vector of player: pos[0] = pos_x, pos[1] = pos_y*/
 	int		exit_pos[2];/*0 =x 1=y pos of exit */
 	int		exit_found; /* 1 if player touched exit, otherwise 0*/
