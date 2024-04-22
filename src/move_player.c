@@ -54,18 +54,18 @@ void move(t_cub *cub, double distance)
 void	look_right(t_cub *cub)//more kinda look left 
 {
 	if(cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
-		rotateDirection(cub, 0.5);
+		rotateDirection(cub, 1.5);
 	else
-		rotateDirection(cub, -0.5);
+		rotateDirection(cub, -1.5);
 	//printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 
 void look_left(t_cub *cub) // more like look right
 {
 	if(cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
-    	rotateDirection(cub, -0.5);
+    	rotateDirection(cub, -1.5);
 	else
-		rotateDirection(cub, 0.5);
+		rotateDirection(cub, 1.5);
   //  printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
 }
 

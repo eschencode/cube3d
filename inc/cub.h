@@ -202,6 +202,19 @@ int 		map_check(t_cub *cube);
 
 /* init_map.c */
 void		allocate_map_data(t_cub *cub);
+void	save_texture(t_cub *cube, char *line, int i);
+void	ft_fill_layout(t_cub *cube, char *line, int current_line);
+int	check_valid_file(t_cub *cube, char *pf);
+void	set_map_data_to_null(t_map *map);
+void	ft_setcolor_f(t_cub *cube, char *line, int i);
+void	ft_setcolor_c(t_cub *cube, char *line, int i);
+void	allocate_layout(t_cub *cube);
+void	save_texture(t_cub *cube, char *line, int i);
+void	ft_fill_layout(t_cub *cube, char *line, int current_line);
+int	check_valid_file(t_cub *cube, char *pf);
+void	set_map_data_to_null(t_map *map);
+
+
 
 /*initmap utils*/
 char		*moded_strdup(const char *s);
