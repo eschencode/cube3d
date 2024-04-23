@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:07:44 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 15:01:36 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:26:20 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	render_square(t_cub *cub, int x, int y, unsigned int color)
 	}
 }
 
-
+/*
 void ft_draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
 {
 	int dx = abs(x1 - x0);
@@ -102,7 +102,29 @@ void	render_player(t_cub *cub, int start_x, int start_y)
 	my_pixel_put(cub->img, x_pixel + i, y_pixel + i, YELLOW);
 	ft_draw_line(cub->img, x_pixel, y_pixel, end_x_pixel, end_y_pixel, YELLOW);
 }
+*/
 
+void	render_player(t_cub *cub, int start_x, int start_y)
+{
+	int	x_pixel;
+	int	y_pixel;
+	int	i;
+
+	i = -5;
+	x_pixel = (start_x * 25) + (25 * cub->pos[0]);
+	y_pixel = (start_y * 25) + (25 * cub->pos[1]);
+	while (i < 7)
+	{
+		my_pixel_put(cub->img, x_pixel, y_pixel + i, YELLOW);
+		i++;
+	}
+	i = -5;
+	while (i < 5)
+	{
+		my_pixel_put(cub->img, x_pixel + i, y_pixel, YELLOW);
+		i++;
+	}
+}
 
 void	render_minimap(t_cub *cub, int start_x, int start_y)
 {
