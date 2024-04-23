@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/22 10:10:05 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:57:59 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_textures(t_map *map)
 	
 }*/
 
-void free_map_data(t_map *map, t_cub *cub)
+void	free_map_data(t_map *map, t_cub *cub)
 {
 	int i = 0;
 	if(map)
