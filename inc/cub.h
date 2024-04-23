@@ -1,7 +1,7 @@
 #ifndef CUBE_H
 # define CUBE_H
 
-# include "../../../minilibx-linux/mlx.h"
+# include "../libs/minilibx-linux/mlx.h"
 # include "../libs/libft/libft.h"
 # include "key_codes.h"
 # include "color_codes.h"
@@ -216,7 +216,7 @@ int	checkcolor(t_cub *cube);
 int	ft_isspace(char c);
 int	check_textures(char *str);
 void	set_angle(t_cub *cube, char c);
-
+int	check_all_rows(t_cub *cube);
 
 /*initmap utils*/
 char		*moded_strdup(const char *s);

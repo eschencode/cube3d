@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:58:41 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/22 18:10:07 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:48:47 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,15 @@ void	ft_setcolor_f(t_cub *cube, char *line, int i)
 	char	*newline;
 	char	**ar;
 
-	if (line[i] == 'F')
+	while (line[i] == 'F' || line[i] == ' ')
+		i++;
+	newline = ft_strdup(line + i);
+	ar = ft_split(newline, ',');
+	if (ar[0] && ar[1] && ar[2])
 	{
-		while (line[i] == 'F' || line[i] == ' ')
-			i++;
-		newline = ft_strdup(line + i);
-		ar = ft_split(newline, ',');
-		if (ar[0] && ar[1] && ar[2])
-		{
-			cube->map->F_color->r = ft_atoi(ar[0]);
-			cube->map->F_color->g = ft_atoi(ar[1]);
-			cube->map->F_color->b = ft_atoi(ar[2]);
-		}
+		cube->map->F_color->r = ft_atoi(ar[0]);
+		cube->map->F_color->g = ft_atoi(ar[1]);
+		cube->map->F_color->b = ft_atoi(ar[2]);
 	}
 	if (ar != NULL)
 	{
@@ -105,18 +102,15 @@ void	ft_setcolor_c(t_cub *cube, char *line, int i)
 	char	*newline;
 	char	**ar;
 
-	if (line[i] == 'C')
+	while (line[i] == 'C' || line[i] == ' ')
+		i++;
+	newline = ft_strdup(line + i);
+	ar = ft_split(newline, ',');
+	if (ar[0] && ar[1] && ar[2])
 	{
-		while (line[i] == 'C' || line[i] == ' ')
-			i++;
-		newline = ft_strdup(line + i);
-		ar = ft_split(newline, ',');
-		if (ar[0] && ar[1] && ar[2])
-		{
-			cube->map->C_color->r = ft_atoi(ar[0]);
-			cube->map->C_color->g = ft_atoi(ar[1]);
-			cube->map->C_color->b = ft_atoi(ar[2]);
-		}
+		cube->map->C_color->r = ft_atoi(ar[0]);
+		cube->map->C_color->g = ft_atoi(ar[1]);
+		cube->map->C_color->b = ft_atoi(ar[2]);
 	}
 	if (ar != NULL)
 	{
