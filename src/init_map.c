@@ -6,60 +6,65 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:43:07 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/22 18:25:20 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:29:09 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-
-
-
-
 #include "../inc/cub.h"
-
 #include <stdbool.h>
 
-void	count_lines(t_cub *cube, char *path_to_map)
+void	process_line(t_cub *cube, char *line, int *line_counter,
+		int *max_line_len)
+{
+	int	i;
+
+	i = 0;
+	while ((line[i] == ' ') && line[i] != '\n')
+	{
+		i++;
+	}
+	if (line[i] == '1' || line[i] == '2')
+	{
+		while (line[i] != '\n' && line[i] != '\0')
+			i++;
+		(*line_counter)++;
+		if (i > *max_line_len)
+			*max_line_len = i;
+	}
+}
+
+void	count_lines(t_cub *cube, char *path_to_map, int fd)
 {
 	int		line_counter;
+	int		max_line_len;
 	char	*line;
-	int		fd;
-	int		i;
 
 	line_counter = 0;
-	i = 0;
-	fd = open(path_to_map, O_RDONLY);
+	max_line_len = 0;
+	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		while ((line[i] == ' ') && line[i] != '\n')
-			i++;
-		if (line[i] == '1' || line[i] == '2')
-		{
-			while (line[i] != '\n' && line[i] != '\0')
-				i++;
-			line_counter++;
-			if (i > cube->map->max_line_len)
-				cube->map->max_line_len = i;
-		}
-		i = 0;
+		process_line(cube, line, &line_counter, &max_line_len);
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	close(fd);
+	cube->map->max_line_len = max_line_len;
 	cube->map->nlines = line_counter;
 }
 
 
 void	set_map_values(t_cub *cube, int i, char *line)
 {
-	if (line[i] == 'F' )
+	if (line[i] == 'F')
 		ft_setcolor_f(cube, line, i);
 	if (line[i] == 'C')
 		ft_setcolor_c(cube, line, i);
 	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		save_texture(cube, line, i);
 }
-
 
 int	init_map_contents(char *path_to_map, t_cub *cube, int fd)
 {
@@ -91,13 +96,13 @@ int	init_map_contents(char *path_to_map, t_cub *cube, int fd)
 
 int	initmap(char *path_to_map, t_cub *cube)
 {
-	int		fd;
+	int	fd;
 
 	allocate_map_data(cube);
 	cube->map->map_valid_flag = 0;
-	count_lines(cube, path_to_map);
-	allocate_layout(cube);
 	fd = open(path_to_map, O_RDONLY);
+	count_lines(cube, path_to_map, fd);
+	allocate_layout(cube);
 	if (check_valid_file(cube, path_to_map) == -1)
 		return (-1);
 	init_map_contents(path_to_map, cube, fd);
@@ -105,4 +110,3 @@ int	initmap(char *path_to_map, t_cub *cube)
 		return (-1);
 	return (0);
 }
-
