@@ -3,131 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 16:16:26 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:31:22 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
 
-void rotateDirection(t_cub *cub, double Dangle)//Dangle = angleindegrees
+void	rotate_direction(t_cub *cub, double Dangle)
 {
-	double angleInRadians;
-	double newDirX;
-	double newDirY;
+	double	angleinradians;
+	double	newdirx;
+	double	newdiry;
 	double	oldcamplanex;
-	
-	angleInRadians = Dangle * M_PI / 180;// Convert the angle from degrees to radians
-	newDirX = cub->dir[0] * cos(angleInRadians) - cub->dir[1] * sin(angleInRadians);
-	newDirY = cub->dir[0] * sin(angleInRadians) + cub->dir[1] * cos(angleInRadians);
-	cub->dir[0] = newDirX;
-	cub->dir[1] = newDirY;
+
+	angleinradians = Dangle * M_PI / 180;
+	newdirx = cub->dir[0] * cos(angleinradians) - \
+	cub->dir[1] * sin(angleinradians);
+	newdiry = cub->dir[0] * sin(angleinradians) + \
+	cub->dir[1] * cos(angleinradians);
+	cub->dir[0] = newdirx;
+	cub->dir[1] = newdiry;
 	oldcamplanex = cub->camplane[0];
-	cub->camplane[0] = cub->camplane[0] * cos(angleInRadians) - cub->camplane[1] * sin(angleInRadians);
-	cub->camplane[1] = oldcamplanex * sin(angleInRadians) + cub->camplane[1] * cos(angleInRadians);
+	cub->camplane[0] = cub->camplane[0] * cos(angleinradians) - \
+	cub->camplane[1] * sin(angleinradians);
+	cub->camplane[1] = oldcamplanex * sin(angleinradians) + \
+	cub->camplane[1] * cos(angleinradians);
 }
 
-void move(t_cub *cub, double distance)
+
+void	look_right(t_cub *cub)
 {
-	// Calculate new position
-    double new_x = cub->pos[0] + distance * cub->dir[0];
-    double new_y = cub->pos[1] + distance * cub->dir[1];
-	if(cub->map->layout[(int)new_y][(int)new_x] == '2')
+	if (cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
+		rotate_direction(cub, 1.5);
+	else
+		rotate_direction(cub, -1.5);
+
+}
+
+void	look_left(t_cub *cub)
+{
+	if (cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
+		rotate_direction(cub, -1.5);
+	else
+		rotate_direction(cub, 1.5);
+
+}
+
+
+void	move_left(t_cub *cub)
+{
+	double	perp_dir[2];
+	double	new_x;
+	double	new_y;
+
+	if (cub->map->initial_dir == 'W' || cub->map->initial_dir == 'E')
 	{
-		printf("YOU FOUND THE EXIT\n");
-		cub->exit_found = 1;
-	}
-	if (cub->map->layout[(int)new_y][(int)new_x] != '0')
-	{
-		return;
+		perp_dir[0] = -cub->dir[1];
+		perp_dir[1] = cub->dir[0];
 	}
 	else
+	{
+		perp_dir[0] = cub->dir[1];
+		perp_dir[1] = -cub->dir[0];
+	}
+	new_x = cub->pos[0] + 0.01 * perp_dir[0];
+	new_y = cub->pos[1] + 0.01 * perp_dir[1];
+	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
 	{
 		cub->pos[0] = new_x;
-   		cub->pos[1] = new_y;
+		cub->pos[1] = new_y;
 	}
 }
 
-void	look_right(t_cub *cub)//more kinda look left 
+void	move_right(t_cub *cub)
 {
-	if(cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
-		rotateDirection(cub, 1.5);
+	double	perp_dir[2];
+	double	new_x;
+	double	new_y;
+
+	if (cub->map->initial_dir == 'W' || cub->map->initial_dir == 'E')
+	{
+		perp_dir[0] = cub->dir[1];
+		perp_dir[1] = -cub->dir[0];
+	}
 	else
-		rotateDirection(cub, -1.5);
-	//printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
-}
-
-void look_left(t_cub *cub) // more like look right
-{
-	if(cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
-    	rotateDirection(cub, -1.5);
-	else
-		rotateDirection(cub, 1.5);
-  //  printf("new looking x = %f, y = %f\n",cub->dir[0],cub->dir[1]);
-}
-
-void	move_down(t_cub *cub)
-{
-	move(cub,-0.01);
-	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
-}
-
-void move_left(t_cub *cub)
-{
-	if(cub->map->initial_dir == 'W' || cub->map->initial_dir == 'E'){
-	double perp_dir[2] = {-cub->dir[1], cub->dir[0]};
-	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
-	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
-	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
-    {
-        cub->pos[0] = new_x;
-        cub->pos[1] = new_y;
-    }
+	{
+		perp_dir[0] = -cub->dir[1];
+		perp_dir[1] = cub->dir[0];
 	}
-	else{
-		double perp_dir[2] = {cub->dir[1], -cub->dir[0]};
-	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
-	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
+	new_x = cub->pos[0] + 0.01 * perp_dir[0];
+	new_y = cub->pos[1] + 0.01 * perp_dir[1];
 	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
-    {
-        cub->pos[0] = new_x;
-        cub->pos[1] = new_y;
-    }
+	{
+		cub->pos[0] = new_x;
+		cub->pos[1] = new_y;
 	}
-		
-	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
 }
-
-
-void move_right(t_cub *cub)
-{
-	if(cub->map->initial_dir == 'W' || cub->map->initial_dir == 'E'){
-		double perp_dir[2] = {cub->dir[1], -cub->dir[0]};
-	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
-	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
-	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
-    {
-        cub->pos[0] = new_x;
-        cub->pos[1] = new_y;
-    }
-	}
-	else{
-		double perp_dir[2] = {-cub->dir[1], cub->dir[0]};
-	double new_x = cub->pos[0] + 0.01 * perp_dir[0];
-	double new_y = cub->pos[1] + 0.01 * perp_dir[1];
-	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
-    {
-        cub->pos[0] = new_x;
-        cub->pos[1] = new_y;
-    }
-	}
-	//printf("npos x%f,y%f\n",cub->pos[0],cub->pos[1]);
-}
-void	move_up(t_cub *cub)
-{
-	move(cub, 0.01);
-}
-
