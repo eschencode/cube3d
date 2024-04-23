@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:43:07 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 14:16:40 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:45:02 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../inc/cub.h"
 #include <stdbool.h>
 
-void	process_line(t_cub *cube, char *line, int *line_counter,
+void	process_line(char *line, int *line_counter,
 		int *max_line_len)
 {
 	int	i;
@@ -34,7 +34,7 @@ void	process_line(t_cub *cube, char *line, int *line_counter,
 	}
 }
 
-void	count_lines(t_cub *cube, char *path_to_map, int fd)
+void	count_lines(t_cub *cube, int fd)
 {
 	int		line_counter;
 	int		max_line_len;
@@ -45,7 +45,7 @@ void	count_lines(t_cub *cube, char *path_to_map, int fd)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		process_line(cube, line, &line_counter, &max_line_len);
+		process_line(line, &line_counter, &max_line_len);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -66,7 +66,7 @@ void	set_map_values(t_cub *cube, int i, char *line)
 		save_texture(cube, line, i);
 }
 
-int	init_map_contents(char *path_to_map, t_cub *cube, int fd)
+void	init_map_contents(t_cub *cube, int fd)
 {
 	char	*line;
 	int		i;
@@ -101,11 +101,11 @@ int	initmap(char *path_to_map, t_cub *cube)
 	allocate_map_data(cube);
 	cube->map->map_valid_flag = 0;
 	fd = open(path_to_map, O_RDONLY);
-	count_lines(cube, path_to_map, fd);
+	count_lines(cube, fd);
 	allocate_layout(cube);
 	if (check_valid_file(cube, path_to_map) == -1)
 		return (-1);
-	init_map_contents(path_to_map, cube, fd);
+	init_map_contents(cube, fd);
 	if (map_check(cube) == -1)
 		return (-1);
 	return (0);

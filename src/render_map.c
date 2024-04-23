@@ -3,29 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:07:44 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 12:46:27 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:52:59 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../inc/cub.h"
 
 
-/* only works properly if SCREEN_WIDTH is a multiple of MAP_WIDTH * SQUARE_SIZE*/
 
-int	set_right(t_cub *cube)
-{
-	return (SCREEN_WIDTH / SQUARE_SIZE - cube->map->max_line_len);
-}
 
-int	set_down(t_cub *cube)
-{
-	return (SCREEN_HEIGHT / SQUARE_SIZE - cube->map->nlines);
-}
 
 void	render_square(t_cub *cub, int x, int y, unsigned int color)
 {

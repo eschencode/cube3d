@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:45:08 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 14:33:33 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:50:51 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	process_character(t_cub *cube, int x, int y, int *playercount)
 		cube->exit_pos[0] = x;
 		cube->exit_pos[1] = y;
 	}
+	return (0);
 }
 
 int	check_player_count(int playercount)
