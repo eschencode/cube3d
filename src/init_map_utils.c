@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:58:41 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 14:48:47 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:11:42 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,26 @@ char	*moded_strdup(const char *s)
 	return (nstr);
 }
 
+int	check_valid_format(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\n')
+	{
+		if (str[i] != ' ' && str[i] != 'F' && str[i] != 'C' && str[i] != ',' \
+		&& str[i] != '0' && str[i] != '1' && str[i] != '2' && str[i] != '3' \
+		&& str[i] != '4' && str[i] != '5' && str[i] != '6' && str[i] != '7' \
+		&& str[i] != '8' && str[i] != '9')
+		{
+			return (-1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+
 void	ft_setcolor_f(t_cub *cube, char *line, int i)
 {
 	char	*newline;
@@ -78,6 +98,8 @@ void	ft_setcolor_f(t_cub *cube, char *line, int i)
 
 	while (line[i] == 'F' || line[i] == ' ')
 		i++;
+	if (check_valid_format(line) == -1)
+		cube->map->map_valid_flag = -1;
 	newline = ft_strdup(line + i);
 	ar = ft_split(newline, ',');
 	if (ar[0] && ar[1] && ar[2])
@@ -104,6 +126,8 @@ void	ft_setcolor_c(t_cub *cube, char *line, int i)
 
 	while (line[i] == 'C' || line[i] == ' ')
 		i++;
+	if (check_valid_format(line) == -1)
+		cube->map->map_valid_flag = -1;
 	newline = ft_strdup(line + i);
 	ar = ft_split(newline, ',');
 	if (ar[0] && ar[1] && ar[2])

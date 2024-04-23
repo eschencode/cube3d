@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:42:46 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/22 16:44:52 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:44:39 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,19 @@ void	allocate_layout(t_cub *cube)
 
 void	save_texture(t_cub *cube, char *line, int i)
 {
-	char	*str;
 	int		j;
 
 	j = i + 2;
 	while (line[j] == ' ')
 		j++;
-	str = moded_strdup(line + j);
-	if (line[i] == 'N')
-		cube->map->NO = str;
-	if (line[i] == 'S')
-		cube->map->SO = str;
-	if (line[i] == 'W')
-		cube->map->WE = str;
-	if (line[i] == 'E')
-		cube->map->EA = str;
+	if (line[i] == 'N' && line[i + 1] == 'O' && !cube->map->NO)
+		cube->map->NO = moded_strdup(line + j);
+	if (line[i] == 'S' && line[i + 1] == 'O' && !cube->map->SO)
+		cube->map->SO = moded_strdup(line + j);
+	if (line[i] == 'W' && line[i + 1] == 'E' && !cube->map->WE)
+		cube->map->WE = moded_strdup(line + j);
+	if (line[i] == 'E' && line[i + 1] == 'A' && !cube->map->EA)
+		cube->map->EA = moded_strdup(line + j);
 }
 
 void	ft_fill_layout(t_cub *cube, char *line, int current_line)

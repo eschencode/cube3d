@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:16 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 13:24:48 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:24:15 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	render_frame(void *param)
 	render_3d_view(cub);
 	if (cub->m_flag.map_flag == 1) 
 		render_minimap(cub, set_right(cub), set_down(cub));
-	print_timer(cub);
+	//print_timer(cub);
 	mlx_clear_window(cub->mlx, cub->win);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img, 0, 0);
 	return (0);

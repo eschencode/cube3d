@@ -6,7 +6,7 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:35:22 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 14:07:21 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:53:41 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	ft_flood_fill(t_cub *cube)
 
 int	map_check(t_cub *cube)
 {
+	if (cube->map->map_valid_flag == -1)
+		return (-1);
 	checkcolor(cube);
 	if (cube->map->map_valid_flag == -1)
 		printf("COLOR ERROR\n");
