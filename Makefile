@@ -9,7 +9,7 @@ DIRSRC = ./src/
 C_FILES = main init exit window event_handling \
 			init_map init_map_utils map_check textures \
 			render_map move_player raycasting raycasting_calc \
-			utils timer
+			utils timer init_map_utils2
 
 SRC = ${addprefix ${DIRSRC}, $(addsuffix .c, $(C_FILES))}
 OBJ = $(SRC:.c=.o)

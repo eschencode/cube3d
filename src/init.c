@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:00:24 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:17:23 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,8 @@ void	init_cub(t_cub *cub)
 			which creates perfect FOV of 66°*/
 
 void	init_dir(t_cub *cub, char c)
-{	
-	//printf("direction facing: %c\n", c);
-	/*this is the right code, but I had to change it, as in map->layout x and y are swapped
-	if(c == 'N' || c == 'S')
-	{
-		cub->dir[0] = 1;
-		if (c == 'N')
-			cub->dir[0] = -1;
-		cub->dir[1] = 0;
-		cub->camplane[0] = 0;
-		cub->camplane[1] = 0.66 * cub->dir[0];
-	}
-	if(c == 'E' || c == 'W')
-	{
-		cub->dir[0] = 0;
-		cub->dir[1] = 1;
-		if (c == 'W')
-			cub->dir[1] = -1;
-		cub->camplane[0] = -0.66 * cub->dir[1];
-		cub->camplane[1] = 0;
-	}*/
-		if(c == 'N' || c == 'S')
+{
+	if (c == 'N' || c == 'S')
 	{
 		cub->dir[1] = 1;
 		if (c == 'N')
@@ -78,7 +58,7 @@ void	init_dir(t_cub *cub, char c)
 		cub->camplane[1] = 0;
 		cub->camplane[0] = -0.66 * cub->dir[1];
 	}
-	if(c == 'E' || c == 'W')
+	if (c == 'E' || c == 'W')
 	{
 		cub->dir[1] = 0;
 		cub->dir[0] = 1;
@@ -93,7 +73,7 @@ void	init_dir(t_cub *cub, char c)
 void	init_img(t_cub *cub, int width, int height)
 {
 	t_img	*img;
-	
+
 	cub->img = malloc(sizeof(t_img));
 	if (!cub->img)
 		error_exit(cub, "malloc image failed", NULL);
@@ -101,7 +81,8 @@ void	init_img(t_cub *cub, int width, int height)
 	img->img = mlx_new_image(cub->mlx, width, height);
 	if (!img->img)
 		error_exit(cub, "image could not be initialized", NULL);
-	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian);
+	img->addr = mlx_get_data_addr \
+	(img->img, &img->bpp, &img->line_length, &img->endian);
 	if (!img->addr)
 		error_exit(cub, "image information could not be retrieved", NULL);
 }
