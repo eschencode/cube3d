@@ -214,6 +214,11 @@ void	ft_fill_layout(t_cub *cube, char *line, int current_line);
 int	check_valid_file(t_cub *cube, char *pf);
 void	set_map_data_to_null(t_map *map);
 
+//mapchecks utils
+int	checkcolor(t_cub *cube);
+int	ft_isspace(char c);
+int	check_textures(char *str);
+void	set_angle(t_cub *cube, char c);
 
 
 /*initmap utils*/
