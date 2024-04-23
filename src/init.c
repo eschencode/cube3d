@@ -6,14 +6,15 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/22 10:20:31 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:00:24 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
+/* init_movement: sets all movement flags to zero*/
 
-void init_movement(t_cub *cub)
+void	init_movement(t_cub *cub)
 {
 	cub->m_flag.move_down = 0;
 	cub->m_flag.move_left = 0;
@@ -21,12 +22,12 @@ void init_movement(t_cub *cub)
 	cub->m_flag.move_up = 0;
 	cub->m_flag.look_left = 0;
 	cub->m_flag.look_right = 0;
-	cub->m_flag.map_flag = 1;
+	cub->m_flag.map_flag = 0;
 }
 
+/* init_cub: The variables of struct cub are initialized.
+	All pointers and flags are set to zero.*/
 
-/* init_var: The variables of struct cub are initialized.
-	The initial values of dir and cam are taken from lodev's guide.*/
 void	init_cub(t_cub *cub)
 {
 	init_movement(cub);

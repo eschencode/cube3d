@@ -1,7 +1,7 @@
 #ifndef CUBE_H
 # define CUBE_H
 
-# include "../libs/minilibx-linux/mlx.h"
+# include "../../../minilibx-linux/mlx.h"
 # include "../libs/libft/libft.h"
 # include "key_codes.h"
 # include "color_codes.h"
@@ -146,13 +146,10 @@ int			choose_texture(t_cub *cub, int wall_type);
 void		open_window(t_cub *cub);
 void		close_window(t_cub *cub);
 
-/* image.c: creates the image displayed */
-void		my_pixel_put(t_img *img, int x, int y, unsigned int color);
-void		render_image(t_cub *cub, t_img *img);
 
 /* render_map.c: rendering of 2D map*/
 void		render_square(t_cub *cub, int x, int y, unsigned int color);
-void		render_minimap(t_cub *cub, t_img *img, int start_x, int start_y);
+void		render_minimap(t_cub *cub, int start_x, int start_y);
 int			set_right();
 int			set_down();
 
@@ -191,7 +188,7 @@ int key_press(int key, t_cub *cub);
 int key_release(int key, t_cub *cub);
 
 /* exit.c: handles clean exit */
-void 		free_map_data(t_map *map, t_cub *cub);
+void 		free_map_data(t_map *map);
 void		error_exit(t_cub *cub, char *message, char *file);
 void		exit_screen(t_cub *cub);
 
@@ -209,7 +206,7 @@ int 		ft_empty(char *line);
 void 		ft_setcolors(t_cub *cube, char *line, int i);
 
 /* utils.c*/
-double			get_time(double time_zero);
 unsigned int	conv_rgb_hex(t_rgb *rgb);
+void			my_pixel_put(t_img *img, int x, int y, unsigned int color);
 
 #endif

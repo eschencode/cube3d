@@ -1,12 +1,12 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -g #-Wall -Wextra -Werror 
-MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -lXext -lX11 
-DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
+CFLAGS = -g -Wall -Wextra -Werror 
+MLXFLAGS = -L ../../minilibx-linux -lm -lmlx -lXext -lX11 
+DEPS = ../../minilibx-linux/mlx.h libs/libft/libft.a
 
 DIRSRC = ./src/
 
-C_FILES = main init exit window event_handling image \
+C_FILES = main init exit window event_handling \
 			init_map init_map_utils map_check textures \
 			render_map move_player raycasting raycasting_calc \
 			utils timer
@@ -22,7 +22,7 @@ $(LIBFT):
 	$(MAKE) -C ./libs/libft
 
 libs:
-	$(MAKE) -C ./libs/minilibx-linux
+	$(MAKE) -C ../../minilibx-linux
 	
 $(NAME): $(OBJ) $(libs) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)

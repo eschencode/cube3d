@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:07:44 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/18 16:40:12 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:46:27 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void render_player(t_cub *cub, int start_x ,int start_y)
 	For displaying it at the right side of the screen, call the function set_right() instead of start_x.
 	For displaying it at the bottom of the screen, call the function set_down() instead of start_x.*/
 
-void	render_minimap(t_cub *cub, t_img *img, int start_x, int start_y)
+void	render_minimap(t_cub *cub, int start_x, int start_y)
 {
 	int	x;
 	int	y;

@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/22 10:10:05 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:12:31 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,60 +24,52 @@ void	free_textures(t_map *map)
 	}
 }
 
-/*void	free_layout(t_map *map)
-{
-	
-}*/
+/* free_ptr: frees a char* pointer and sets it to NULL*/
 
-void free_map_data(t_map *map, t_cub *cub)
+void	free_ptr(char *ptr)
 {
-	int i = 0;
-	if(map)
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
+}
+
+/* free_map_data: frees all allocated memory in map struct*/
+
+void	free_map_data(t_map *map)
+{
+	int	i;
+
+	if (map)
 	{
 		free_textures(map);
-    	if(map->NO != NULL)
-		{
-            free(map->NO);
-            map->NO = NULL;
-        }
-		if(map->EA != NULL)
-		{
-            free(map->EA);
-            map->EA = NULL;
-        }
-		if(map->WE != NULL)
-		{
-            free(map->WE);
-            map->WE = NULL;
-        }
-        if(map->SO != NULL)
-		{
-            free(map->SO);
-            map->SO = NULL;
-        }
-		if(map->C_color != NULL)
+		free_ptr(map->NO);
+		free_ptr(map->EA);
+		free_ptr(map->WE);
+		free_ptr(map->SO);
+		if (map->C_color != NULL)
 			free(map->C_color);
-		if(map->F_color != NULL)
+		if (map->F_color != NULL)
 			free(map->F_color);
-		if(map->layout)
+		i = -1;
+		if (map->layout)
 		{
-			while(map->nlines > i)
-			{
-				if(map->layout[i] != NULL)
-				{
-					free(map->layout[i]);
-					map->layout[i] = NULL;
-				}
-				i++;
-			}
+			while (map->nlines > ++i)
+				free_ptr(map->layout[i]);
 			free(map->layout);
 			map->layout = NULL;
 		}
 		free(map);
-    	map = NULL;
-		
+		map = NULL;
 	}
 }
+
+/* error_exit: clean exit of program when an error occurs
+	1. prints error message
+	2. frees map data
+	3. closes all mlx images and windows
+	4. exits with error code 1*/
 
 void	error_exit(t_cub *cub, char *message, char *file)
 {
@@ -85,10 +77,15 @@ void	error_exit(t_cub *cub, char *message, char *file)
 		printf("Error: %s\n", message);
 	else
 		printf("Error: %s: %s\n", message, file);
-	free_map_data(cub->map, cub);
+	free_map_data(cub->map);
 	close_window(cub);
 	exit(1);
 }
+
+/* exit_screen: render exit screen when player found exit door
+	1. puts exit image to image
+	2. destroys and frees previously used image (game image)
+	3. puts new image to window*/
 
 void	exit_screen(t_cub *cub)
 {
@@ -97,10 +94,10 @@ void	exit_screen(t_cub *cub)
 
 	width = 0;
 	height = 0;
-
 	if (cub->exit_found == 1)
 	{
-		cub->img_exit.img = mlx_xpm_file_to_image(cub->mlx, EXIT_IMAGE, &width, &height);
+		cub->img_exit.img = mlx_xpm_file_to_image(cub->mlx, EXIT_IMAGE, 
+				&width, &height);
 		if (!cub->img_exit.img)
 		{
 			error_exit(cub, "image could not be put to window", EXIT_IMAGE);

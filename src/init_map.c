@@ -82,7 +82,6 @@ void save_texture(t_cub *cube, char *line, int i)
 
 void ft_fill_layout(t_cub *cube,char *line, int current_line)
 {
-	int startposcount = 0;
 	int x = 0;
 	if (cube == NULL || cube->map == NULL || cube->map->layout[current_line] == NULL) {
         printf("error");

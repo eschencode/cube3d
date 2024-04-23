@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/19 13:17:38 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:44:31 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int key_release(int key, t_cub *cub)
 
 int	x_close(t_cub *cub)
 {
-	free_map_data(cub->map, cub);
+	free_map_data(cub->map);
 	close_window(cub);
 	return (0);
 }
