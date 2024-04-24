@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:04:52 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 15:36:07 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:58:14 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "../../../minilibx-linux/mlx.h"
+# include "../../minilibx-linux/mlx.h"
 # include "../libs/libft/libft.h"
 # include "key_codes.h"
 # include "color_codes.h"
