@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:43:07 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 15:42:24 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:09:34 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	count_lines(t_cub *cube, int fd)
 		if (check_only_valid_token(line) == -1)
 		{
 			free(line);
+			close(fd);
 			error_exit(cube, "invalid token in map", NULL);
 		}
 		process_line(line, &line_counter, &max_line_len);
