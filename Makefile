@@ -29,7 +29,6 @@ $(NAME): $(OBJ) $(libs) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 
 
-
 clean:
 	$(MAKE) $@ -C ./libs/libft
 	@rm -rf $(OBJ)
