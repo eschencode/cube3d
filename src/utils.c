@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:20:42 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 13:28:20 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:38:39 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void	my_pixel_put(t_img *img, int x, int y, unsigned int color)
 	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)pixel = color;
 }
-

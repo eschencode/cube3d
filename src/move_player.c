@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:31:22 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:32:11 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
-
 
 void	rotate_direction(t_cub *cub, double Dangle)
 {
@@ -34,14 +33,12 @@ void	rotate_direction(t_cub *cub, double Dangle)
 	cub->camplane[1] * cos(angleinradians);
 }
 
-
 void	look_right(t_cub *cub)
 {
 	if (cub->map->initial_dir == 'N' || cub->map->initial_dir == 'S' )
 		rotate_direction(cub, 1.5);
 	else
 		rotate_direction(cub, -1.5);
-
 }
 
 void	look_left(t_cub *cub)
@@ -50,9 +47,7 @@ void	look_left(t_cub *cub)
 		rotate_direction(cub, -1.5);
 	else
 		rotate_direction(cub, 1.5);
-
 }
-
 
 void	move_left(t_cub *cub)
 {

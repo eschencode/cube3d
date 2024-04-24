@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:43:07 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 14:45:02 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:35:29 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/cub.h"
 #include <stdbool.h>
@@ -54,7 +53,6 @@ void	count_lines(t_cub *cube, int fd)
 	cube->map->max_line_len = max_line_len;
 	cube->map->nlines = line_counter;
 }
-
 
 void	set_map_values(t_cub *cube, int i, char *line)
 {

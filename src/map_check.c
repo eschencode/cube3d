@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:35:22 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 16:53:41 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:33:38 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../inc/cub.h"
 
@@ -40,9 +38,6 @@ void	set_angle(t_cub *cube, char c)
 		cube->dir[1] = 0;
 	}
 }
-
-
-
 
 int	flood_fill_check(char **layout, int x, int y, int xmax, int ymax)
 {
@@ -96,14 +91,13 @@ int	map_check(t_cub *cube)
 	checkcolor(cube);
 	if (cube->map->map_valid_flag == -1)
 		printf("COLOR ERROR\n");
-	if (check_textures(cube->map->NO) == -1 || check_textures(cube->map->SO) \
-	== -1 || check_textures(cube->map->WE) == -1
-		|| check_textures(cube->map->EA) == -1)
+	if (check_textures(cube->map->no) == -1 || check_textures(cube->map->so) \
+	== -1 || check_textures(cube->map->we) == -1
+		|| check_textures(cube->map->ea) == -1)
 	{
 		printf("TEXTURE ERROR\n");
 		cube->map->map_valid_flag = -1;
 	}
-
 	if (check_all_rows(cube) == -1)
 		cube->map->map_valid_flag = -1;
 	if (ft_flood_fill(cube) == -1)

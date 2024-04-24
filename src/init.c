@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:17:23 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:35:46 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	init_dir(t_cub *cub, char c)
 		cub->camplane[0] = 0;
 	}
 }
-
 
 void	init_img(t_cub *cub, int width, int height)
 {

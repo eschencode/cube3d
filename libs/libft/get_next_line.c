@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:02:47 by leschenb          #+#    #+#             */
-/*   Updated: 2024/03/19 13:40:14 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:56:42 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,4 +167,3 @@ char	*get_next_line(int fd)
 	}
 	return (ft_line_results(ret, stock, buffer));
 }
-

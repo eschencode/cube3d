@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:45:08 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 14:50:51 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:32:28 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	check_all_rows(t_cub *cube)
 	if (validate_cube(cube) == -1)
 		return (-1);
 	y++;
-
 	while (y < cube->map->nlines - 1)
 	{
 		while (cube->map->layout[y][x] != '\0')

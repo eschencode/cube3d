@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:16:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/22 15:58:32 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:37:13 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
-
-/*
-	line_length = amount of bytes taken by one row of image
-			= image_width * (bpp / 8)*/
 
 void	my_pixel_put(t_img *img, int x, int y, unsigned int color)
 {
@@ -26,11 +22,10 @@ void	my_pixel_put(t_img *img, int x, int y, unsigned int color)
 	*(unsigned int *)pixel = color;
 }
 
-
 void	render_image(t_cub *cub, t_img *img)
 {
 	int	x;
-	int y;
+	int	y;
 
 	x = -1;
 	while (++x < SCREEN_WIDTH)
@@ -43,7 +38,6 @@ void	render_image(t_cub *cub, t_img *img)
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, img->img, 0, 0);
 }
-
 
 /*void	render_player(t_cub *cub)
 {
