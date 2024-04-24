@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:07:44 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 12:07:17 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:47:56 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,23 @@ void	render_square(t_cub *cub, int x, int y, unsigned int color)
 
 	px_end = (x + 1) * SQUARE_SIZE;
 	py_end = (y + 1) * SQUARE_SIZE;
-	py = y * SQUARE_SIZE;
-	while (py <= py_end)
+	py = y * SQUARE_SIZE - 1;
+	while (++py < py_end)
 	{
-		px = x * SQUARE_SIZE;
-		while (px <= px_end)
+		px = x * SQUARE_SIZE - 1;
+		while (++px <= px_end)
 		{
-			my_pixel_put(cub->img, px, py, color);
-			px++;
+			if (py == (y * SQUARE_SIZE) || py == py_end 
+				|| px == (x * SQUARE_SIZE) || px == px_end)
+			{
+				if (color == WHITE)
+					my_pixel_put(cub->img, px, py, BLACK);
+				else if (color == BLACK)
+					my_pixel_put(cub->img, px, py, WHITE);
+			}
+			else
+				my_pixel_put(cub->img, px, py, color);
 		}
-		py++;
 	}
 }
 
