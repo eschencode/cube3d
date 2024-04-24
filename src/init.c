@@ -3,16 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:17:05 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 11:35:46 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:18:16 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-/* init_movement: sets all movement flags to zero*/
+
+int	check_only_valid_token(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i] == ' ' && line[i] != '\0')
+		i++;
+	if (line[i] == 'S' && line[i + 1] == 'O')
+		return (0);
+	if (line[i] == 'N' && line[i + 1] == 'O')
+		return (0);
+	if (line[i] == 'W' && line[i + 1] == 'E')
+		return (0);
+	if (line[i] == 'E' && line[i + 1] == 'A')
+		return (0);
+	if (line[i] == '1' || line[i] == '2')
+		return (0);
+	if (line[i] == 'F' || line[i] == 'C')
+		return (0);
+	if (line[i] == '\0' || line[i] == '\n')
+		return (0);
+	return (-1);
+}
 
 void	init_movement(t_cub *cub)
 {
