@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 15:58:37 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:35:23 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ void	error_exit(t_cub *cub, char *message, char *file)
 	else
 	{
 		printf("Error: %s: %s\n", message, file);
-		free(file);
-		file = NULL;
+		if (ft_strncmp(message, "double textures", 15) == 0)
+		{
+			free(file);
+			file = NULL;
+		}
 	}
 	free_map_data(cub->map);
 	close_window(cub);
