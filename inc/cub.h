@@ -235,10 +235,12 @@ void			open_window(t_cub *cub);
 void			close_window(t_cub *cub);
 
 /* render_map.c: rendering of 2D map*/
+
 void			render_square(t_cub *cub, int x, int y, unsigned int color);
 void			render_minimap(t_cub *cub, int start_x, int start_y);
 int				set_right(t_cub *cub);
 int				set_down(t_cub *cub);
+
 
 /* event_handlings.c: management of key and mouse events */
 int				deal_key(int key, t_cub *cub);
