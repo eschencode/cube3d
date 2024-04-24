@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:58:41 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 12:03:35 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:33:17 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,19 @@ char	*moded_strdup(const char *s)
 int	check_valid_format(char *str)
 {
 	int	i;
+	int	comm_counter;
 
 	i = 0;
+	comm_counter = 0;
 	while (str[i] != '\n')
 	{
-		if (str[i] != ' ' && str[i] != 'F' && str[i] != 'C' && str[i] != ',' \
+		while (str[i] == ' ')
+			i++;
+		if (str[i] == 'F' || str[i] == 'C')
+			i++;
+		if (str[i] == ',')
+			comm_counter++;
+		if (str[i] != ' ' && str[i] != ',' \
 		&& str[i] != '0' && str[i] != '1' && str[i] != '2' && str[i] != '3' \
 		&& str[i] != '4' && str[i] != '5' && str[i] != '6' && str[i] != '7' \
 		&& str[i] != '8' && str[i] != '9')
@@ -71,6 +79,8 @@ int	check_valid_format(char *str)
 		}
 		i++;
 	}
+	if (comm_counter != 2)
+		return (-1);
 	return (0);
 }
 
