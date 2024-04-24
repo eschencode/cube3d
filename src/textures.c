@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 13:05:32 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:12:08 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	init_img_xpm(t_cub *cub, t_map *map, int tex)
 	if (tex == (TEX_NUM - 1))
 		texture_path = TEX_EXIT_PATH;
 	else if (tex == TEX_N)
-		texture_path = map->NO;
+		texture_path = map->no;
 	else if (tex == TEX_S)
-		texture_path = map->SO;
+		texture_path = map->so;
 	else if (tex == TEX_W)
-		texture_path = map->WE;
+		texture_path = map->we;
 	else
-		texture_path = map->EA;
+		texture_path = map->ea;
 	cub->img_tex.img = mlx_xpm_file_to_image(cub->mlx, texture_path, 
 			&map->tex_width[tex], &map->tex_height[tex]);
 	if (!cub->img_tex.img)

@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:11:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:14:41 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:38:27 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	key_press(int key, t_cub *cub)
 		cub->m_flag.move_up = 1;
 	else if (key == KEY_S)
 		cub->m_flag.move_down = 1;
-	else if ( key == KEY_A)
+	else if (key == KEY_A)
 		cub->m_flag.move_left = 1;
 	else if (key == KEY_D)
 		cub->m_flag.move_right = 1;
@@ -58,5 +58,3 @@ int	x_close(t_cub *cub)
 	close_window(cub);
 	return (0);
 }
-
-

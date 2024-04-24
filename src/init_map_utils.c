@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:58:41 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 17:11:42 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:35:08 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	allocate_map_data(t_cub *cub)
 	map = cub->map;
 	map->max_line_len = 0;
 	map->nlines = 0;
-	map->F_color = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!map->F_color)
+	map->f_color = (t_rgb *)malloc(sizeof(t_rgb));
+	if (!map->f_color)
 		error_exit(cub, "malloc failed", NULL);
-	map->C_color = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!map->C_color)
+	map->c_color = (t_rgb *)malloc(sizeof(t_rgb));
+	if (!map->c_color)
 		error_exit(cub, "malloc failed", NULL);
 }
 
@@ -90,7 +90,6 @@ int	check_valid_format(char *str)
 	return (0);
 }
 
-
 void	ft_setcolor_f(t_cub *cube, char *line, int i)
 {
 	char	*newline;
@@ -104,9 +103,9 @@ void	ft_setcolor_f(t_cub *cube, char *line, int i)
 	ar = ft_split(newline, ',');
 	if (ar[0] && ar[1] && ar[2])
 	{
-		cube->map->F_color->r = ft_atoi(ar[0]);
-		cube->map->F_color->g = ft_atoi(ar[1]);
-		cube->map->F_color->b = ft_atoi(ar[2]);
+		cube->map->f_color->r = ft_atoi(ar[0]);
+		cube->map->f_color->g = ft_atoi(ar[1]);
+		cube->map->f_color->b = ft_atoi(ar[2]);
 	}
 	if (ar != NULL)
 	{
@@ -132,9 +131,9 @@ void	ft_setcolor_c(t_cub *cube, char *line, int i)
 	ar = ft_split(newline, ',');
 	if (ar[0] && ar[1] && ar[2])
 	{
-		cube->map->C_color->r = ft_atoi(ar[0]);
-		cube->map->C_color->g = ft_atoi(ar[1]);
-		cube->map->C_color->b = ft_atoi(ar[2]);
+		cube->map->c_color->r = ft_atoi(ar[0]);
+		cube->map->c_color->g = ft_atoi(ar[1]);
+		cube->map->c_color->b = ft_atoi(ar[2]);
 	}
 	if (ar != NULL)
 	{

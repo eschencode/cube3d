@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:06:47 by leschenb          #+#    #+#             */
-/*   Updated: 2024/01/24 17:58:57 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:54:46 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stddef.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif/*BUFFER_SIZE*/
 
 typedef struct s_list
 {
@@ -125,5 +129,14 @@ void			ft_put_ptr(unsigned long long num);
 int				ft_ptr_len(unsigned long long ptr);
 char			*ft_strstr(const char *haystack, const char *needle);
 int				ft_strcpy(char *dst, const char *src);
+
+/* get_next_line
+char			*get_next_line(int fd);
+int				ft_strlen_nl(const char *str);
+int				check_line(char *str);
+char			*read_and_stash(int fd, char *stash);
+char			*ft_copy_line(char *str, int i);
+char			*ft_save_stash(char *str, int start);
+void			free_str(char **str);*/
 
 #endif

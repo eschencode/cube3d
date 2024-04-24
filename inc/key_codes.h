@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   key_codes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:13:37 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/10 13:05:30 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:52:11 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_CODES_H
 # define KEY_CODES_H
-
 
 # define KEY_ESC 0xff1b
 # define KEY_W 119

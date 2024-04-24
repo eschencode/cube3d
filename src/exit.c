@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:14:25 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:10:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	free_map_data(t_map *map)
 	if (map)
 	{
 		free_textures(map);
-		free_ptr(map->NO);
-		free_ptr(map->EA);
-		free_ptr(map->WE);
-		free_ptr(map->SO);
-		if (map->C_color != NULL)
-			free(map->C_color);
-		if (map->F_color != NULL)
-			free(map->F_color);
+		free_ptr(map->no);
+		free_ptr(map->ea);
+		free_ptr(map->we);
+		free_ptr(map->so);
+		if (map->c_color != NULL)
+			free(map->c_color);
+		if (map->f_color != NULL)
+			free(map->f_color);
 		i = -1;
 		if (map->layout)
 		{

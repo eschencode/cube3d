@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:20:28 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/22 10:08:29 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:37:33 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	render_wall_texture(t_cub *cub, int x, int tex)
 	tex_pos = (cub->startwall - SCREEN_HEIGHT / 2 + cub->wallheight / 2) * step;
 	y = -1;
 	while (++y < cub->startwall) 
-		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->C_color));
+		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->c_color));
 	while (y < cub->endwall)
 	{
 		tex_y = (int)tex_pos & (cub->map->tex_height[tex] - 1);
@@ -46,7 +46,7 @@ void	render_wall_texture(t_cub *cub, int x, int tex)
 	}
 	y = cub->endwall - 1;
 	while (++y < SCREEN_HEIGHT)
-		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->F_color));
+		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->f_color));
 }
 
 /* render_3d_view renders the players perspective on the 2D map in 3D
@@ -75,10 +75,7 @@ int	render_3d_view(t_cub *cub)
 	int		x;
 	int		tex;
 	int		wall_type;
-	//double	time_start;
-	//double	time_frame;
 
-	//time_start = get_time(0);
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
@@ -89,8 +86,6 @@ int	render_3d_view(t_cub *cub)
 			printf("ERROR: side value wrong, see raycasting\n");
 		calculate_wall_dimensions(cub);
 		render_wall_texture(cub, x, tex);
-		// time frame
-		// speed: move speed and rotation speed
 		x++;
 	}
 	return (0);
@@ -108,7 +103,7 @@ int	render_3d_view(t_cub *cub)
 		color = color / 2; //gives x and y side different brightness
 	y = -1;
 	while (++y < cub->startwall) 
-		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->C_color));
+		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->c_color));
 	while (y < cub->endwall)
 	{
 		my_pixel_put(cub->img, x, y, color);
@@ -116,7 +111,7 @@ int	render_3d_view(t_cub *cub)
 	}
 	while (y < SCREEN_HEIGHT) 
 	{
-		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->F_color));
+		my_pixel_put(cub->img, x, y, conv_rgb_hex(cub->map->f_color));
 		y++;
 	}
 }*/
