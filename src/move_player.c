@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:30:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 11:32:11 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:37:05 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	move_left(t_cub *cub)
 	}
 	new_x = cub->pos[0] + 0.01 * perp_dir[0];
 	new_y = cub->pos[1] + 0.01 * perp_dir[1];
-	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
+	if (cub->map->layout[(int)new_y][(int)new_x] != '1' && \
+	cub->map->layout[(int)new_y][(int)new_x] != '2')
 	{
 		cub->pos[0] = new_x;
 		cub->pos[1] = new_y;
@@ -92,7 +93,8 @@ void	move_right(t_cub *cub)
 	}
 	new_x = cub->pos[0] + 0.01 * perp_dir[0];
 	new_y = cub->pos[1] + 0.01 * perp_dir[1];
-	if (cub->map->layout[(int)new_y][(int)new_x] != '1')
+	if (cub->map->layout[(int)new_y][(int)new_x] != '1' && \
+	cub->map->layout[(int)new_y][(int)new_x] != '2')
 	{
 		cub->pos[0] = new_x;
 		cub->pos[1] = new_y;
