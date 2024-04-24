@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:02:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 11:10:50 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:48:35 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void	error_exit(t_cub *cub, char *message, char *file)
 	if (!file)
 		printf("Error: %s\n", message);
 	else
+	{
 		printf("Error: %s: %s\n", message, file);
+		free(file);
+	}
 	free_map_data(cub->map);
 	close_window(cub);
 	exit(1);
