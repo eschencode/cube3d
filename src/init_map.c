@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:43:07 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 11:35:29 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:15:28 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	count_lines(t_cub *cube, int fd)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		if (check_only_valid_token(line) == -1)
+			error_exit(cube, "error invalid token", line);
 		process_line(line, &line_counter, &max_line_len);
 		free(line);
 		line = get_next_line(fd);
