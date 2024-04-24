@@ -152,7 +152,9 @@ void		render_square(t_cub *cub, int x, int y, unsigned int color);
 void		render_minimap(t_cub *cub, int start_x, int start_y);
 int			set_right();
 int			set_down();
-
+void	render_pixel_b(t_cub *cub, int x, int y);
+void	render_pixel_g(t_cub *cub, int x, int y);
+void	render_pixel_w(t_cub *cub, int x, int y);
 /* event_handlings.c: management of key and mouse events */
 int			deal_key(int key, t_cub *cub);
 int			x_close(t_cub *cub);

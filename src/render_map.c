@@ -6,30 +6,13 @@
 /*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:07:44 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/23 17:26:20 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:07:17 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-
-
-
-
-void	render_pixel(t_cub *cub, int px, int py, int px_start, int px_end, \
-int py_start, int py_end, unsigned int color)
-{
-	if (px == px_start || px == px_end || py == py_start || py == py_end)
-	{
-		if (color == WHITE)
-			my_pixel_put(cub->img, px, py, BLACK);
-		else if (color == BLACK)
-			my_pixel_put(cub->img, px, py, WHITE);
-	}
-	else
-		my_pixel_put(cub->img, px, py, color);
-}
-
+/*
 void	render_square(t_cub *cub, int x, int y, unsigned int color)
 {
 	int	px_start;
@@ -56,7 +39,7 @@ void	render_square(t_cub *cub, int x, int y, unsigned int color)
 		py++;
 	}
 }
-
+*/
 /*
 void ft_draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
 {
@@ -104,22 +87,44 @@ void	render_player(t_cub *cub, int start_x, int start_y)
 }
 */
 
+void	render_square(t_cub *cub, int x, int y, unsigned int color)
+{
+	int	px_end;
+	int	py_end;
+	int	px;
+	int	py;
+
+	px_end = (x + 1) * SQUARE_SIZE;
+	py_end = (y + 1) * SQUARE_SIZE;
+	py = y * SQUARE_SIZE;
+	while (py <= py_end)
+	{
+		px = x * SQUARE_SIZE;
+		while (px <= px_end)
+		{
+			my_pixel_put(cub->img, px, py, color);
+			px++;
+		}
+		py++;
+	}
+}
+
 void	render_player(t_cub *cub, int start_x, int start_y)
 {
 	int	x_pixel;
 	int	y_pixel;
 	int	i;
 
-	i = -5;
+	i = -2;
 	x_pixel = (start_x * 25) + (25 * cub->pos[0]);
 	y_pixel = (start_y * 25) + (25 * cub->pos[1]);
-	while (i < 7)
+	while (i < 3)
 	{
 		my_pixel_put(cub->img, x_pixel, y_pixel + i, YELLOW);
 		i++;
 	}
-	i = -5;
-	while (i < 5)
+	i = -2;
+	while (i < 3)
 	{
 		my_pixel_put(cub->img, x_pixel + i, y_pixel, YELLOW);
 		i++;
