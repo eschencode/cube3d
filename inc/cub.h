@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:04:52 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 13:39:57 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:16:04 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "../../../minilibx-linux/mlx.h"
+# include "../libs/minilibx-linux/mlx.h"
 # include "../libs/libft/libft.h"
 # include "key_codes.h"
 # include "color_codes.h"
@@ -301,6 +301,7 @@ int				ft_isspace(char c);
 int				check_textures(char *str);
 void			set_angle(t_cub *cube, char c);
 int				check_all_rows(t_cub *cube);
+int				check_only_valid_token(char *line);
 
 /*initmap utils*/
 char			*moded_strdup(const char *s);
