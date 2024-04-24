@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:04:52 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 11:36:32 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:03:12 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,5 +309,6 @@ void			ft_setcolors(t_cub *cube, char *line, int i);
 /* utils.c*/
 unsigned int	conv_rgb_hex(t_rgb *rgb);
 void			my_pixel_put(t_img *img, int x, int y, unsigned int color);
+int				ft_empty(char *line);
 
 #endif

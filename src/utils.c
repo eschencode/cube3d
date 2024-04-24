@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:20:42 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/24 11:38:39 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:02:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,22 @@ void	my_pixel_put(t_img *img, int x, int y, unsigned int color)
 		return ;
 	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)pixel = color;
+}
+
+/* for init_map */
+
+int	ft_empty(char *line)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(line);
+	while (i < len)
+	{
+		if (line[i] != ' ' && line[i] != '\n')
+			return (1);
+		i++;
+	}
+	return (-1);
 }

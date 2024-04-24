@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:35:22 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 11:33:38 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:09:48 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,22 @@ void	set_angle(t_cub *cube, char c)
 	}
 }
 
-int	flood_fill_check(char **layout, int x, int y, int xmax, int ymax)
+int	flood_fill_check(char **layout, int x, int y, t_cub *cub)
 {
+	int	xmax;
+	int	ymax;
+
+	xmax = cub->map->max_line_len;
+	ymax = cub->map->nlines;
 	if (x < 0 || y < 0 || x >= xmax || y >= ymax)
-	{
 		return (-1);
-	}
 	if (layout[y][x] == 'x' || layout[y][x] == '1' || layout[y][x] == '2')
 		return (0);
 	layout[y][x] = 'x';
-	if (flood_fill_check(layout, x + 1, y, xmax, ymax) == -1
-		|| flood_fill_check(layout, x - 1, y, xmax, ymax) == -1
-		|| flood_fill_check(layout, x, y + 1, xmax, ymax) == -1
-		|| flood_fill_check(layout, x, y - 1, xmax, ymax) == -1)
+	if (flood_fill_check(layout, x + 1, y, cub) == -1
+		|| flood_fill_check(layout, x - 1, y, cub) == -1
+		|| flood_fill_check(layout, x, y + 1, cub) == -1
+		|| flood_fill_check(layout, x, y - 1, cub) == -1)
 	{
 		return (-1);
 	}
@@ -72,7 +75,7 @@ int	ft_flood_fill(t_cub *cube)
 		i++;
 	}
 	if (flood_fill_check(layout_copy, cube->pos[0] - 0.5, cube->pos[1] - 0.5,
-			cube->map->max_line_len, cube->map->nlines) == -1)
+			cube) == -1)
 		return (-1);
 	i = 0;
 	while (i < cube->map->nlines)

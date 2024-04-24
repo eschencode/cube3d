@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:58:41 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 11:35:08 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:03:35 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ void	allocate_map_data(t_cub *cub)
 	map->c_color = (t_rgb *)malloc(sizeof(t_rgb));
 	if (!map->c_color)
 		error_exit(cub, "malloc failed", NULL);
-}
-
-int	ft_empty(char *line)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = ft_strlen(line);
-	while (i < len)
-	{
-		if (line[i] != ' ' && line[i] != '\n')
-			return (1);
-		i++;
-	}
-	return (-1);
 }
 
 char	*moded_strdup(const char *s)
