@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:06:47 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 11:54:46 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:21:54 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,10 @@ void			ft_put_ptr(unsigned long long num);
 int				ft_ptr_len(unsigned long long ptr);
 char			*ft_strstr(const char *haystack, const char *needle);
 int				ft_strcpy(char *dst, const char *src);
-
+char			*f_strjoin(char *s1, char *s2);
+char			*f_strdup(char *s1);
+char			*f_strchr(char *s, int c);
+char			*ft_get_the_line(char *stock);
 /* get_next_line
 char			*get_next_line(int fd);
 int				ft_strlen_nl(const char *str);
