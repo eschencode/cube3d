@@ -3,24 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:03:58 by leschenb          #+#    #+#             */
-/*   Updated: 2023/02/01 14:04:00 by leschenb         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:23:24 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-size_t	gnlft_strlen(char *str)
+void	ft_get_the_spare(char *buffer)
 {
-	size_t	i;
+	int	i;
+	int	j;
 
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != '\0')
+	while (buffer[i] != '\n')
 		i++;
-	return (i);
+	i = i + 1;
+	j = 0;
+	while (i < BUFFER_SIZE)
+	{
+		buffer[j] = buffer[i];
+		i++;
+		j++;
+	}
+	buffer[j] = '\0';
+}
+
+char	*ft_line_results(int ret, char *stock, char *buffer)
+{
+	char		*line;
+
+	line = NULL;
+	if (ft_strlen(stock) == 0)
+	{
+		free(stock);
+		return (NULL);
+	}
+	line = ft_get_the_line(stock);
+	if (ret > 0)
+		ft_get_the_spare(buffer);
+	free(stock);
+	return (line);
 }
 
 char	*gnlft_strjoin(char *left_str, char *buff)
