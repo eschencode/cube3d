@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:42:46 by leschenb          #+#    #+#             */
-/*   Updated: 2024/04/24 11:34:49 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:21:05 by leschenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,22 @@ void	save_texture(t_cub *cube, char *line, int i)
 		j++;
 	if (line[i] == 'N' && line[i + 1] == 'O' && !cube->map->no)
 		cube->map->no = moded_strdup(line + j);
+	else if (line[i] == 'N' && line[i + 1] == 'O' && cube->map->no)
+		error_exit(cube, "double textures", " ");
 	if (line[i] == 'S' && line[i + 1] == 'O' && !cube->map->so)
 		cube->map->so = moded_strdup(line + j);
+	else if (line[i] == 'S' && line[i + 1] == 'O' && cube->map->so)
+		error_exit(cube, "double textures", " ");
 	if (line[i] == 'W' && line[i + 1] == 'E' && !cube->map->we)
 		cube->map->we = moded_strdup(line + j);
+	else if (line[i] == 'W' && line[i + 1] == 'E' && cube->map->we)
+		error_exit(cube, "double textures", " ");
 	if (line[i] == 'E' && line[i + 1] == 'A' && !cube->map->ea)
 		cube->map->ea = moded_strdup(line + j);
+	else if (line[i] == 'E' && line[i + 1] == 'A' && cube->map->ea)
+		error_exit(cube, "double textures", " ");
 }
+
 
 void	ft_fill_layout(t_cub *cube, char *line, int current_line)
 {
